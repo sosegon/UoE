@@ -1,0 +1,2 @@
+learning_rate, training_size, batch_size, num_epochs
+0.0010, 200, 50, 30
