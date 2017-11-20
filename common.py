@@ -16,12 +16,7 @@ def get_hog_features(img, orient, pix_per_cell, cell_per_block, vis=False, featu
                        visualise=False, feature_vector=feature_vec)
         return features
 
-def extract_features(image):
-    # Define HOG parameters
-    orient = 9
-    pix_per_cell = 8    
-    cell_per_block = 2
-    
+def extract_features(image, orient=9, pix_per_cell=8, cell_per_block=2):
     hog_feats = get_hog_features(
             image, 
             orient, 
@@ -61,6 +56,23 @@ def try_prediction(clf, image, stride):
     
     for patch in patches:
         pred = predict(clf, patch)
+        predictions.append(pred)
+        
+    return locations, predictions
+
+def predictsvm(clf, patch_image):
+    feats = extract_features(patch_image)
+    pred = clf.predict(feats.reshape((1, -1)))
+    
+    return pred
+
+def try_predictionsvm(clf, image, stride):
+    patches, locations = slide_image(image, 64, stride)
+    
+    predictions = []
+    
+    for patch in patches:
+        pred = predictsvm(clf, patch)
         predictions.append(pred)
         
     return locations, predictions
