@@ -40,7 +40,7 @@ def slide_image(image, window_size, stride):
             patches.append(single_patch)
             locations.append([i, j, window_size, window_size])
             
-    return patches, locations
+    return np.array(patches), np.array(locations)
 
 def predict(clf, patch_image):
     feats = extract_features(patch_image)
@@ -58,15 +58,20 @@ def try_prediction(clf, image, stride):
         pred = predict(clf, patch)
         predictions.append(pred)
         
-    return locations, predictions
+    predictions = np.array(predictions)
+    locations = locations[predictions > prob_tresh]
+    predictions = predictions[predictions > prob_tresh]
+    
+    return non_max_suppression_fast(locations, predictions)
 
 def predictsvm(clf, patch_image):
     feats = extract_features(patch_image)
-    pred = clf.predict(feats.reshape((1, -1)))
+    #pred = clf.predict(feats.reshape((1, -1)))
+    pred = clf.predict_proba(feats.reshape((1, -1)))[0][1]
     
     return pred
 
-def try_predictionsvm(clf, image, stride):
+def try_predictionsvm(clf, image, stride, prob_tresh=0.5):
     patches, locations = slide_image(image, 64, stride)
     
     predictions = []
@@ -75,7 +80,11 @@ def try_predictionsvm(clf, image, stride):
         pred = predictsvm(clf, patch)
         predictions.append(pred)
         
-    return locations, predictions
+    predictions = np.array(predictions)
+    locations = locations[predictions > prob_tresh]
+    predictions = predictions[predictions > prob_tresh]
+    
+    return non_max_suppression_fast(locations, predictions)
 
 def load_clf(clf_name):
     with open("{:s}.json".format(clf_name), 'r') as jfile:
@@ -85,3 +94,64 @@ def load_clf(clf_name):
     model.load_weights("{:s}.h5".format(clf_name))
     
     return model
+
+# from https://www.pyimagesearch.com/2015/02/16/faster-non-maximum-suppression-python/
+# Malisiewicz et al.
+def non_max_suppression_fast(boxes, probs, overlapThresh=0.3):
+    # if there are no boxes, return an empty list
+    if len(boxes) == 0:
+        return np.array([]), np.array([])
+ 
+    # if the bounding boxes integers, convert them to floats --
+    # this is important since we'll be doing a bunch of divisions
+    if boxes.dtype.kind == "i":
+        boxes = boxes.astype("float")
+ 
+    # initialize the list of picked indexes 
+    pick = []
+ 
+    # grab the coordinates of the bounding boxes
+    x1 = boxes[:,0]
+    y1 = boxes[:,1]
+    w = boxes[:,2]
+    h = boxes[:,3]
+    x2 = x1 + w
+    y2 = y1 + h
+ 
+    # compute the area of the bounding boxes and sort the bounding
+    # boxes by the bottom-right y-coordinate of the bounding box
+    area = w * h
+    idxs = np.argsort(y2)
+ 
+    # keep looping while some indexes still remain in the indexes
+    # list
+    while len(idxs) > 0:
+        # grab the last index in the indexes list and add the
+        # index value to the list of picked indexes
+        last = len(idxs) - 1
+        i = idxs[last]
+        pick.append(i)
+ 
+        # find the largest (x, y) coordinates for the start of
+        # the bounding box and the smallest (x, y) coordinates
+        # for the end of the bounding box
+        xx1 = np.maximum(x1[i], x1[idxs[:last]])
+        yy1 = np.maximum(y1[i], y1[idxs[:last]])
+        xx2 = np.minimum(x2[i], x2[idxs[:last]])
+        yy2 = np.minimum(y2[i], y2[idxs[:last]])
+ 
+        # compute the width and height of the bounding box
+        w = np.maximum(0, xx2 - xx1 + 1)
+        h = np.maximum(0, yy2 - yy1 + 1)
+ 
+        # compute the ratio of overlap
+        overlap = (w * h) / area[idxs[:last]]
+ 
+        # delete all indexes from the index list that have
+        idxs = np.delete(idxs, np.concatenate(([last],
+            np.where(overlap > overlapThresh)[0])))
+ 
+    if len(pick) > 0:
+        return boxes[pick].astype("int"), probs[pick]
+    else:
+        return np.array([]), np.array([])
