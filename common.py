@@ -49,7 +49,7 @@ def predict(clf, patch_image):
     
     return pred
 
-def try_prediction(clf, image, stride):
+def try_prediction(clf, image, stride, prob_tresh=0.5):
     patches, locations = slide_image(image, 64, stride)
     
     predictions = []
