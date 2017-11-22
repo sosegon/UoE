@@ -1,7 +1,9 @@
+import argparse
 import scipy.io as sio
 import numpy as np
 from common import extract_features, extract_features_lbp
 from sklearn.svm import SVC
+from sklearn.externals import joblib
 
 def load_data(pref, path):
     
@@ -54,13 +56,40 @@ def train_model():
     Xfeat_train = extract_features_all(X_train)
     Xfeat_val = extract_features_all(X_val)
 
-    print(Xfeat_train)
-
     Xt_ = convert_features(Xfeat_train)
     Xv_ = convert_features(Xfeat_val)
 
     model = SVC(kernel="linear", C=100.0)
     model.fit(Xt_, Y_train)
+
+    joblib.dump(model, 'verification.pkl')
+
     return model.score(Xv_, Y_val)
 
-print(train_model())
+def val_model():
+    clf = joblib.load("verification.pkl")
+    X_test, Y_test = load_data('va', './data/face_verification/face_verification_te.mat')
+
+    Xfeat_test = extract_features_all(X_test)
+    Xt_ = convert_features(Xfeat_test)
+
+    return clf.score(Xt_, Y_test)
+
+def perform(stage):
+    if stage == 0:
+        score = train_model()
+        print("Score during training: {:.2f}".format(score))
+    else:
+        score = val_model()
+        print("Score during testing: {:.2f}".format(score))
+
+
+desc = """ SVM classifier for face recognition
+           """
+parser = argparse.ArgumentParser(description=desc)
+parser.add_argument('stage', type=int, help="Train or testing")
+
+args = parser.parse_args()
+stage = args.stage
+
+perform(stage)
