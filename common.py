@@ -2,6 +2,7 @@ import json
 import numpy as np
 from skimage.feature import hog
 from keras.models import model_from_json
+from skimage.feature import local_binary_pattern
 
 # from https://classroom.udacity.com/nanodegrees/nd013/parts/fbf77062-5703-404e-b60c-95b78b2f3f9e/modules/2b62a1c3-e151-4a0e-b6b6-e424fa46ceab/lessons/fd66c083-4ccb-4fe3-bda1-c29db76f50a0/concepts/d479f43a-7bbb-4de7-9452-f6b991ece599
 def get_hog_features(img, orient, pix_per_cell, cell_per_block, vis=False, feature_vec=True):
@@ -27,6 +28,19 @@ def extract_features(image, orient=9, pix_per_cell=8, cell_per_block=2):
         )
 
     return hog_feats
+
+def extract_features_lbp(image, num_points=12, radius=4, eps=1e-7):
+    lbp = local_binary_pattern(image, num_points, radius, method="uniform")
+    hist, _ = np.histogram(lbp.ravel(),
+                          bins=np.arange(0, num_points + 3),
+                          range=(0, num_points + 2))
+    # normalization
+    hist = hist.astype(float)
+    hist /= (hist.sum() + eps)
+    
+    return hist
+
+
 
 def slide_image(image, window_size, stride):
         
