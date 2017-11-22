@@ -43,7 +43,11 @@ ylabel('Precision');
 
 
 % Average Precision
-AP = Precision;
-AP(isnan(AP)) = 0;
-AP = mean(AP); 
+% AP = Precision;
+% AP(isnan(AP)) = 0;
+% AP = mean(AP);
+% disp(num2str(AP))
+
+% Interpolated Average Precision
+AP = VOCap(Recall', Precision');
 disp(num2str(AP))
