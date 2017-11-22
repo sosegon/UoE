@@ -55,7 +55,7 @@ def load_data():
 def train_classifier(model_name):
     X_train, X_val, y_train, y_val = load_data()
 
-    model = SVC(kernel="linear", C=100.0)
+    model = SVC(kernel="linear", C=100.0, probability=True)
     model.fit(X_train, y_train)
     model.score(X_val, y_val)
 
