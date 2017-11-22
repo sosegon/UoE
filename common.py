@@ -95,10 +95,12 @@ def try_predictionsvm(clf, image, stride, prob_tresh=0.5):
         predictions.append(pred)
         
     predictions = np.array(predictions)
-    locations = locations[predictions > prob_tresh]
-    predictions = predictions[predictions > prob_tresh]
+    return locations, predictions
     
-    return non_max_suppression_fast(locations, predictions)
+    # locations = locations[predictions > prob_tresh]
+    # predictions = predictions[predictions > prob_tresh]
+    
+    # return non_max_suppression_fast(locations, predictions)
 
 def load_clf(clf_name):
     with open("{:s}.json".format(clf_name), 'r') as jfile:
