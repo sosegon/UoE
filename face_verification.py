@@ -84,7 +84,7 @@ def perform(stage):
         print("Score during testing: {:.2f}".format(score))
 
 
-desc = """ SVM classifier for face recognition
+desc = """ SVM classifier for face verification
            """
 parser = argparse.ArgumentParser(description=desc)
 parser.add_argument('stage', type=int, help="Train or testing")
