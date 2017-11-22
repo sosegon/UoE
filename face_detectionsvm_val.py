@@ -8,7 +8,7 @@ from sklearn.externals import joblib
 def evaluate_classifier(clf_name, stride, prob_tresh):
     clf = joblib.load("{:s}.pkl".format(clf_name))
 
-    val_path = "./data/face_detection/val_raw_images/*/*"
+    val_path = "./data/face_detection/te_raw_images/*/*"
     val_paths = glob.glob(val_path)
 
     with open("{:s}_val.log".format(clf_name), "w+") as log_file:
