@@ -95,7 +95,7 @@ def extract_patches_features(id, image, stride=48):
 
     features = np.array(features)
 
-    ids = np.ones(len(patches)).reshape((-1, 1))
+    ids = np.ones(len(patches)).reshape((-1, 1))*id
 
     return np.hstack((ids, locations, features))
 
