@@ -73,10 +73,11 @@ def try_prediction(clf, image, stride, prob_tresh=0.5):
         predictions.append(pred)
         
     predictions = np.array(predictions)
-    locations = locations[predictions > prob_tresh]
-    predictions = predictions[predictions > prob_tresh]
+    return locations, predictions
+    # locations = locations[predictions > prob_tresh]
+    # predictions = predictions[predictions > prob_tresh]
     
-    return non_max_suppression_fast(locations, predictions)
+    # return non_max_suppression_fast(locations, predictions)
 
 def predictsvm(clf, patch_image):
     feats = extract_features(patch_image)
