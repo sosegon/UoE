@@ -15,7 +15,7 @@ def load_data(pref, path):
     for x1, x2 in zip(X1, X2):
         X.append([x1, x2])
         
-    Y = data['Y' + pref]
+    Y = np.array(data['Y' + pref], dtype = int)
     return np.array(X), Y
 
 def recursive_extraction(el, num_iter=2):
@@ -48,7 +48,29 @@ def convert_features(features):
     std = np.std(f_, axis=2)
        
     return std
-    
+
+# Files with features for data sets to be used for evaluation in matlab
+def extract_save_features():
+    X_train, Y_train = load_data('tr', './data/face_verification/face_verification_tr.mat')
+    X_val, Y_val = load_data('va', './data/face_verification/face_verification_va.mat')
+    X_test, Y_test = load_data('va', './data/face_verification/face_verification_te.mat')
+
+    Xfeat_train = extract_features_all(X_train)
+    Xfeat_val = extract_features_all(X_val)
+    Xfeat_test = extract_features_all(X_test)
+
+    Xt_ = convert_features(Xfeat_train)
+    Xv_ = convert_features(Xfeat_val)
+    Xts_ = convert_features(Xfeat_test)
+
+    YXt_ = np.hstack((Y_train, Xt_))
+    YXv_ = np.hstack((Y_val, Xv_))
+    YXts_ = np.hstack((Y_test, Xts_))
+
+    np.savetxt("face_verification_train.txt", YXt_, delimiter=",")
+    np.savetxt("face_verification_val.txt", YXv_, delimiter=",")
+    np.savetxt("face_verification_test.txt", YXts_, delimiter=",")
+
 def train_model():
     X_train, Y_train = load_data('tr', './data/face_verification/face_verification_tr.mat')
     X_val, Y_val = load_data('va', './data/face_verification/face_verification_va.mat')
@@ -61,6 +83,12 @@ def train_model():
 
     model = SVC(kernel="linear", C=100.0)
     model.fit(Xt_, Y_train)
+
+    # Save the params of the model to use them for evaluation in matlab
+    weights = model.coef_.ravel()
+    bias = model.intercept_
+    params = np.hstack((weights, bias))
+    np.savetxt("face_verification_w_b.txt", params, delimiter=",")
 
     joblib.dump(model, 'verification.pkl')
 
@@ -79,9 +107,11 @@ def perform(stage):
     if stage == 0:
         score = train_model()
         print("Score during training: {:.2f}".format(score))
-    else:
+    elif stage == 1:
         score = val_model()
         print("Score during testing: {:.2f}".format(score))
+    elif stage == 2:
+        extract_save_features()
 
 
 desc = """ SVM classifier for face verification
