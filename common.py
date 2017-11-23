@@ -85,6 +85,21 @@ def predictsvm(clf, patch_image):
     
     return pred
 
+def extract_patches_features(id, image, stride=48):
+    patches, locations = slide_image(image, 64, stride)
+    features = []
+
+    for patch in patches:
+        feat = extract_features(patch)
+        features.append(feat)
+
+    features = np.array(features)
+
+    ids = np.ones(len(patches)).reshape((-1, 1))
+
+    return np.hstack((ids, locations, features))
+
+
 def try_predictionsvm(clf, image, stride, prob_tresh=0.5):
     patches, locations = slide_image(image, 64, stride)
     

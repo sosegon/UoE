@@ -51,13 +51,16 @@ def load_data():
 
     return train_test_split(X_feats_all, y_all, test_size=0.3, random_state=50)
 
-
 def train_classifier(model_name):
     X_train, X_val, y_train, y_val = load_data()
 
     model = SVC(kernel="linear", C=100.0, probability=True)
     model.fit(X_train, y_train)
-    model.score(X_val, y_val)
+
+    weights = model.coef_
+    bias = model.intercept_.reshape((-1, 1))
+    params = np.hstack((weights, bias))
+    np.savetxt("face_detection_w_b.txt", params, delimiter=",")
 
     joblib.dump(model, '{:s}.pkl'.format(model_name))
 
