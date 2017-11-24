@@ -15,7 +15,7 @@ def detect_faces(clf_name, img_name, stride, prob_tresh):
     ax.imshow(image_rgb)
 
     image = imread(img_name, as_grey=True)
-    locations, predictions = try_predictionsvm(clf, image, stride, prob_tresh)
+    locations, predictions = try_predictionsvm(clf, image, stride, prob_tresh, False)
     
     for loc, pred in zip(locations, predictions):
         ax.add_patch(pypatches.Rectangle(

@@ -50,7 +50,7 @@ def slide_image(image, window_size, stride):
     
     for j in range(0, h - window_size, stride):
         for i in range(0, w - window_size, stride):
-            single_patch = image[i:i+window_size, j:j+window_size]
+            single_patch = image[j:j+window_size, i:i+window_size]
             patches.append(single_patch)
             locations.append([i, j, window_size, window_size])
             
@@ -63,7 +63,7 @@ def predict(clf, patch_image):
     
     return pred
 
-def try_prediction(clf, image, stride, prob_tresh=0.5):
+def try_prediction(clf, image, stride, prob_tresh=0.5, evaluate=True):
     patches, locations = slide_image(image, 64, stride)
     
     predictions = []
@@ -73,11 +73,14 @@ def try_prediction(clf, image, stride, prob_tresh=0.5):
         predictions.append(pred)
         
     predictions = np.array(predictions)
+
+    if evaluate == False:
+        locations = locations[predictions > prob_tresh]
+        predictions = predictions[predictions > prob_tresh]
+        
+        return non_max_suppression_fast(locations, predictions)
+
     return locations, predictions
-    # locations = locations[predictions > prob_tresh]
-    # predictions = predictions[predictions > prob_tresh]
-    
-    # return non_max_suppression_fast(locations, predictions)
 
 def predictsvm(clf, patch_image):
     feats = extract_features(patch_image)
@@ -101,7 +104,7 @@ def extract_patches_features(id, image, stride=48):
     return np.hstack((ids, locations, features))
 
 
-def try_predictionsvm(clf, image, stride, prob_tresh=0.5):
+def try_predictionsvm(clf, image, stride, prob_tresh=0.5, evaluate=True):
     patches, locations = slide_image(image, 64, stride)
     
     predictions = []
@@ -111,6 +114,13 @@ def try_predictionsvm(clf, image, stride, prob_tresh=0.5):
         predictions.append(pred)
         
     predictions = np.array(predictions)
+
+    if evaluate == False:
+        locations = locations[predictions > prob_tresh]
+        predictions = predictions[predictions > prob_tresh]
+        
+        return non_max_suppression_fast(locations, predictions)
+
     return locations, predictions
     
     # locations = locations[predictions > prob_tresh]
