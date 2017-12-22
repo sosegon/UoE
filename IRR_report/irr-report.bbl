@@ -1,4 +1,4 @@
-\begin{thebibliography}{32}
+\begin{thebibliography}{40}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -120,11 +120,32 @@ Hu, Guosheng, Peng, Xiaojiang, Yang, Yongxin, Hospedales, Timothy, and Verbeek,
 \newblock Frankenstein: Learning deep face representations using small data.
 \newblock \emph{arXiv preprint arXiv:1603.06470}, 2016.
 
+\bibitem[Huang et~al.(2000)Huang, Zhou, Zhang, and Chen]{huang2000pose}
+Huang, Fu~Jie, Zhou, Zhihua, Zhang, Hong-Jiang, and Chen, Tsuhan.
+\newblock Pose invariant face recognition.
+\newblock In \emph{Automatic Face and Gesture Recognition, 2000. Proceedings.
+  Fourth IEEE International Conference on}, pp.\  245--250. IEEE, 2000.
+
 \bibitem[Jing \& Mariani(2000)Jing and Mariani]{jing2000glasses}
 Jing, Zhong and Mariani, Robert.
 \newblock Glasses detection and extraction by deformable contour.
 \newblock In \emph{Pattern Recognition, 2000. Proceedings. 15th International
   Conference on}, volume~2, pp.\  933--936. IEEE, 2000.
+
+\bibitem[Kanade \& Yamada(2003)Kanade and Yamada]{kanade2003multi}
+Kanade, Takeo and Yamada, Akihiko.
+\newblock Multi-subregion based probabilistic approach toward pose-invariant
+  face recognition.
+\newblock In \emph{Computational Intelligence in Robotics and Automation, 2003.
+  Proceedings. 2003 IEEE International Symposium on}, volume~2, pp.\  954--959.
+  IEEE, 2003.
+
+\bibitem[Kao et~al.(2010)Kao, Hsu, and Yang]{kao2010local}
+Kao, Wen-Chung, Hsu, Ming-Chai, and Yang, Yueh-Yiing.
+\newblock Local contrast enhancement and adaptive feature extraction for
+  illumination-invariant face recognition.
+\newblock \emph{Pattern Recognition}, 43\penalty0 (5):\penalty0 1736--1747,
+  2010.
 
 \bibitem[Kim \& Ramakrishna(1999)Kim and Ramakrishna]{kim1999vision}
 Kim, Kyung-Nam and Ramakrishna, RS.
@@ -139,6 +160,12 @@ Lawrence, Steve, Giles, C~Lee, Tsoi, Ah~Chung, and Back, Andrew~D.
 \newblock Face recognition: A convolutional neural-network approach.
 \newblock \emph{IEEE transactions on neural networks}, 8\penalty0 (1):\penalty0
   98--113, 1997.
+
+\bibitem[Liu et~al.(2005)Liu, Lam, and Shen]{liu2005illumination}
+Liu, Dang-Hui, Lam, Kin-Man, and Shen, Lan-Sun.
+\newblock Illumination invariant face recognition.
+\newblock \emph{Pattern Recognition}, 38\penalty0 (10):\penalty0 1705--1716,
+  2005.
 
 \bibitem[Lowe(1999)]{lowe1999object}
 Lowe, David~G.
@@ -156,6 +183,24 @@ Rowley, Henry~A, Baluja, Shumeet, and Kanade, Takeo.
 \newblock Neural network-based face detection.
 \newblock \emph{IEEE Transactions on pattern analysis and machine
   intelligence}, 20\penalty0 (1):\penalty0 23--38, 1998.
+
+\bibitem[Schiele \& Waibel(1995)Schiele and Waibel]{schiele1995gaze}
+Schiele, Bernt and Waibel, Alex.
+\newblock Gaze tracking based on face-color.
+\newblock In \emph{Proceedings of the International Workshop on Automatic
+  Face-and Gesture-Recognition}, pp.\  344--349, 1995.
+
+\bibitem[Schwerdt \& Crowley(2000)Schwerdt and Crowley]{schwerdt2000robust}
+Schwerdt, Karl and Crowley, James~L.
+\newblock Robust face tracking using color.
+\newblock In \emph{Automatic Face and Gesture Recognition, 2000. Proceedings.
+  Fourth IEEE International Conference on}, pp.\  90--95. IEEE, 2000.
+
+\bibitem[Song et~al.(2006)Song, Kim, Chang, and Kwon]{song2006face}
+Song, Young-Jun, Kim, Young-Gil, Chang, Un-Dong, and Kwon, Heak~Bong.
+\newblock Face recognition robust to left/right shadows; facial symmetry.
+\newblock \emph{Pattern Recognition}, 39\penalty0 (8):\penalty0 1542--1545,
+  2006.
 
 \bibitem[Sun et~al.(2013)Sun, Wang, and Tang]{sun2013hybrid}
 Sun, Yi, Wang, Xiaogang, and Tang, Xiaoou.
@@ -179,6 +224,14 @@ Vezhnevets, Vladimir, Sazonov, Vassili, and Andreeva, Alla.
 \newblock A survey on pixel-based skin color detection techniques.
 \newblock In \emph{Proc. Graphicon}, volume~3, pp.\  85--92. Moscow, Russia,
   2003.
+
+\bibitem[Volken et~al.(2006)Volken, Terrier, and
+  Vandewalle]{volken2006automatic}
+Volken, Flavien, Terrier, Johann, and Vandewalle, Patrick.
+\newblock Automatic red-eye removal based on sclera and skin tone detection.
+\newblock In \emph{Conference on Colour in Graphics, Imaging, and Vision},
+  volume 2006, pp.\  359--364. Society for Imaging Science and Technology,
+  2006.
 
 \bibitem[Wang et~al.(2009)Wang, Han, and Yan]{wang2009hog}
 Wang, Xiaoyu, Han, Tony~X, and Yan, Shuicheng.

@@ -5,45 +5,46 @@ The style file: icml2017.bst
 Database file #1: example-refs.bib
 Warning--can't use both volume and number fields in harris1988combined
 Warning--can't use both volume and number fields in parkhi2015deep
-You've used 32 entries,
+Warning--can't use both volume and number fields in volken2006automatic
+You've used 40 entries,
             2773 wiz_defined-function locations,
-            791 strings with 10886 characters,
-and the built_in function-call counts, 18492 in all, are:
-= -- 1737
-> -- 1018
-< -- 39
-+ -- 341
-- -- 309
-* -- 1509
-:= -- 2662
-add.period$ -- 110
-call.type$ -- 32
-change.case$ -- 198
-chr.to.int$ -- 32
-cite$ -- 66
-duplicate$ -- 856
-empty$ -- 1487
-format.name$ -- 359
-if$ -- 4034
+            833 strings with 12328 characters,
+and the built_in function-call counts, 23169 in all, are:
+= -- 2188
+> -- 1249
+< -- 49
++ -- 418
+- -- 378
+* -- 1882
+:= -- 3316
+add.period$ -- 138
+call.type$ -- 40
+change.case$ -- 245
+chr.to.int$ -- 40
+cite$ -- 83
+duplicate$ -- 1079
+empty$ -- 1880
+format.name$ -- 442
+if$ -- 5071
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 32
-newline$ -- 168
-num.names$ -- 128
-pop$ -- 400
+missing$ -- 40
+newline$ -- 208
+num.names$ -- 160
+pop$ -- 497
 preamble$ -- 1
-purify$ -- 166
+purify$ -- 205
 quote$ -- 0
-skip$ -- 698
+skip$ -- 879
 stack$ -- 0
-substring$ -- 899
-swap$ -- 208
-text.length$ -- 28
+substring$ -- 1160
+swap$ -- 267
+text.length$ -- 35
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 352
-warning$ -- 2
-while$ -- 173
+type$ -- 440
+warning$ -- 3
+while$ -- 218
 width$ -- 0
-write$ -- 446
-(There were 2 warnings)
+write$ -- 556
+(There were 3 warnings)
