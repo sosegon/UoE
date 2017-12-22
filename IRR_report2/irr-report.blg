@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: irr-report.aux
+The style file: Science.bst
+Database file #1: scibib.bib
+Warning--can't use both volume and number fields in harris1988combined
+Warning--can't use both volume and number fields in volken2006automatic
+Warning--can't use both volume and number fields in parkhi2015deep
+You've used 40 entries,
+            2300 wiz_defined-function locations,
+            967 strings with 13200 characters,
+and the built_in function-call counts, 12313 in all, are:
+= -- 1155
+> -- 476
+< -- 35
++ -- 238
+- -- 119
+* -- 915
+:= -- 1566
+add.period$ -- 40
+call.type$ -- 40
+change.case$ -- 0
+chr.to.int$ -- 0
+cite$ -- 43
+duplicate$ -- 609
+empty$ -- 1200
+format.name$ -- 157
+if$ -- 3007
+int.to.chr$ -- 0
+int.to.str$ -- 40
+missing$ -- 40
+newline$ -- 123
+num.names$ -- 40
+pop$ -- 267
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 542
+stack$ -- 0
+substring$ -- 841
+swap$ -- 283
+text.length$ -- 35
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 3
+while$ -- 123
+width$ -- 42
+write$ -- 333
+(There were 3 warnings)

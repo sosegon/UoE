@@ -1,0 +1,171 @@
+\begin{thebibliography}{10}
+
+\bibitem{harris1988combined}
+C.~Harris, M.~Stephens, {\it Alvey vision conference\/} (Manchester, UK, 1988),
+  vol.~15, pp. 10--5244.
+
+\bibitem{lowe1999object}
+D.~G. Lowe, {\it Computer vision, 1999. The proceedings of the seventh IEEE
+  international conference on\/} (Ieee, 1999), vol.~2, pp. 1150--1157.
+
+\bibitem{chow1993towards}
+G.~Chow, X.~Li, {\it Pattern Recognition\/} {\bf 26}, 1739 (1993).
+
+\bibitem{colmenarez1999detection}
+A.~Colmenarez, B.~Frey, T.~S. Huang, {\it Image Processing, 1999. ICIP 99.
+  Proceedings. 1999 International Conference on\/} (IEEE, 1999), vol.~1, pp.
+  657--661.
+
+\bibitem{fleming1990categorization}
+M.~K. Fleming, G.~W. Cottrell, {\it Neural Networks, 1990., 1990 IJCNN
+  International Joint Conference on\/} (IEEE, 1990), pp. 65--70.
+
+\bibitem{rowley1998neural}
+H.~A. Rowley, S.~Baluja, T.~Kanade, {\it IEEE Transactions on pattern analysis
+  and machine intelligence\/} {\bf 20}, 23 (1998).
+
+\bibitem{lawrence1997face}
+S.~Lawrence, C.~L. Giles, A.~C. Tsoi, A.~D. Back, {\it IEEE transactions on
+  neural networks\/} {\bf 8}, 98 (1997).
+
+\bibitem{sun2013hybrid}
+Y.~Sun, X.~Wang, X.~Tang, {\it Proceedings of the IEEE International Conference
+  on Computer Vision\/} (2013), pp. 1489--1496.
+
+\bibitem{hu2016frankenstein}
+G.~Hu, X.~Peng, Y.~Yang, T.~Hospedales, J.~Verbeek, {\it arXiv preprint
+  arXiv:1603.06470\/}  (2016).
+
+\bibitem{guo2009digital}
+D.~Guo, T.~Sim, {\it Computer Vision and Pattern Recognition, 2009. CVPR 2009.
+  IEEE Conference on\/} (IEEE, 2009), pp. 73--79.
+
+\bibitem{bitouk2008face}
+D.~Bitouk, N.~Kumar, S.~Dhillon, P.~Belhumeur, S.~K. Nayar, {\it ACM
+  Transactions on Graphics (TOG)\/} {\bf 27}, 39 (2008).
+
+\bibitem{zhu2006fast}
+Q.~Zhu, M.-C. Yeh, K.-T. Cheng, S.~Avidan, {\it Computer Vision and Pattern
+  Recognition, 2006 IEEE Computer Society Conference on\/} (IEEE, 2006),
+  vol.~2, pp. 1491--1498.
+
+\bibitem{song2006face}
+Y.-J. Song, Y.-G. Kim, U.-D. Chang, H.~B. Kwon, {\it Pattern Recognition\/}
+  {\bf 39}, 1542 (2006).
+
+\bibitem{huang2000pose}
+F.~J. Huang, Z.~Zhou, H.-J. Zhang, T.~Chen, {\it Automatic Face and Gesture
+  Recognition, 2000. Proceedings. Fourth IEEE International Conference on\/}
+  (IEEE, 2000), pp. 245--250.
+
+\bibitem{kanade2003multi}
+T.~Kanade, A.~Yamada, {\it Computational Intelligence in Robotics and
+  Automation, 2003. Proceedings. 2003 IEEE International Symposium on\/} (IEEE,
+  2003), vol.~2, pp. 954--959.
+
+\bibitem{ahonen2004face}
+T.~Ahonen, A.~Hadid, M.~Pietik{\"a}inen, {\it Computer vision-eccv 2004\/} pp.
+  469--481 (2004).
+
+\bibitem{adolphs2002recognizing}
+R.~Adolphs, {\it Behavioral and cognitive neuroscience reviews\/} {\bf 1}, 21
+  (2002).
+
+\bibitem{yacoob1996recognizing}
+Y.~Yacoob, L.~S. Davis, {\it IEEE Transactions on pattern analysis and machine
+  intelligence\/} {\bf 18}, 636 (1996).
+
+\bibitem{guo2014face}
+G.~Guo, L.~Wen, S.~Yan, {\it IEEE Transactions on Circuits and Systems for
+  Video Technology\/} {\bf 24}, 814 (2014).
+
+\bibitem{jing2000glasses}
+Z.~Jing, R.~Mariani, {\it Pattern Recognition, 2000. Proceedings. 15th
+  International Conference on\/} (IEEE, 2000), vol.~2, pp. 933--936.
+
+\bibitem{wu2004glasses}
+B.~Wu, H.~Ai, R.~Liu, {\it Pattern Recognition, 2004. ICPR 2004. Proceedings of
+  the 17th International Conference on\/} (IEEE, 2004), vol.~1, pp. 292--295.
+
+\bibitem{basilio2011explicit}
+J.~A.~M. Basilio, G.~A. Torres, G.~S. P{\'e}rez, L.~K.~T. Medina, H.~M.~P.
+  Meana, {\it Applications of Mathematics and Computer Engineering\/} pp.
+  123--128 (2011).
+
+\bibitem{garcia1999face}
+C.~Garcia, G.~Tziritas, {\it IEEE Transactions on multimedia\/} {\bf 1}, 264
+  (1999).
+
+\bibitem{schwerdt2000robust}
+K.~Schwerdt, J.~L. Crowley, {\it Automatic Face and Gesture Recognition, 2000.
+  Proceedings. Fourth IEEE International Conference on\/} (IEEE, 2000), pp.
+  90--95.
+
+\bibitem{schiele1995gaze}
+B.~Schiele, A.~Waibel, {\it Proceedings of the International Workshop on
+  Automatic Face-and Gesture-Recognition\/} (1995), pp. 344--349.
+
+\bibitem{albiol2001optimum}
+A.~Albiol, L.~Torres, E.~J. Delp, {\it Image Processing, 2001. Proceedings.
+  2001 International Conference on\/} (IEEE, 2001), vol.~1, pp. 122--124.
+
+\bibitem{vezhnevets2003survey}
+V.~Vezhnevets, V.~Sazonov, A.~Andreeva, {\it Proc. Graphicon\/} (Moscow,
+  Russia, 2003), vol.~3, pp. 85--92.
+
+\bibitem{liu2005illumination}
+D.-H. Liu, K.-M. Lam, L.-S. Shen, {\it Pattern Recognition\/} {\bf 38}, 1705
+  (2005).
+
+\bibitem{kao2010local}
+W.-C. Kao, M.-C. Hsu, Y.-Y. Yang, {\it Pattern Recognition\/} {\bf 43}, 1736
+  (2010).
+
+\bibitem{kim1999vision}
+K.-N. Kim, R.~Ramakrishna, {\it Systems, Man, and Cybernetics, 1999. IEEE
+  SMC'99 Conference Proceedings. 1999 IEEE International Conference on\/}
+  (IEEE, 1999), vol.~2, pp. 324--329.
+
+\bibitem{yacoob2006detection}
+Y.~Yacoob, L.~S. Davis, {\it IEEE transactions on pattern analysis and machine
+  intelligence\/} {\bf 28}, 1164 (2006).
+
+\bibitem{volken2006automatic}
+F.~Volken, J.~Terrier, P.~Vandewalle, {\it Conference on Colour in Graphics,
+  Imaging, and Vision\/} (Society for Imaging Science and Technology, 2006),
+  vol. 2006, pp. 359--364.
+
+\bibitem{tsumura2003image}
+N.~Tsumura, {\it et~al.\/}, {\it ACM Transactions on Graphics (TOG)\/} {\bf
+  22}, 770 (2003).
+
+\bibitem{deniz2011face}
+O.~D{\'e}niz, G.~Bueno, J.~Salido, F.~De~la Torre, {\it Pattern Recognition
+  Letters\/} {\bf 32}, 1598 (2011).
+
+\bibitem{hsu2002face}
+R.-L. Hsu, M.~Abdel-Mottaleb, A.~K. Jain, {\it IEEE transactions on pattern
+  analysis and machine intelligence\/} {\bf 24}, 696 (2002).
+
+\bibitem{chen2013automatic}
+C.~Chen, A.~Dantcheva, A.~Ross, {\it Biometrics (ICB), 2013 International
+  Conference on\/} (IEEE, 2013), pp. 1--8.
+
+\bibitem{albiol2008face}
+A.~Albiol, D.~Monzo, A.~Martin, J.~Sastre, A.~Albiol, {\it Pattern Recognition
+  Letters\/} {\bf 29}, 1537 (2008).
+
+\bibitem{wang2009hog}
+X.~Wang, T.~X. Han, S.~Yan, {\it Computer Vision, 2009 IEEE 12th International
+  Conference on\/} (IEEE, 2009), pp. 32--39.
+
+\bibitem{yang2004face}
+P.~Yang, S.~Shan, W.~Gao, S.~Z. Li, D.~Zhang, {\it Automatic Face and Gesture
+  Recognition, 2004. Proceedings. Sixth IEEE International Conference on\/}
+  (IEEE, 2004), pp. 356--361.
+
+\bibitem{parkhi2015deep}
+O.~M. Parkhi, A.~Vedaldi, A.~Zisserman, {\it et~al.\/}, {\it BMVC\/} (2015),
+  vol.~1, p.~6.
+
+\end{thebibliography}
