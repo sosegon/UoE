@@ -12,14 +12,16 @@ import st.SimpleTemplateEngine;
 import st.TemplateEngine;
 
 @RunWith(Task1_Functional.class)
-@SuiteClasses({EntryMapStoreTest.class, EntryMapDeleteTest.class, 
-	EntryMapUpdateTest.class, SimpleTemplateEngineTest.class})
+@SuiteClasses({Task1_Functional.EntryMapStoreTest.class, Task1_Functional.EntryMapDeleteTest.class,
+	Task1_Functional.EntryMapUpdateTest.class, Task1_Functional.SimpleTemplateEngineTest.class})
 public class Task1_Functional extends Suite{
+	
 
 	public Task1_Functional(Class<?> klass) throws InitializationError {
-        super(klass);
-    }
-	
+		super(klass);
+		// TODO Auto-generated constructor stub
+	}
+
 	public static class EntryMapStoreTest {
 		
 		private EntryMap map;
