@@ -1,3 +1,5 @@
+package st_cw1;
+
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
