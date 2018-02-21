@@ -1,5 +1,3 @@
-package st_cw1_p1;
-
 import static org.junit.Assert.*;
 
 import org.junit.Before;
