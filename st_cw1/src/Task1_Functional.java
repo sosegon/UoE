@@ -6,6 +6,7 @@ import org.junit.internal.runners.InitializationError;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+import org.junit.runners.model.RunnerBuilder;
 
 import st.EntryMap;
 import st.SimpleTemplateEngine;
@@ -16,9 +17,8 @@ import st.TemplateEngine;
 	Task1_Functional.EntryMapUpdateTest.class, Task1_Functional.SimpleTemplateEngineTest.class})
 public class Task1_Functional extends Suite{
 	
-
-	public Task1_Functional(Class<?> klass) throws InitializationError {
-		super(klass);
+	public Task1_Functional(Class<?> klass, RunnerBuilder builder) throws org.junit.runners.model.InitializationError {
+		super(klass, builder);
 		// TODO Auto-generated constructor stub
 	}
 
