@@ -1,0 +1,113 @@
+
+Test Case 1  		<single>
+   Template_CONTENT :  Null
+
+
+Test Case 2  		<single>
+   Template_CONTENT :  Empty
+
+
+Test Case 3  		<single>
+   Pattern_CONTENT :  Null
+
+
+Test Case 4  		<single>
+   Pattern_CONTENT :  Empty
+
+
+Test Case 5  		<single>
+   Pattern_HASHTAG :  Even
+
+
+Test Case 6  		<single>
+   Pattern_POSITION :  > No ocurrences
+
+
+Test Case 7  		<single>
+   Value_CONTENT :  Null
+
+
+Test Case 8  		<single>
+   Value_CONTENT :  Empty
+
+
+Test Case 9  		(Key = 3.3.1.2.3.0.)
+   Template_CONTENT :  No spaces
+   Pattern_CONTENT  :  Not empty
+   Pattern_HASHTAG  :  Odd
+   Pattern_POSITION :  <= No ocurrences
+   Value_CONTENT    :  Not empty
+   Mode_VALUE       :  <n/a>
+
+
+Test Case 10 		(Key = 3.3.3.0.3.2.)
+   Template_CONTENT :  No spaces
+   Pattern_CONTENT  :  Not empty
+   Pattern_HASHTAG  :  None
+   Pattern_POSITION :  <n/a>
+   Value_CONTENT    :  Not empty
+   Mode_VALUE       :  CASE_SENSITIVE
+
+
+Test Case 11 		(Key = 3.3.3.0.3.3.)
+   Template_CONTENT :  No spaces
+   Pattern_CONTENT  :  Not empty
+   Pattern_HASHTAG  :  None
+   Pattern_POSITION :  <n/a>
+   Value_CONTENT    :  Not empty
+   Mode_VALUE       :  DEFAULT_MATCH
+
+
+Test Case 12 		(Key = 4.3.1.2.3.1.)
+   Template_CONTENT :  Spaces
+   Pattern_CONTENT  :  Not empty
+   Pattern_HASHTAG  :  Odd
+   Pattern_POSITION :  <= No ocurrences
+   Value_CONTENT    :  Not empty
+   Mode_VALUE       :  WHOLE_WORLD_SEARCH
+
+
+Test Case 13 		(Key = 4.3.1.2.3.4.)
+   Template_CONTENT :  Spaces
+   Pattern_CONTENT  :  Not empty
+   Pattern_HASHTAG  :  Odd
+   Pattern_POSITION :  <= No ocurrences
+   Value_CONTENT    :  Not empty
+   Mode_VALUE       :  WHOLE_WORLD_SEARCH and CASE_SENSITIVE
+
+
+Test Case 14 		(Key = 4.3.3.0.3.1.)
+   Template_CONTENT :  Spaces
+   Pattern_CONTENT  :  Not empty
+   Pattern_HASHTAG  :  None
+   Pattern_POSITION :  <n/a>
+   Value_CONTENT    :  Not empty
+   Mode_VALUE       :  WHOLE_WORLD_SEARCH
+
+
+Test Case 15 		(Key = 4.3.3.0.3.2.)
+   Template_CONTENT :  Spaces
+   Pattern_CONTENT  :  Not empty
+   Pattern_HASHTAG  :  None
+   Pattern_POSITION :  <n/a>
+   Value_CONTENT    :  Not empty
+   Mode_VALUE       :  CASE_SENSITIVE
+
+
+Test Case 16 		(Key = 4.3.3.0.3.3.)
+   Template_CONTENT :  Spaces
+   Pattern_CONTENT  :  Not empty
+   Pattern_HASHTAG  :  None
+   Pattern_POSITION :  <n/a>
+   Value_CONTENT    :  Not empty
+   Mode_VALUE       :  DEFAULT_MATCH
+
+
+Test Case 17 		(Key = 4.3.3.0.3.4.)
+   Template_CONTENT :  Spaces
+   Pattern_CONTENT  :  Not empty
+   Pattern_HASHTAG  :  None
+   Pattern_POSITION :  <n/a>
+   Value_CONTENT    :  Not empty
+   Mode_VALUE       :  WHOLE_WORLD_SEARCH and CASE_SENSITIVE
+

@@ -1,0 +1,32 @@
+# Template
+	Template_CONTENT:
+		Null.				[single]
+		Empty.				[single]
+		No spaces.
+		Spaces.				[property TemplateContentSpaces]
+
+# Patterbbbbbbn
+	Pattern_CONTENT:
+		Null.				[single]
+		Empty.				[single]
+		Not empty.			
+	Pattern_HASHTAG:
+		Odd.				[property PatternHashtagOdd]
+		Even.				[single]
+		None.				[property PatternHashtagNone]
+	Pattern_POSITION:
+		> No ocurrences.	[single]
+		<= No ocurrences.	[if PatternHashtagOdd]
+
+# Value
+	Value_CONTENT:
+		Null.				[single]
+		Empty.				[single]
+		Not empty.			
+
+# Mode
+	Mode_VALUE:
+		WHOLE_WORLD_SEARCH.	[if TemplateContentSpaces]
+		CASE_SENSITIVE.		[if PatternHashtagNone]
+		DEFAULT_MATCH.		[if PatternHashtagNone]
+		WHOLE_WORLD_SEARCH and CASE_SENSITIVE. [if TemplateContentSpaces]

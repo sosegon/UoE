@@ -1,0 +1,19 @@
+# Template
+	Template_DATA_TYPE:
+		String.				
+		Null.				[error]
+	Template_CHARACTERS:
+		Empty.				[error]
+		Not empty.			
+		
+# Value
+	Value_DATA_TYPE:
+		String.				
+		Null.				[error]
+
+# Map
+	Map_CONTAINS_ENTRY:
+		Yes.				[property MapContainsEntry]
+		No.					
+	Map_KEEP_ORDER:
+		Yes.				[if MapContainsEntry]
