@@ -24,7 +24,7 @@ public class Left_Toe_Joint_01 : MonoBehaviour {
 		// Vector3 global_pos = sphere_script.global_position_pointer;
 		// Debug.Log("position" + global_position_pointer.ToString());
 
-		Vector3 pos = GameObject.Find("Sphere").transform.position;
-		transform.position = pos;
+		// Vector3 pos = GameObject.Find("Sphere").transform.position;
+		// transform.position = pos;
 	}
 }
