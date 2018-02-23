@@ -33,21 +33,33 @@ public class Task1_Functional extends Suite{
 	        engine = new TemplateEngine();
 	    }
 
+		/*
+		 * Template is null
+		 */
 		@Test(expected=RuntimeException.class)
 		public void TestCase1() {
 			map.store(null, "");		
 		}
 		
+		/*
+		 * Template is empty
+		 */
 		@Test(expected=RuntimeException.class)
 		public void TestCase2() {
 			map.store("", "");
 		}
 		
+		/*
+		 * Value is null
+		 */
 		@Test(expected=RuntimeException.class)
 		public void TestCase3() {
 			map.store("key", null);
 		}
 		
+		/*
+		 * An existing template is not stored again
+		 */
 		@Test
 		public void TestCase4() {
 			map.store("key", "@\nabc 123");
@@ -57,6 +69,9 @@ public class Task1_Functional extends Suite{
 			assertEquals("Value is @\nabc 123", result);
 		}
 		
+		/*
+		 * A new template is stored
+		 */
 		@Test
 		public void TestCase5() {
 			map.store("key1", "@\nabc 123");
@@ -64,8 +79,6 @@ public class Task1_Functional extends Suite{
 			Integer matchingMode = TemplateEngine.DEFAULT;
 			String result = engine.evaluate("Value is ${key2}", map, matchingMode);
 			assertEquals("Value is @\nabc 1234", result);
-			
-			//TODO check order
 		}
 	}
 	
@@ -81,23 +94,34 @@ public class Task1_Functional extends Suite{
 	        map.store("key3", "value3");
 	    }
 
+		/*
+		 * Template is null
+		 */
 		@Test(expected=RuntimeException.class)
 		public void TestCase1() {
 			map.delete(null);
 		}
 		
+		/*
+		 * Template is empty
+		 */
 		@Test(expected=RuntimeException.class)
 		public void TestCase2() {
 			map.delete("");
 		}
 		
+		/*
+		 * An existing entry is deleted
+		 */
 		@Test
 		public void TestCase3() {
 			map.delete("key2");		
 			assertEquals(map.getEntries().size(), 2);
-			// TODO check order
 		}
 		
+		/*
+		 * A non-existing entry is not deleted
+		 */
 		@Test
 		public void TestCase5() {
 			map.delete("key4");		
@@ -121,21 +145,33 @@ public class Task1_Functional extends Suite{
 	        engine = new TemplateEngine();
 	    }
 		
+		/*
+		 * Template is null
+		 */
 		@Test(expected=RuntimeException.class)
 		public void TestCase1() {
 			map.update(null, "");
 		}
 		
+		/*
+		 * Template is empty
+		 */
 		@Test(expected=RuntimeException.class)
 		public void TestCase2() {
 			map.update("", "");
 		}
 		
+		/*
+		 * Value is null
+		 */
 		@Test(expected=RuntimeException.class)
 		public void TestCase3() {
 			map.update("key", null);
 		}
 		
+		/*
+		 * An existing entry is updated
+		 */
 		@Test
 		public void TestCase4() {
 			map.update("key1", "nValue1");
@@ -143,10 +179,11 @@ public class Task1_Functional extends Suite{
 			Integer matchingMode = TemplateEngine.DEFAULT;
 			String result = engine.evaluate("Value is ${key1}", map, matchingMode);
 			assertEquals("Value is nValue1", result);
-			
-			//TODO check order
 		}
 		
+		/*
+		 * A non-existing entry is not updated
+		 */
 		@Test
 		public void TestCase5() {
 			map.update("key4", "nValue4");
@@ -165,6 +202,9 @@ public class Task1_Functional extends Suite{
 	        simpleEngine = new SimpleTemplateEngine();
 	    }
 	       
+	    /*
+	     * Template is null
+	     */
 	    @Test
 	    public void TestCase1() {
 	    	String template = null;
@@ -173,6 +213,9 @@ public class Task1_Functional extends Suite{
 	    	assertEquals(result, null);
 	    }
 	    
+	    /*
+	     * Template is empty
+	     */
 	    @Test
 	    public void TestCase2() {
 	    	String template = "";
@@ -181,6 +224,9 @@ public class Task1_Functional extends Suite{
 	    	assertEquals(result, "");
 	    }
 	    
+	    /*
+	     * Pattern is null
+	     */
 	    @Test
 	    public void TestCase3() {
 	    	String pattern = null;
@@ -189,6 +235,9 @@ public class Task1_Functional extends Suite{
 	    	assertEquals(result, "123");
 	    }
 	    
+	    /*
+	     * Pattern is empty
+	     */
 	    @Test
 	    public void TestCase4() {
 	    	String pattern = "";
@@ -197,6 +246,9 @@ public class Task1_Functional extends Suite{
 	    	assertEquals(result, "123");
 	    }
 	    
+	    /*
+	     * Pattern has even number of #
+	     */
 	    @Test
 	    public void TestCase5() {
 	    	String template = "value(0) value#(1) value##(2) value###(3) value####(4) value#####(5) value######(6)";
@@ -208,6 +260,9 @@ public class Task1_Functional extends Suite{
 	    	assertEquals(result, comparison);
 	    }
 	    
+	    /*
+	     * The pattern to replace has a fewer number of occurrences than the specified
+	     */
 	    @Test
 	    public void TestCase6() {
 	    	String template = "value(0) value#(1) value##(2) value###(3) value####(4) value#####(5) value######(6)";
@@ -218,6 +273,9 @@ public class Task1_Functional extends Suite{
 	    	assertEquals(result, template);
 	    }
 	    
+	    /*
+	     * Value is null
+	     */
 	    @Test
 	    public void TestCase7() {
 	    	String template = "123";
@@ -228,6 +286,9 @@ public class Task1_Functional extends Suite{
 	    	assertEquals(result, template);
 	    }
 	    
+	    /*
+	     * Value is empty
+	     */
 	    @Test
 	    public void TestCase8() {
 	    	String template = "123";
@@ -238,6 +299,9 @@ public class Task1_Functional extends Suite{
 	    	assertEquals(result, template);
 	    }
 	    
+	    /*
+	     * The pattern to replace has a higher number of occurrences than the specified
+	     */
 	    @Test
 	    public void TestCase9() {
 	    	String template = "ABC0abc0ABC0ABC";
@@ -249,6 +313,9 @@ public class Task1_Functional extends Suite{
 	    	assertEquals(result, comparison);
 	    }
 	    
+	    /*
+	     * The pattern to replace is case sensitive
+	     */
 	    @Test
 	    public void TestCase10() {
 	    	String template = "ABC0abc0ABC0ABC";
@@ -260,6 +327,9 @@ public class Task1_Functional extends Suite{
 	    	assertEquals(result, comparison);
 	    }
 	    
+	    /*
+	     * The pattern to replace is not case sensitive
+	     */
 	    @Test
 	    public void TestCase11() {
 	    	String template = "ABC0abc0ABC0ABC";
@@ -271,6 +341,9 @@ public class Task1_Functional extends Suite{
 	    	assertEquals(result, comparison);
 	    }
 	    
+	    /*
+	     * The pattern to replace looks for whole words
+	     */
 	    @Test
 	    public void TestCase12() {
 	    	String template = "ABC abc_ABC-ABC";
@@ -282,6 +355,9 @@ public class Task1_Functional extends Suite{
 	    	assertEquals(result, comparison);
 	    }
 	    
+	    /*
+	     * The pattern to replace looks for whole words and is case sensitive for a single match
+	     */
 	    @Test
 	    public void TestCase13() {
 	    	String template = "ABC abc_ABC-ABC";
@@ -293,6 +369,9 @@ public class Task1_Functional extends Suite{
 	    	assertEquals(result, comparison);
 	    }
 	    
+	    /*
+	     * The pattern to replace looks for whole words and is not case sensitive
+	     */
 	    @Test
 	    public void TestCase14() {
 	    	String template = "ABC abc_ABC-ABC";
@@ -304,6 +383,9 @@ public class Task1_Functional extends Suite{
 	    	assertEquals(result, comparison);
 	    }
 	    
+	    /*
+	     * The pattern to replace is case sensitive in a string with spaces
+	     */
 	    @Test
 	    public void TestCase15() {
 	    	String template = "ABC abc_ABC-ABC";
@@ -315,6 +397,9 @@ public class Task1_Functional extends Suite{
 	    	assertEquals(result, comparison);
 	    }
 	    
+	    /*
+	     * The pattern to replace is not case sensitive in a string with spaces
+	     */
 	    @Test
 	    public void TestCase16() {
 	    	String template = "ABC abc_ABC-ABC";
@@ -326,6 +411,9 @@ public class Task1_Functional extends Suite{
 	    	assertEquals(result, comparison);
 	    }
 	    
+	    /*
+	     * The pattern to replace looks for whole words and is case sensitive for all matches
+	     */
 	    @Test
 	    public void TestCase17() {
 	    	String template = "ABC abc_ABC-ABC";
