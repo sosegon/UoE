@@ -6,7 +6,8 @@ using UnityEngine;
 public class Sphere : MonoBehaviour {
 
 	public Vector3 position;
-	public float alpha = 0.0f;
+	public float alpha = 16.0f;
+	public float lambda = 0.1f;
 
 	// Use this for initialization
 	void Start () {

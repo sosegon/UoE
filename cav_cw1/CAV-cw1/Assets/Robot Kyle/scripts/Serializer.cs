@@ -123,6 +123,11 @@ public class Serializer {
 		return Jsi * change;
 	}
 
+	public static Matrix JacobianDampedLeastSquares(Matrix J, Matrix change, float lambda=1.0f) {
+		Matrix Jdls = DampedLeastSquares (J, lambda);
+		return Jdls * change;
+	}
+
 	public static Matrix Transpose(Matrix m) {
 		Matrix mm = new Matrix(m.GetColumns(), m.GetRows());
 		for(int i=0; i<mm.Values.Length; i++) {
@@ -180,6 +185,25 @@ public class Serializer {
 		UpdateJoints (x_angles, y_angles, z_angles, chain);
 	}
 
+	public static void IKJacobianDampedLeastSquares(Vector3 target, Vector3 end_effector, Transform[] chain, float lambda=1.0f) {
+
+		Matrix e = ChangeOfPosition(target, end_effector, chain);
+
+		Vector3 x_axis = new Vector3 (1, 0, 0);
+		Matrix x_J = Jacobian(target, end_effector, x_axis, chain);
+		Matrix x_angles = JacobianDampedLeastSquares(x_J, e, lambda);
+
+		Vector3 y_axis = new Vector3 (0, 1, 0);
+		Matrix y_J = Jacobian(target, end_effector, y_axis, chain);
+		Matrix y_angles = JacobianDampedLeastSquares(y_J, e, lambda);
+
+		Vector3 z_axis = new Vector3 (0, 0, 1);
+		Matrix z_J = Jacobian(target, end_effector, z_axis, chain);
+		Matrix z_angles = JacobianDampedLeastSquares(z_J, e, lambda);
+
+		UpdateJoints (x_angles, y_angles, z_angles, chain);
+	}
+
 	public static void UpdateJoints(Matrix x_angles, Matrix y_angles, Matrix z_angles, Transform[] chain){
 		for(int i=0; i<chain.Length; i++){
 			Transform t = chain[i];
@@ -209,6 +233,58 @@ public class Serializer {
 			Quaternion q = Quaternion.AngleAxis (angle + delta_angle, vv);
 			t.Rotate(q.eulerAngles);
 		}
+	}
+
+	public static Matrix DampedLeastSquares(Matrix J, float lambda){
+		float[][] mat = J.Values;
+		double[,] matt = Convert (mat);
+		int m = mat.Length;
+		int n = mat[0].Length;
+
+		double[] w = new double[m];
+		double[,] u = new double[m, m];
+		double[,] vt = new double[n, n];
+
+
+		alglib.rmatrixsvd (matt, m, n, 2, 2, 0, out w, out u, out vt);
+
+		float[] W = Convert (w);
+		float[][] U = Convert (u);
+		float[][] Vt = Convert (vt);
+
+		float lambda2 = lambda * lambda;
+		// damped least squares
+		for (int i = 0; i < W.Length; i++) {
+			float v = W [i];
+			float v2 = v * v;
+			W [i] = v / (v2 + lambda2);
+		}
+
+		// Create diagonal matrix
+		float[][] E = new float[n][];
+		for(int i = 0; i < n; i++) {
+			E[i] = new float[m];
+			for (int j = 0; j < m; j++) {
+				if (i == j) {
+					E [i] [j] = W [i];
+				} else {
+					E [i] [j] = 0.0f;
+				}
+			}
+		}
+
+		// Create matrices to transpose y multiplication
+		Matrix U_ = new Matrix(U);
+		Matrix Vt_ = new Matrix (Vt);
+		Matrix E_ = new Matrix (E);
+
+		// Transpose U_ and Vt_
+		Matrix Ut_ = Transpose(U_);
+		Matrix V_ = Transpose(Vt_);
+
+		Matrix EU = E_ * Ut_;
+		return V_ * EU;
+
 	}
 
 	public static Matrix PseudoInverse(Matrix J) {
