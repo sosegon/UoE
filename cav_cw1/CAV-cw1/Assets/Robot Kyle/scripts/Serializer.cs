@@ -34,16 +34,14 @@ public class Serializer {
 	// Target and end effector position are in world coord
 	// The end effector position is the extreme point of the last link
 	// not the position respect to the previous link (parent)
-	public static Matrix Jacobian(Vector3 target, Vector3 end_effector_position, Transform[] chain) {
+	public static Matrix Jacobian(Vector3 target, Vector3 end_effector_position, Vector3 axis, Transform[] chain) {
 
 		int n_angles = chain.Length;
 		Matrix J = new Matrix(3, n_angles);
+		Vector3 vv = axis;
 
 		for(int i=0; i<chain.Length; i++) {
 			Transform t = chain[i];
-
-    		// Rotation around y axis
-    		Vector3 vv = new Vector3(0,1,0);
 
 			// TODO: I am not sure if it is the current transform or the parent
     		// Position of the end effector in local coords
@@ -83,7 +81,7 @@ public class Serializer {
 	}
 
 	public static Matrix JacobianTranspose(Matrix J, Matrix change, float alpha=0.1f) {
-		Matrix JT = Serializer.Transpose(J);
+		Matrix JT = Transpose(J);
 		JT = alpha * JT;
 		return JT * change;
 	}
@@ -98,22 +96,36 @@ public class Serializer {
 		return mm;
 	}
 
-	public static Matrix IKJacobianTranspose(Vector3 target, Vector3 end_effector, Transform[] chain, float alpha=0.1f) {
-		Matrix J = Serializer.Jacobian(target, end_effector, chain);
-		Matrix e = Serializer.ChangeOfPosition(target, end_effector, chain);
-		return JacobianTranspose(J, e, alpha);
+	public static void IKJacobianTranspose(Vector3 target, Vector3 end_effector, Transform[] chain, float alpha=0.1f) {
+		
+		Matrix e = ChangeOfPosition(target, end_effector, chain);
+
+		Vector3 x_axis = new Vector3 (1, 0, 0);
+		Matrix x_J = Jacobian(target, end_effector, x_axis, chain);
+		Matrix x_angles = JacobianTranspose(x_J, e, alpha);
+
+		Vector3 y_axis = new Vector3 (0, 1, 0);
+		Matrix y_J = Jacobian(target, end_effector, y_axis, chain);
+		Matrix y_angles = JacobianTranspose(y_J, e, alpha);
+
+		Vector3 z_axis = new Vector3 (0, 0, 1);
+		Matrix z_J = Jacobian(target, end_effector, z_axis, chain);
+		Matrix z_angles = JacobianTranspose(z_J, e, alpha);
+
+		UpdateJoints (x_angles, y_angles, z_angles, chain);
 	}
 
-	public static void UpdateJoints(Matrix angles, Transform[] chain){
+	public static void UpdateJoints(Matrix x_angles, Matrix y_angles, Matrix z_angles, Transform[] chain){
 		for(int i=0; i<chain.Length; i++){
 			Transform t = chain[i];
-			float delta_angle = angles.Values[i][0];
-
-			// Rotation around y axis
-    		Vector3 vv = new Vector3(0,1,0);
+			float x_delta_angle = x_angles.Values[i][0];
+			float y_delta_angle = y_angles.Values[i][0];
+			float z_delta_angle = z_angles.Values[i][0];
 
     		Vector3 eulerAngles = t.localRotation.eulerAngles;
-    		eulerAngles.y += delta_angle;
+			eulerAngles.x += x_delta_angle;
+			eulerAngles.y += y_delta_angle;
+			eulerAngles.z += z_delta_angle;
     		t.localRotation = Quaternion.identity;
     		t.Rotate(eulerAngles);
 		}

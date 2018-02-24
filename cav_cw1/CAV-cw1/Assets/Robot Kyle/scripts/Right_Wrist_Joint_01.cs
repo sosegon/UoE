@@ -19,8 +19,7 @@ public class Right_Wrist_Joint_01 : MonoBehaviour {
 		Vector3 end_effector_pos = GameObject.Find ("Right_Middle_Finger_Joint_01c").transform.position;
 		Transform[] chain = Serializer.KinematicChainTransforms(transform,3);
 
-		Matrix angles = Serializer.IKJacobianTranspose(target_pos, end_effector_pos,chain, alpha);
-		Serializer.UpdateJoints(angles, chain);
+		Serializer.IKJacobianTranspose(target_pos, end_effector_pos,chain, alpha);
 	}
 
 }
