@@ -31,53 +31,53 @@ public class Serializer {
 		return chain;
 	}
 
-	// Target is in world coord
-	public static Matrix Jacobian(Vector3 target, Transform[] chain) {
+	// Target and end effector position are in world coord
+	// The end effector position is the extreme point of the last link
+	// not the position respect to the previous link (parent)
+	public static Matrix Jacobian(Vector3 target, Vector3 end_effector_position, Transform[] chain) {
 
 		int n_angles = chain.Length;
-		Matrix J = new Matrix(n_angles, 3);
-
-		//End effector position in world coordinates
-		//Vector3 s = chain[0].position;
-		Vector3 s = target;
+		Matrix J = new Matrix(3, n_angles);
 
 		for(int i=0; i<chain.Length; i++) {
 			Transform t = chain[i];
-			float angle = 0.0f;
-
-			// Axis of rotation in local coords
-    		// Vector3 vv = Vector3.zero;
-    		// t.localRotation.ToAngleAxis(out angle, out vv);
 
     		// Rotation around y axis
     		Vector3 vv = new Vector3(0,1,0);
 
+			// TODO: I am not sure if it is the current transform or the parent
     		// Position of the end effector in local coords
-    		Vector3 ss = t.parent.worldToLocalMatrix.MultiplyPoint(s);
+			Vector3 ss = t.parent.worldToLocalMatrix.MultiplyPoint(end_effector_position);
+			//Vector3 ss = t.worldToLocalMatrix.MultiplyPoint(end_effector_position);
 
     		// Position of the link in local coords
     		Vector3 pp = t.localPosition;
 
-    		//Jacobian entry
-    		Vector3 ds = Vector3.Cross(vv, ss - pp);
-    		J.Values[i][0] = ds.x;
-    		J.Values[i][1] = ds.y;
-    		J.Values[i][2] = ds.z;
+    		//Jacobian entry is a column
+			Vector3 sspp = ss - pp;
+    		Vector3 ds = Vector3.Cross(vv.normalized, sspp);
+    		J.Values[0][i] = ds.x;
+    		J.Values[1][i] = ds.y;
+			J.Values[2][i] = ds.z;
 			Debug.Log("link " + i + " ss " + ss.ToString() + " pp " + pp.ToString());
 		}
 		//Debug.Log("Jacobian: " + MatrixUtility.MatrixAsString(J.Values));
 		return J;
 	}
 
-	public static Matrix ChangeOfPosition(Vector3 target, Transform[] chain) {
-		// target in local coords of the end effector
+	public static Matrix ChangeOfPosition(Vector3 target, Vector3 end_effector_position, Transform[] chain) {
+		// TODO: I am not sure if it is the current transform or the parent
+		// target and end_effector_position in local coords of the end effector
 		Vector3 tt = chain[0].parent.worldToLocalMatrix.MultiplyPoint(target);
-		tt = tt - chain[0].localPosition;
+		Vector3 ss = chain [0].parent.worldToLocalMatrix.MultiplyPoint (end_effector_position);
+		//Vector3 tt = chain[0].worldToLocalMatrix.MultiplyPoint(target);
+		//Vector3 ss = chain [0].worldToLocalMatrix.MultiplyPoint (end_effector_position);
+		Vector3 ee = tt - ss;
 
 		Matrix mm = new Matrix(3, 1);
-		mm.Values[0][0] = tt.x;
-		mm.Values[1][0] = tt.y;
-		mm.Values[2][0] = tt.z;
+		mm.Values[0][0] = ee.x;
+		mm.Values[1][0] = ee.y;
+		mm.Values[2][0] = ee.z;
 		
 		return mm;
 	}
@@ -90,19 +90,17 @@ public class Serializer {
 
 	public static Matrix Transpose(Matrix m) {
 		Matrix mm = new Matrix(m.GetColumns(), m.GetRows());
-
 		for(int i=0; i<mm.Values.Length; i++) {
 			for(int j=0; j<mm.Values[i].Length; j++) {
 				mm.Values[i][j] = m.Values[j][i];
 			}
 		}
-
 		return mm;
 	}
 
-	public static Matrix IKJacobianTranspose(Vector3 target, Transform[] chain, float alpha=0.1f) {
-		Matrix J = Serializer.Jacobian(target, chain);
-		Matrix e = Serializer.ChangeOfPosition(target, chain);
+	public static Matrix IKJacobianTranspose(Vector3 target, Vector3 end_effector, Transform[] chain, float alpha=0.1f) {
+		Matrix J = Serializer.Jacobian(target, end_effector, chain);
+		Matrix e = Serializer.ChangeOfPosition(target, end_effector, chain);
 		return JacobianTranspose(J, e, alpha);
 	}
 
@@ -111,22 +109,13 @@ public class Serializer {
 			Transform t = chain[i];
 			float delta_angle = angles.Values[i][0];
 
-			float angle = 0.0f;
-
-			// Axis of rotation in local coords
-    		// Vector3 vv = Vector3.zero;
-    		// t.localRotation.ToAngleAxis(out angle, out vv);
-
-    		// Rotation around y axis
+			// Rotation around y axis
     		Vector3 vv = new Vector3(0,1,0);
 
-    		// Apply rotation
-    		//Quaternion q = Quaternion.AngleAxis(angle, vv);
     		Vector3 eulerAngles = t.localRotation.eulerAngles;
     		eulerAngles.y += delta_angle;
     		t.localRotation = Quaternion.identity;
     		t.Rotate(eulerAngles);
-    		//Debug.Log("link " + i + " Delta " + delta_angle);
 		}
 	}
 

@@ -16,10 +16,10 @@ public class Right_Wrist_Joint_01 : MonoBehaviour {
 	void Update () {
 		Vector3 target_pos = GameObject.Find("Sphere").GetComponent<Sphere>().position;
 		float alpha = GameObject.Find("Sphere").GetComponent<Sphere>().alpha;
-		Vector3 end_pos = transform.position;
+		Vector3 end_effector_pos = GameObject.Find ("Right_Middle_Finger_Joint_01c").transform.position;
 		Transform[] chain = Serializer.KinematicChainTransforms(transform,3);
-		Matrix angles = Serializer.IKJacobianTranspose(target_pos, chain, alpha);
-		// Debug.Log(""+MatrixUtility.MatrixAsString(angles.Values));
+
+		Matrix angles = Serializer.IKJacobianTranspose(target_pos, end_effector_pos,chain, alpha);
 		Serializer.UpdateJoints(angles, chain);
 	}
 
