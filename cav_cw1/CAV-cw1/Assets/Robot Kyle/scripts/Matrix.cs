@@ -278,7 +278,7 @@ public static class MatrixUtility {
 	{
 		for (int j = 0; j < matrix[i].Length; ++j)
 		s += matrix[i][j].ToString("F3").PadLeft(8) + " ";
-		s += Environment.NewLine;
+		//s += Environment.NewLine;
 	}
 	return s;
 	}
