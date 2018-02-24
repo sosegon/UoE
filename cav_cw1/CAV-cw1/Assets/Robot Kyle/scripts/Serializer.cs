@@ -86,6 +86,11 @@ public class Serializer {
 		return JT * change;
 	}
 
+	public static Matrix JacobianPseudoInverse(Matrix J, Matrix change) {
+		Matrix Jsi = PseudoInverse (J);
+		return Jsi * change;
+	}
+
 	public static Matrix Transpose(Matrix m) {
 		Matrix mm = new Matrix(m.GetColumns(), m.GetRows());
 		for(int i=0; i<mm.Values.Length; i++) {
@@ -115,6 +120,25 @@ public class Serializer {
 		UpdateJoints (x_angles, y_angles, z_angles, chain);
 	}
 
+	public static void IKJacobianPseudoInverse(Vector3 target, Vector3 end_effector, Transform[] chain) {
+
+		Matrix e = ChangeOfPosition(target, end_effector, chain);
+
+		Vector3 x_axis = new Vector3 (1, 0, 0);
+		Matrix x_J = Jacobian(target, end_effector, x_axis, chain);
+		Matrix x_angles = JacobianPseudoInverse(x_J, e);
+
+		Vector3 y_axis = new Vector3 (0, 1, 0);
+		Matrix y_J = Jacobian(target, end_effector, y_axis, chain);
+		Matrix y_angles = JacobianPseudoInverse(y_J, e);
+
+		Vector3 z_axis = new Vector3 (0, 0, 1);
+		Matrix z_J = Jacobian(target, end_effector, z_axis, chain);
+		Matrix z_angles = JacobianPseudoInverse(z_J, e);
+
+		UpdateJoints (x_angles, y_angles, z_angles, chain);
+	}
+
 	public static void UpdateJoints(Matrix x_angles, Matrix y_angles, Matrix z_angles, Transform[] chain){
 		for(int i=0; i<chain.Length; i++){
 			Transform t = chain[i];
@@ -131,4 +155,93 @@ public class Serializer {
 		}
 	}
 
+	public static Matrix PseudoInverse(Matrix J) {
+		float[][] mat = J.Values;
+		double[,] matt = Convert (mat);
+		int m = mat.Length;
+		int n = mat[0].Length;
+
+		double[] w = new double[m];
+		double[,] u = new double[m, m];
+		double[,] vt = new double[n, n];
+
+
+		alglib.rmatrixsvd (matt, m, n, 2, 2, 0, out w, out u, out vt);
+
+		float[] W = Convert (w);
+		float[][] U = Convert (u);
+		float[][] Vt = Convert (vt);
+
+		// invert diagonal values
+		for (int i = 0; i < W.Length; i++) {
+			if (W [i] >= 0.1) {
+				W [i] = 1.0f / W [i];
+			} else {
+				W [i] = 0;
+			}
+		}
+
+		// Create pseudo inverse diagonal matrix
+		float[][] Dsi = new float[n][];
+		for(int i = 0; i < n; i++) {
+			Dsi[i] = new float[m];
+			for (int j = 0; j < m; j++) {
+				if (i == j) {
+					Dsi [i] [j] = W [i];
+				} else {
+					Dsi [i] [j] = 0.0f;
+				}
+			}
+		}
+
+		// Create matrices to transpose y multiplication
+		Matrix U_ = new Matrix(U);
+		Matrix Vt_ = new Matrix (Vt);
+		Matrix Dsi_ = new Matrix (Dsi);
+
+		// Transpose U_ and Vt_
+		Matrix Ut_ = Transpose(U_);
+		Matrix V_ = Transpose(Vt_);
+
+		Matrix DsiU = Dsi_ * Ut_;
+		return V_ * DsiU;
+
+	}
+
+	public static float[][] Convert(double[,] mtx)
+	{
+		int rows = mtx.GetUpperBound(0) - mtx.GetLowerBound(0) + 1;
+		int cols = mtx.GetUpperBound(1) - mtx.GetLowerBound(1) + 1;
+		float[][] a = new float[rows][];
+		for (int i = 0; i < rows; i++) {
+			a [i] = new float[cols];
+			for (int j = 0; j < cols; j++) {
+				a [i] [j] = (float)mtx [i, j];
+			}
+		}
+
+		return a;
+	}
+
+	public static double[,] Convert(float[][] mtx)
+	{
+		double[,] a = new double[mtx.Length, mtx [0].Length];
+		for (int i = 0; i < mtx.Length; i++) {
+			for (int j = 0; j < mtx [i].Length; j++) {
+				a [i,j] = (double)mtx [i] [j];
+			}
+		}
+
+		return a;
+	}
+
+	public static float[] Convert(double[] mtx) {
+		float[] a = new float[mtx.Length];
+
+		for (int i = 0; i < mtx.Length; i++) {
+			a [i] = (float)mtx [i];
+		}
+
+		return a;
+	}
 }
