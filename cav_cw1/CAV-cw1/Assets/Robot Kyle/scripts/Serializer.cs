@@ -53,9 +53,7 @@ public class Serializer {
 			J.Values[0][i] = ds.x;
 			J.Values[1][i] = ds.y;
 			J.Values[2][i] = ds.z;
-			Debug.Log("link " + i + " ss " + ss.ToString() + " pp " + pp.ToString());
 		}
-		//Debug.Log("Jacobian: " + MatrixUtility.MatrixAsString(J.Values));
 		return J;
 	}
 
