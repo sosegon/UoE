@@ -17,15 +17,22 @@ public class KinematicsWindow : EditorWindow
 		Vector3 rotation = go.transform.localEulerAngles;
 
 		GUILayout.Label (label, EditorStyles.boldLabel);
-		// Due to the how Unity handle the rotations internally
-		// the range for X is 0-90, otherwise, unexpected behaviour
-		// occurs
-		float x = EditorGUILayout.Slider ("X", rotation.x, 0, 90);
+		// Unity presents the X euler angle between 0 and 90
+		// and 270 and 360
+		/*float x = EditorGUILayout.Slider ("X", rotation.x, 0, 90);
 		float y = EditorGUILayout.Slider ("Y", rotation.y, 0, 360);
 		float z = EditorGUILayout.Slider ("Z", rotation.z, 0, 360);
+	*/
+		float x = EditorGUILayout.FloatField ("X: ", rotation.x);
+		float y = EditorGUILayout.FloatField ("Y: ", rotation.y);
+		float z = EditorGUILayout.FloatField ("Z: ", rotation.z);
 
 		go.transform.localRotation = Quaternion.identity;
-		go.transform.Rotate (new Vector3 (x, y, z));
+		Quaternion qx = Quaternion.AngleAxis (x, new Vector3 (1, 0, 0));
+		Quaternion qy = Quaternion.AngleAxis (y, new Vector3 (0, 1, 0));
+		Quaternion qz = Quaternion.AngleAxis (z, new Vector3 (0, 0, 1));
+		Quaternion q = qz * qy * qx;
+		go.transform.Rotate (q.eulerAngles);
 	}
 
     void OnGUI()
