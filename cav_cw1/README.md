@@ -69,4 +69,11 @@ To choose one of the described methods, select the corresponding option in the "
 ### Updating the joints
 Once the angle variations have been solved with one of the methods described above, they are used to updated the joints. In this case, we use the axis of rotation ```v``` calculated when creating the Jacobian matrix. Basically, we need to perform a rotation corresponding the angle variation calculated previously; we create a quaternion ```q``` using the axis ```v``` and the angle variation corresponding to the given joint. We also need another quaternion ```r``` which corresponds to the current rotation of the joint. The final rotation to update the joint is the multiplication of ```q``` and ```r```.
 
-
+### Additional notes
+- Scene1 is the displayed one in Figures 1 and 2. Please use this scene to test the implementation.
+- The 	alglibnet2.dll file contains the functionality from  [ALGLIB](http://www.alglib.net/).
+- The code to create the custom window is in the file CAV-cw1/Assets/Editor/KinematicsWindow.cs It has the code to perform forward kinematics.
+- The scripts with the code to perform inverse kinematics are in the folder CAV-cw1/Assets/Editor/Robot Kyle/scripts
+-- Matrix.cs is provided
+-- Serializer.cs contains all the code to perform the operations related to the Jacobian matrix.
+-- Sphere is the script attached to the target ball in the scene. It has calls to the functions in Serializer.cs
