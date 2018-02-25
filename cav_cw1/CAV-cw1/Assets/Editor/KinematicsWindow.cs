@@ -1,13 +1,11 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections;
+using System.Text.RegularExpressions;
 
-public class FKWindow : EditorWindow
+public class KinematicsWindow : EditorWindow
 {
-    string myString = "Hello World";
     bool groupEnabled;
-    bool myBool = true;
-    float myFloat = 1.23f;
 
     // Shoulder variables
     float shoulder_x = 0;
@@ -24,13 +22,13 @@ public class FKWindow : EditorWindow
     float wrist_y = 0;
     float wrist_z = 0;
     GameObject left_wrist;
-    
+
     // Add menu item named "My Window" to the Window menu
-    [MenuItem("CAV/FKWindow")]
+    [MenuItem("CAV/Kinematics")]
     public static void ShowWindow()
     {
         //Show existing window instance. If one doesn't exist, make one.
-        EditorWindow.GetWindow(typeof(FKWindow));
+		EditorWindow.GetWindow(typeof(KinematicsWindow));
         Debug.Log("Show");
     }
     
@@ -60,11 +58,27 @@ public class FKWindow : EditorWindow
         wrist_x = EditorGUILayout.Slider ("X", lw_rotation.x, 0, 360);
         wrist_y = EditorGUILayout.Slider ("Y", lw_rotation.y, 0, 360);
         wrist_z = EditorGUILayout.Slider ("Z", lw_rotation.z, 0, 360);
-    }
 
-    void OnInspectorUpdate() {
-    	// Vector3 lw_rotation2 = new Vector3(wrist_x, wrist_y, wrist_z);
-    	// left_wrist.transform.localRotation = Quaternion.Euler(wrist_x, wrist_y, wrist_z);
-    	// left_wrist.transform.eulerAngles = lw_rotation;
+		// IK
+		string[] labels = new string[3];
+		labels[0] = "Transpose";
+		labels[1] = "Pseudo inverse";
+		labels[2] = "Damped least squares";
+
+		GUILayout.Label ("Options IK", EditorStyles.boldLabel);
+		int selected = GameObject.Find ("Sphere").GetComponent<Sphere> ().option;
+		selected = GUILayout.SelectionGrid(selected,labels,1,EditorStyles.radioButton);
+		GameObject.Find ("Sphere").GetComponent<Sphere> ().option = selected;
+
+		if (selected == 0) {
+			float alpha = GameObject.Find ("Sphere").GetComponent<Sphere> ().alpha; 
+			alpha = EditorGUILayout.FloatField ("Alpha: ", alpha);
+			GameObject.Find ("Sphere").GetComponent<Sphere> ().alpha = alpha;
+		} else if (selected == 2) {
+			float lambda = GameObject.Find ("Sphere").GetComponent<Sphere> ().lambda; 
+			lambda = EditorGUILayout.FloatField ("Lambda: ", lambda);
+			GameObject.Find ("Sphere").GetComponent<Sphere> ().lambda = lambda;
+		}
+
     }
 }
