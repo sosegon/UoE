@@ -34,35 +34,6 @@ public class Serializer {
 	// Target and end effector position are in world coord
 	// The end effector position is the extreme point of the last link
 	// not the position respect to the previous link (parent)
-	public static Matrix Jacobian(Vector3 target, Vector3 end_effector_position, Vector3 axis, Transform[] chain) {
-
-		int n_angles = chain.Length;
-		Matrix J = new Matrix(3, n_angles);
-		Vector3 vv = axis;
-
-		for(int i=0; i<chain.Length; i++) {
-			Transform t = chain[i];
-
-			// TODO: I am not sure if it is the current transform or the parent
-    		// Position of the end effector in local coords
-			Vector3 ss = t.parent.worldToLocalMatrix.MultiplyPoint(end_effector_position);
-			//Vector3 ss = t.worldToLocalMatrix.MultiplyPoint(end_effector_position);
-
-    		// Position of the link in local coords
-    		Vector3 pp = t.localPosition;
-
-    		//Jacobian entry is a column
-			Vector3 sspp = ss - pp;
-    		Vector3 ds = Vector3.Cross(vv.normalized, sspp);
-    		J.Values[0][i] = ds.x;
-    		J.Values[1][i] = ds.y;
-			J.Values[2][i] = ds.z;
-			//Debug.Log("link " + i + " ss " + ss.ToString() + " pp " + pp.ToString());
-		}
-		//Debug.Log("Jacobian: " + MatrixUtility.MatrixAsString(J.Values));
-		return J;
-	}
-
 	public static Matrix Jacobian(Vector3 target, Vector3 end_effector_position, Transform[] chain) {
 		int n_angles = chain.Length;
 		Matrix J = new Matrix(3, n_angles);
@@ -156,83 +127,24 @@ public class Serializer {
 	}
 
 	public static void IKJacobianTranspose(Vector3 target, Vector3 end_effector, Transform[] chain, float alpha=0.1f) {
-		/*Matrix e = ChangeOfPosition(target, end_effector, chain);
-
-		Vector3 x_axis = new Vector3 (1, 0, 0);
-		Matrix x_J = Jacobian(target, end_effector, x_axis, chain);
-		Matrix x_angles = JacobianTranspose(x_J, e, alpha);
-
-		Vector3 y_axis = new Vector3 (0, 1, 0);
-		Matrix y_J = Jacobian(target, end_effector, y_axis, chain);
-		Matrix y_angles = JacobianTranspose(y_J, e, alpha);
-
-		Vector3 z_axis = new Vector3 (0, 0, 1);
-		Matrix z_J = Jacobian(target, end_effector, z_axis, chain);
-		Matrix z_angles = JacobianTranspose(z_J, e, alpha);
-
-		UpdateJoints (x_angles, y_angles, z_angles, chain);
-*/
-		// This option does not work
-
 		Matrix e = ChangeOfPosition(target, end_effector, chain);
 		Matrix J = Jacobian(target, end_effector, chain);
 		Matrix angles = JacobianTranspose (J, e, alpha);
 		UpdateJoints (angles, target, end_effector, chain);
-
 	}
 
 	public static void IKJacobianPseudoInverse(Vector3 target, Vector3 end_effector, Transform[] chain) {
-
 		Matrix e = ChangeOfPosition(target, end_effector, chain);
-
-		Vector3 x_axis = new Vector3 (1, 0, 0);
-		Matrix x_J = Jacobian(target, end_effector, x_axis, chain);
-		Matrix x_angles = JacobianPseudoInverse(x_J, e);
-
-		Vector3 y_axis = new Vector3 (0, 1, 0);
-		Matrix y_J = Jacobian(target, end_effector, y_axis, chain);
-		Matrix y_angles = JacobianPseudoInverse(y_J, e);
-
-		Vector3 z_axis = new Vector3 (0, 0, 1);
-		Matrix z_J = Jacobian(target, end_effector, z_axis, chain);
-		Matrix z_angles = JacobianPseudoInverse(z_J, e);
-
-		UpdateJoints (x_angles, y_angles, z_angles, chain);
+		Matrix J = Jacobian(target, end_effector, chain);
+		Matrix angles = JacobianPseudoInverse (J, e);
+		UpdateJoints (angles, target, end_effector, chain);
 	}
 
 	public static void IKJacobianDampedLeastSquares(Vector3 target, Vector3 end_effector, Transform[] chain, float lambda=1.0f) {
-
 		Matrix e = ChangeOfPosition(target, end_effector, chain);
-
-		Vector3 x_axis = new Vector3 (1, 0, 0);
-		Matrix x_J = Jacobian(target, end_effector, x_axis, chain);
-		Matrix x_angles = JacobianDampedLeastSquares(x_J, e, lambda);
-
-		Vector3 y_axis = new Vector3 (0, 1, 0);
-		Matrix y_J = Jacobian(target, end_effector, y_axis, chain);
-		Matrix y_angles = JacobianDampedLeastSquares(y_J, e, lambda);
-
-		Vector3 z_axis = new Vector3 (0, 0, 1);
-		Matrix z_J = Jacobian(target, end_effector, z_axis, chain);
-		Matrix z_angles = JacobianDampedLeastSquares(z_J, e, lambda);
-
-		UpdateJoints (x_angles, y_angles, z_angles, chain);
-	}
-
-	public static void UpdateJoints(Matrix x_angles, Matrix y_angles, Matrix z_angles, Transform[] chain){
-		for(int i=0; i<chain.Length; i++){
-			Transform t = chain[i];
-			float x_delta_angle = x_angles.Values[i][0];
-			float y_delta_angle = y_angles.Values[i][0];
-			float z_delta_angle = z_angles.Values[i][0];
-
-    		Vector3 eulerAngles = t.localRotation.eulerAngles;
-			eulerAngles.x += x_delta_angle;
-			eulerAngles.y += y_delta_angle;
-			eulerAngles.z += z_delta_angle;
-    		t.localRotation = Quaternion.identity;
-    		t.Rotate(eulerAngles);
-		}
+		Matrix J = Jacobian(target, end_effector, chain);
+		Matrix angles = JacobianDampedLeastSquares (J, e, lambda);
+		UpdateJoints (angles, target, end_effector, chain);
 	}
 
 	public static void UpdateJoints(Matrix angles, Vector3 target, Vector3 end_effector_position, Transform[] chain) {
@@ -304,7 +216,16 @@ public class Serializer {
 
 		Matrix EU = E_ * Ut_;
 		return V_ * EU;
+	}
 
+	/*
+	 * Using this function gives unexpected results
+	*/
+	public static Matrix PseudoInverse2(Matrix J) {
+		Matrix Jt = Transpose (J);
+		Matrix JJt = J * Jt;
+		Matrix JJti = JJt.GetInverse ();
+		return Jt * JJti;
 	}
 
 	public static Matrix PseudoInverse(Matrix J) {
@@ -357,7 +278,6 @@ public class Serializer {
 
 		Matrix DsiU = Dsi_ * Ut_;
 		return V_ * DsiU;
-
 	}
 
 	public static float[][] Convert(double[,] mtx)
