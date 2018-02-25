@@ -57,7 +57,7 @@ public class Serializer {
     		J.Values[0][i] = ds.x;
     		J.Values[1][i] = ds.y;
 			J.Values[2][i] = ds.z;
-			Debug.Log("link " + i + " ss " + ss.ToString() + " pp " + pp.ToString());
+			//Debug.Log("link " + i + " ss " + ss.ToString() + " pp " + pp.ToString());
 		}
 		//Debug.Log("Jacobian: " + MatrixUtility.MatrixAsString(J.Values));
 		return J;
@@ -67,14 +67,14 @@ public class Serializer {
 		int n_angles = chain.Length;
 		Matrix J = new Matrix(3, n_angles);
 
-
+		Vector3 vv = new Vector3 (1, 1, 1);
 		for(int i=0; i<chain.Length; i++) {
 			Transform t = chain[i];
-
+			/*
 			Vector3 vv = Vector3.zero;
 			float angle = 0.0f;
 			t.localRotation.ToAngleAxis(out angle, out vv);
-
+			*/
 			// TODO: I am not sure if it is the current transform or the parent
 			// Position of the end effector in local coords
 			Vector3 ss = t.parent.worldToLocalMatrix.MultiplyPoint(end_effector_position);
@@ -139,7 +139,6 @@ public class Serializer {
 	}
 
 	public static void IKJacobianTranspose(Vector3 target, Vector3 end_effector, Transform[] chain, float alpha=0.1f) {
-		
 		Matrix e = ChangeOfPosition(target, end_effector, chain);
 
 		Vector3 x_axis = new Vector3 (1, 0, 0);
@@ -156,14 +155,13 @@ public class Serializer {
 
 		UpdateJoints (x_angles, y_angles, z_angles, chain);
 
-
 		// This option does not work
 		/*
 		Matrix e = ChangeOfPosition(target, end_effector, chain);
 		Matrix J = Jacobian(target, end_effector, chain);
 		Matrix angles = JacobianTranspose (J, e, alpha);
 		UpdateJoints (angles, chain);
-		*/
+*/
 	}
 
 	public static void IKJacobianPseudoInverse(Vector3 target, Vector3 end_effector, Transform[] chain) {
@@ -221,17 +219,26 @@ public class Serializer {
 	}
 
 	public static void UpdateJoints(Matrix angles, Transform[] chain) {
+		Vector3 vv = new Vector3 (1, 1, 1);
 		for(int i=0; i<chain.Length; i++){
 			Transform t = chain[i];
 			float delta_angle = angles.Values[i][0];
 
+			/*
 			Vector3 vv = Vector3.zero;
 			float angle = 0.0f;
 			t.localRotation.ToAngleAxis(out angle, out vv);
+*/
+
+			Quaternion q = Quaternion.AngleAxis (delta_angle, vv);
+			Vector3 deltaEuler = q.eulerAngles;
+			Vector3 eulerAngles = t.localRotation.eulerAngles;
+			eulerAngles.x += deltaEuler.x;
+			eulerAngles.y += deltaEuler.y;
+			eulerAngles.z += deltaEuler.z;
 
 			t.localRotation = Quaternion.identity;
-			Quaternion q = Quaternion.AngleAxis (angle + delta_angle, vv);
-			t.Rotate(q.eulerAngles);
+			t.Rotate(eulerAngles);
 		}
 	}
 
