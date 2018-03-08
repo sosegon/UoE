@@ -1,0 +1,19 @@
+# Computer Animation and Visualisation Assessment 2 - Volume Rendering
+
+
+## Compilation
+
+Run "make"
+
+
+## Running
+
+Run ./volume
+
+
+## Controls
+
+* Up Array - Increase Display Threshold
+* Down Array - Decrease Display Threshold
+* Escape key to exit
+
