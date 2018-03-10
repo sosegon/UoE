@@ -1,4 +1,4 @@
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +14,7 @@ import st.TemplateEngine;
 @RunWith(Task1_Coverage.class)
 @SuiteClasses({Task1_Coverage.EntryMapStoreTest.class, Task1_Coverage.EntryMapDeleteTest.class,
 	Task1_Coverage.EntryMapUpdateTest.class, Task1_Coverage.SimpleTemplateEngineTest.class,
+	Task1_Coverage.TemplateEngineTest.class,
 	Task1_Coverage.SimpleTemplateEngineCoverageTest.class})
 public class Task1_Coverage extends Suite{
 	
@@ -122,6 +123,54 @@ public class Task1_Coverage extends Suite{
 	    	String result = simpleEngine.evaluate(template, pattern, value, matchingMode);
 	    	assertEquals(result, template);
 	    }
+
+	    /*
+			Test cases of Antonios Valais
+		 */
+	    @Test
+		public void TestCase_Coverage_10() {
+			String originalText = "A"+Character.MIN_VALUE+"AA";
+			String expected = "ABC"+Character.MIN_VALUE+"AA";
+			String pattern = "A";
+			String result = simpleEngine.evaluate(originalText, pattern, "ABC", 2);
+			assertEquals(result, expected);
+		}
+	}
+
+	public static class TemplateEngineCoverageTest {
+		/*
+			Test cases of Antonios Valais
+		 */
+		private TemplateEngine engine;
+	    private EntryMap map;
+
+	    @Before
+	    public void setUp() throws Exception {
+	        engine = new TemplateEngine();
+	        map = new EntryMap();
+	    }
+
+	    @Test
+	    public void TestCase_Coverage_1()
+	    {
+	    	map.store("name", "Antonios");
+			
+			Integer integer = new Integer(2);
+			
+			for (Object entry : map.getEntries()) {
+				assertFalse(entry.equals(null));
+				assertTrue(entry.equals(entry));
+				assertFalse(entry.equals(integer));
+			}
+	    }
+
+		@Test
+	    public void TestTemplateStartsWithEntry() {
+	        map.store("name", "Antonios");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("${name} is my name", map, matchingMode);
+	        assertEquals("Antonios is my name", result);
+	    }
 	}
 
 	public static class EntryMapStoreTest {
@@ -229,7 +278,6 @@ public class Task1_Coverage extends Suite{
 			map.delete("key4");		
 			assertEquals(map.getEntries().size(), 3);
 		}
-
 	}
 	
 	public static class EntryMapUpdateTest {
@@ -525,6 +573,393 @@ public class Task1_Coverage extends Suite{
 	    	String result = simpleEngine.evaluate(template, pattern, value, matchingMode);
 	    	String comparison = "XYZ abc_XYZ-XYZ";
 	    	assertEquals(result, comparison);
+	    }
+	}
+
+	public static class TemplateEngineTest {
+		/*
+			Test cases of Antonios Valais
+		 */
+		private TemplateEngine engine;
+	    private EntryMap map;
+
+	    @Before
+	    public void setUp() throws Exception {
+	        engine = new TemplateEngine();
+	        map = new EntryMap();
+	    }
+
+		@Test
+	    public void TestNullTemplate() {
+	        map.store("name", "Antonios");
+	        map.store("surname", "Valais");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate(null, map, matchingMode);
+	        assertNull(result);
+	    }
+	    
+	    @Test
+	    public void TestEmptyTemplate() {
+	        map.store("name", "Antonios");
+	        map.store("surname", "Valais");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("", map, matchingMode);
+	        assertEquals("", result);
+	    }
+	    
+	    @Test
+	    public void TestTemplateWithOnlySpaces() {
+	        map.store("name", "Antonios");
+	        map.store("surname", "Valais");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("  ", map, matchingMode);
+	        assertEquals("  ", result);
+	    }
+	    
+	    @Test
+	    public void TestNullEntryMap() {
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("My name is ${name}", null, matchingMode);
+	        assertEquals("My name is ${name}", result);
+	    }
+	    
+	    @Test
+	    public void TestEmptyEntryMap() {
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("My name is ${name}", map, matchingMode);
+	        assertEquals("My name is ${name}", result);
+	    }
+	    
+	    @Test
+	    public void TestNullMatchingMode() {
+	        map.store("name", "Antonios");
+	        Integer matchingMode = null;
+	        String result = engine.evaluate("Hello my name is ${name}", map, matchingMode);
+	        assertEquals("Hello my name is Antonios", result);
+	    }
+	    
+	    @Test
+	    public void TestOutOfBoundMatchingMode_NEGATIVE() {
+	        map.store("name", "Antonios");
+	        Integer matchingMode = -1;
+	        String result = engine.evaluate("Hello my name is ${name}", map, matchingMode);
+	        assertEquals("Hello my name is Antonios", result);
+	    }
+	    
+	    @Test
+	    public void TestOutOfBoundMatchingMode_MIN_NEGATIVE() {
+	        map.store("name", "Antonios");
+	        Integer matchingMode = Integer.MIN_VALUE;
+	        String result = engine.evaluate("Hello my name is ${name}", map, matchingMode);
+	        assertEquals("Hello my name is Antonios", result);
+	    }
+	    
+	    @Test
+	    public void TestOutOfBoundMatchingMode_GreaterThanSeven() {
+	        map.store("name", "Antonios");
+	        Integer matchingMode = 8;
+	        String result = engine.evaluate("Hello my name is ${name}", map, matchingMode);
+	        assertEquals("Hello my name is Antonios", result);
+	    }
+	    
+	    @Test
+	    public void TestOutOfBoundMatchingMode_MAX() {
+	        map.store("name", "Antonios");
+	        Integer matchingMode = Integer.MAX_VALUE;
+	        String result = engine.evaluate("Hello my name is ${name}", map, matchingMode);
+	        assertEquals("Hello my name is Antonios", result);
+	    }
+	    
+	    @Test
+	    public void TestOneWordTemplateWithOneEntryMatching_Default() {
+	        map.store("name", "Antonios");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("Hello my name is ${name}", map, matchingMode);
+	        assertEquals("Hello my name is Antonios", result);
+	    }
+	    
+	    @Test
+	    public void TestOneWordTemplateWithOneEntryMatching_CASESENSITIVE_NOT_MATCHING() {
+	        map.store("Name", "Antonios");
+	        Integer matchingMode = TemplateEngine.CASE_SENSITIVE;
+	        String result = engine.evaluate("Hello my name is ${name}", map, matchingMode);
+	        assertEquals("Hello my name is ${name}", result);
+	    }
+	    
+	    @Test
+	    public void TestOneWordTemplateWithOneEntryMatching_CASESENSITIVE_MATCHING() {
+	        map.store("Name", "Antonios");
+	        Integer matchingMode = TemplateEngine.CASE_SENSITIVE;
+	        String result = engine.evaluate("Hello my name is ${Name}", map, matchingMode);
+	        assertEquals("Hello my name is Antonios", result);
+	    }
+	    
+	    
+	    @Test
+	    public void TestTwoWordTemplateWithOneEntryMatching_DEFAULT() {
+	        map.store("My Name", "Antonios");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("Hello my name is ${My Name}", map, matchingMode);
+	        assertEquals("Hello my name is Antonios", result);
+	    }
+	    
+	    @Test
+	    public void TestTwoWordTemplateWithOneEntryMatching_CASESENSITIVE_NOT_MATCHING() {
+	        map.store("My name", "Antonios");
+	        Integer matchingMode = TemplateEngine.CASE_SENSITIVE;
+	        String result = engine.evaluate("Hello my name is ${My Name}", map, matchingMode);
+	        assertEquals("Hello my name is ${My Name}", result);
+	    }
+	    
+	    @Test
+	    public void TestTwoWordTemplateWithOneEntryMatching_CASESENSITIVE_MATCHING() {
+	        map.store("My Name", "Antonios");
+	        Integer matchingMode = TemplateEngine.CASE_SENSITIVE;
+	        String result = engine.evaluate("Hello my name is ${My Name}", map, matchingMode);
+	        assertEquals("Hello my name is Antonios", result);
+	    }
+	    
+	    @Test
+	    public void TestTwoWordTemplateWithOneEntryMatching_CASESENSITIVE_DELETEUNMATCHED_NOT_MATCHING() {
+	        map.store("My name", "Antonios");
+	        Integer matchingMode = TemplateEngine.CASE_SENSITIVE | TemplateEngine.DELETE_UNMATCHED ;
+	        String result = engine.evaluate("Hello my name is ${My Name}", map, matchingMode);
+	        assertEquals("Hello my name is ", result);
+	    }
+	    
+	    @Test
+	    public void TestTwoWordTemplateWithOneEntryMatching_CASESENSITIVE_DELETEUNMATCHED_MATCHING() {
+	        map.store("My Name", "Antonios");
+	        Integer matchingMode = TemplateEngine.CASE_SENSITIVE | TemplateEngine.DELETE_UNMATCHED ;
+	        String result = engine.evaluate("Hello my name is ${My Name}", map, matchingMode);
+	        assertEquals("Hello my name is Antonios", result);
+	    }
+	    
+	    @Test
+	    public void TestTwoWordTemplateWithOneEntryMatching_BLUR_CASESENSITIVE_NOT_MATCHING() {
+	        map.store("Myname", "Antonios");
+	        Integer matchingMode = TemplateEngine.BLUR_SEARCH | TemplateEngine.CASE_SENSITIVE;
+	        String result = engine.evaluate("Hello my name is ${My Name}", map, matchingMode);
+	        assertEquals("Hello my name is ${My Name}", result);
+	    }
+	    
+	    @Test
+	    public void TestTwoWordTemplateWithOneEntryMatching_BLUR_CASESENSITIVE_MATCHING() {
+	        map.store("MyName", "Antonios");
+	        Integer matchingMode = TemplateEngine.BLUR_SEARCH | TemplateEngine.CASE_SENSITIVE;
+	        String result = engine.evaluate("Hello my name is ${My Name}", map, matchingMode);
+	        assertEquals("Hello my name is Antonios", result);
+	    }
+	    
+	    @Test
+	    public void TestTwoWordTemplateWithOneEntryMatching_BLUR_CASESENSITIVE_DELETEUNMATCHED_NOT_MATCHING() {
+	        map.store("Myname", "Antonios");
+	        Integer matchingMode = TemplateEngine.BLUR_SEARCH | TemplateEngine.CASE_SENSITIVE | TemplateEngine.DELETE_UNMATCHED ;
+	        String result = engine.evaluate("Hello my name is ${My Name}", map, matchingMode);
+	        assertEquals("Hello my name is ", result);
+	    }
+	    
+	    @Test
+	    public void TestTwoWordTemplateWithOneEntryMatching_BLUR_CASESENSITIVE_DELETEUNMATCHED_MATCHING() {
+	        map.store("MyName", "Antonios");
+	        Integer matchingMode = TemplateEngine.BLUR_SEARCH | TemplateEngine.CASE_SENSITIVE | TemplateEngine.DELETE_UNMATCHED ;
+	        String result = engine.evaluate("Hello my name is ${My Name}", map, matchingMode);
+	        assertEquals("Hello my name is Antonios", result);
+	    }
+	    
+	    @Test
+	    public void TestTwoWordTemplateWithSpacesOneEntryMatching_CASESENSITIVE_MATCHING() {
+	        map.store("My   Name", "Antonios");
+	        Integer matchingMode = TemplateEngine.CASE_SENSITIVE;
+	        String result = engine.evaluate("Hello my name is ${My   Name}", map, matchingMode);
+	        assertEquals("Hello my name is Antonios", result);
+	    }
+	    
+	    @Test
+	    public void TestTwoWordTemplateWithSpacesOneEntryMatching_BLUR_MATCHING() {
+	        map.store("My   name", "Antonios");
+	        Integer matchingMode = TemplateEngine.BLUR_SEARCH;
+	        String result = engine.evaluate("Hello my name is ${MyName}", map, matchingMode);
+	        assertEquals("Hello my name is Antonios", result);
+	    }
+	    
+	    @Test
+	    public void TestTwoWordTemplateWithSpacesOneEntryMatching_BLUR_CASESENSITIVE_MATCHING() {
+	        map.store("My   Name", "Antonios");
+	        Integer matchingMode = TemplateEngine.BLUR_SEARCH | TemplateEngine.CASE_SENSITIVE;
+	        String result = engine.evaluate("Hello my name is ${MyName}", map, matchingMode);
+	        assertEquals("Hello my name is Antonios", result);
+	    }
+	    
+	    @Test
+	    public void TestTwoWordTemplateWithSpacesOneEntryMatching_BLUR_CASESENSITIVE_NOT_MATCHING() {
+	        map.store("My   name", "Antonios");
+	        Integer matchingMode = TemplateEngine.BLUR_SEARCH | TemplateEngine.CASE_SENSITIVE;
+	        String result = engine.evaluate("Hello my name is ${MyName}", map, matchingMode);
+	        assertEquals("Hello my name is ${MyName}", result);
+	    }
+	    
+	    @Test
+	    public void TestNestedTemplate() {
+	        map.store("name Valais", "Antonios Valais");
+	        map.store("surname", "Valais");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("Hello my name is ${name ${Surname}}", map, matchingMode);
+	        assertEquals("Hello my name is Antonios Valais", result);
+	    }
+	    
+	    @Test
+	    public void TestLeftBrokenTemplateBoundary() {
+	        map.store("name", "Antonios");
+	        map.store("surname", "Valais");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("Hello my name ${ is ${name} ${surname}", map, matchingMode);
+	        assertEquals("Hello my name ${ is Antonios Valais", result);
+	    }
+	    
+	    @Test
+	    public void TestLeftBrokenTemplateBoundary_OnlyDollar() {
+	        map.store("name", "Antonios");
+	        map.store("surname", "Valais");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("Hello my name $ is ${name} ${surname}", map, matchingMode);
+	        assertEquals("Hello my name $ is Antonios Valais", result);
+	    }
+	    
+	    @Test
+	    public void TestLeftBrokenTemplateBoundary_OnlyBracket() {
+	        map.store("name", "Antonios");
+	        map.store("surname", "Valais");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("Hello my name { is ${name} ${surname}", map, matchingMode);
+	        assertEquals("Hello my name { is Antonios Valais", result);
+	    }
+	    
+	    @Test
+	    public void TestRightBrokenTemplateBoundary() {
+	        map.store("name", "Antonios");
+	        map.store("surname", "Valais");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("Hello my name } is ${name} ${surname}", map, matchingMode);
+	        assertEquals("Hello my name } is Antonios Valais", result);
+	    }
+	    
+	    @Test
+	    public void TestEmptyTemplateBoundary_KeepUnmatched() {
+	        map.store("name", "Antonios");
+	        map.store("surname", "Valais");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("Hello my name ${} is ${name} ${surname}", map, matchingMode);
+	        assertEquals("Hello my name ${} is Antonios Valais", result);
+	    }
+	    
+	    @Test
+	    public void TestEmptyTemplateBoundary_DeleteUnmatched() {
+	        map.store("name", "Antonios");
+	        map.store("surname", "Valais");
+	        Integer matchingMode = TemplateEngine.DEFAULT | TemplateEngine.DELETE_UNMATCHED;
+	        String result = engine.evaluate("Hello my name ${}is ${name} ${surname}", map, matchingMode);
+	        assertEquals("Hello my name is Antonios Valais", result);
+	    }
+	    
+	    @Test
+	    public void TestDoubleTemplateBoundary() {
+	        map.store("name", "Antonios");
+	        map.store("surname", "Valais");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("Hello my name is ${${name}} ${surname}", map, matchingMode);
+	        assertEquals("Hello my name is ${Antonios} Valais", result);
+	    }
+	    
+	    @Test
+	    public void TestTemplateThatCreatesItsOwnTemplate() {
+	        map.store("name", "${name}");
+	        map.store("surname", "Valais");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("Hello my name is ${name} ${surname}", map, matchingMode);
+	        assertEquals("Hello my name is ${name} Valais", result);
+	    }
+	    
+	    @Test
+	    public void TestTemplatesLenghtArePlacedInAscedingOrder_testA() {
+	        map.store("name", "Antonios");
+	        map.store("surname", "Valais");
+	        map.store("age", "29");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("Hello my name is ${surname} ${name}, I am ${age} years old", map, matchingMode);
+	        assertEquals("Hello my name is Valais Antonios, I am 29 years old", result);
+	    }
+	    
+	    @Test
+	    public void TestTemplatesLenghtArePlacedInAscedingOrder_testB_DEFAULT() {
+	        map.store("name", "Antonios");
+	        map.store("surname", "Valais");
+	        map.store("name ${surname}", "Captain America");
+	        map.store("name Valais", "Batman");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("Hello my name is ${name ${surname}}", map, matchingMode);
+	        assertEquals("Hello my name is Batman", result);
+	    }
+	    
+	    @Test
+	    public void TestTemplatesLenghtArePlacedInAscedingOrder_testB_DELETE_UNMATCHED() {
+	        map.store("name", "Antonios");
+	        map.store("surname", "Valais");
+	        map.store("name ${surname}", "Captain America");
+	        map.store("name Valais", "Batman");
+	        Integer matchingMode = TemplateEngine.DELETE_UNMATCHED;
+	        String result = engine.evaluate("Hello my name is ${name ${delete}${surname}}", map, matchingMode);
+	        assertEquals("Hello my name is Batman", result);
+	    }
+	    
+	    @Test
+	    public void TestTemplatesLenghtArePlacedInAscedingOrder_testB_DELETE_UNMATCHED_CASE_SENSITIVE() {
+	        map.store("name", "Antonios");
+	        map.store("surname", "Valais");
+	        map.store("name ${surname}", "Captain America");
+	        map.store("name VaLais", "Batman");
+	        Integer matchingMode = TemplateEngine.DELETE_UNMATCHED | TemplateEngine.CASE_SENSITIVE;
+	        String result = engine.evaluate("Hello my name is ${name ${delete}${surname}}", map, matchingMode);
+	        assertEquals("Hello my name is ", result);
+	    }
+	    
+	    @Test
+	    public void TestTemplatesLenghtArePlacedInAscedingOrder_testB_DELETE_UNMATCHED_CASE_SENSITIVE_BLUR_SEARCH() {
+	        map.store("name", "Antonios");
+	        map.store("surname", "Valais");
+	        map.store("name ${surname}", "Captain America");
+	        map.store("name VaLais", "Batman");
+	        Integer matchingMode = TemplateEngine.DELETE_UNMATCHED | TemplateEngine.CASE_SENSITIVE | TemplateEngine.BLUR_SEARCH;
+	        String result = engine.evaluate("Hello my name is ${name${delete}${surname}}", map, matchingMode);
+	        assertEquals("Hello my name is ", result);
+	    }
+	    
+	    @Test
+	    public void TestTemplatesLenghtArePlacedInAscedingOrder_TwoWithSameLength() {
+	        map.store("name", "Antonios");
+	        map.store("surname", "Valais");
+	        map.store("age", "29");
+	        map.store("eat", "Bananas");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("Hello my name is ${surname} ${name}, I am ${age} years old and I like ${eat}", map, matchingMode);
+	        assertEquals("Hello my name is Valais Antonios, I am 29 years old and I like Bananas", result);
+	    }
+	    
+	    @Test
+	    public void TestTemplateWithATemplateOccurTwice() {
+	        map.store("name", "Antonios");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("Hello my name is ${name}, ${name} is my name", map, matchingMode);
+	        assertEquals("Hello my name is Antonios, Antonios is my name", result);
+	    }
+	    
+	    @Test
+	    public void TestTemplateWithATemplateOccurTwice_ExtraTemplateBetween() {
+	        map.store("name", "Antonios");
+	        map.store("surname", "Valais");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("Hello my name is ${name} ${surname}, ${name} is my name", map, matchingMode);
+	        assertEquals("Hello my name is Antonios Valais, Antonios is my name", result);
 	    }
 	}
 }
