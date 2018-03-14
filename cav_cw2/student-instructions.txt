@@ -1,0 +1,30 @@
+Computer Animation and Visualisation: Assignment 2
+
+Volume rendering with Transparency
+
+Students are required to render 3D volume data using Composite Intensity Projection (CIP). Students must design and implement transfer functions to highlight materials of different density. Note: you must not use the 3D rendering functions of OpenGL (e.g. alpha blending).
+A basic program to load and visualize volume data is provided (click here). You may use it as a starting point. Example volume data is also provided (human head). 
+
+Requirements
+
+* Produce a program to show the skin overlapped with the skeleton, by tuning the colour and opacity transfer functions.
+* Volume rendering by casting rays that are axis-aligned and clear visualization of the skin and the skeleton (x, y and z directions). (70 marks).
+* Bonus Marks (30 marks): 
+	- Ray tracing in 3D. 
+	- Comparison of ray casting: "Front-to-Back" CIP using empty-space leaping optimization, verses simple "Back-to-Front" CIP. 
+	- Additional interfaces to change view points
+	- Focal distance. 
+	- Transfer functions.
+	- Comparison of different schemes (shear warping / traversal vs. sampling, trilinear interpolation vs. nearest neighbour)
+	- Using enhanced methods e.g. local illumination and multidimensional transfer functions using gradient information.
+* A README file giving clear instructions about your source code and stating what you have done. Especially, you must mention about the additional functions for the bonus marks.
+* Your program must be written using C++ and OpenGL. It must run on DICE.
+
+Place your files in a single directory, and call the informatics electronic submission script for this course as follows (use the command "man submit" for further details): 
+
+submit cav 2 your_directory_name
+
+Deadline 23rd March, 2018 
+Tutor : Floyd M. Chitalu : floyd.m.chitalu@ed.ac.uk
+All practical work is covered by the school policy on plagiarism and students are advised to be fully aware of this when submitting practical work.
+All practical work is also covered by the late submission policy.
