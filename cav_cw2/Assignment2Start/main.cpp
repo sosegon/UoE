@@ -25,10 +25,13 @@ void Draw(void) {
   glPointSize(2.0);
   glBegin(GL_POINTS);
 
-  for (int y = 0; y < volumeData->GetHeight(); y++) {
-    for (int z = 0; z < volumeData->GetDepth(); z++) {
+  for (int z = 0; z < volumeData->GetDepth(); z++) {
+    for (int y = 0; y < volumeData->GetHeight(); y++) {
       for (int x = 0; x < volumeData->GetWidth(); x++) {
         unsigned char val = volumeData->Get(x, y, z);
+
+        // z, y, x are height, width and depth
+        
         /* TODO:
         **
         **  Here is where you should calculate the color of
@@ -73,7 +76,7 @@ int main(int argc, char** argv) {
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
   glutInitWindowSize(WIDTH, HEIGHT);
-  glutCreateWindow("CAV Assignment 2 [BUILD: "__DATE__"]");
+  glutCreateWindow("CAV Assignment 2 [BUILD: " __DATE__ "]");
 
   glClearColor(0.5, 0.5, 0.5, 1.0);
 
