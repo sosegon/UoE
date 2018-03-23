@@ -22,6 +22,10 @@ vec3 linearTF(vec3 a, vec3 b, float t) {
   return a * (1-t) + b * t;
 }
 
+vec3 quadraticTF(vec3 a, vec3 b, float t) {
+  return a * (1-t*t) + b * t*t;
+}
+
 void Update(void) { glutPostRedisplay(); }
 
 void Draw(void) {
@@ -32,6 +36,7 @@ void Draw(void) {
   for (int z = 0; z < volumeData->GetDepth(); z++) {
     for (int y = 0; y < volumeData->GetHeight(); y++) {
       for (int x = 0; x < volumeData->GetWidth(); x++) {
+        vec3 color = vec3(0,1,0);
         unsigned char val = volumeData->Get(x, y, z);
 
         // z, y, x are height, width and depth
@@ -41,11 +46,19 @@ void Draw(void) {
         **  Here is where you should calculate the color of
         **  the pixel via some more sophisticated method.
         */
+        // if(color.r() < threshold || color.g() < threshold || color.b() < threshold) {
+        //   vec3 red = vec3(1,0,0);
+        //   color = linearTF(red, color, val/255.0);
+        // } else {
+        //   glColor3f(color.r(), color.g(), color.b());
+        //   glVertex3f(y, z, 0);
+        //   break;
+        // }
 
         if (val > threshold) {
           vec3 red = vec3(1,0,0);
           vec3 blue = vec3(0,0,1);
-          vec3 color = linearTF(red, blue, val/255.0);
+          vec3 color = quadraticTF(red, blue, val/255.0);
           //vec3 color = vec3(val, val, val) / 255.0;
           glColor3f(color.r(), color.g(), color.b());
           glVertex3f(y, z, 0);
