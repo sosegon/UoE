@@ -18,6 +18,10 @@
 static cVolumeData* volumeData = NULL;
 static unsigned char threshold = 75;
 
+vec3 linearTF(vec3 a, vec3 b, float t) {
+  return a * (1-t) + b * t;
+}
+
 void Update(void) { glutPostRedisplay(); }
 
 void Draw(void) {
@@ -36,7 +40,10 @@ void Draw(void) {
         */
 
         if (val > threshold) {
-          vec3 color = vec3(val, val, val) / 255.0;
+          vec3 red = vec3(1,0,0);
+          vec3 blue = vec3(0,0,1);
+          vec3 color = linearTF(red, blue, val/255.0);
+          //vec3 color = vec3(val, val, val) / 255.0;
           glColor3f(color.r(), color.g(), color.b());
           glVertex3f(y, z, 0);
           break;
