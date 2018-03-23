@@ -167,17 +167,64 @@ public class TemplateEngine {
     }
 
     private boolean isYearTemplate(EntryMap.Entry currentEntry) {
+    	if(currentEntry.pattern.toLowerCase().trim() == "year") {
+    		String value = currentEntry.value.toLowerCase();
+    		// Regex for the value
+    		return value.matches("^in\\s[0-9]\\d*\\syears$");
+    	};
     	
-
-    	return false; //TODO
+    	return false;
     }
     
     private void replaceYearEntry(ArrayList<EntryMap.Entry> sortedEntries, EntryMap.Entry currentEntry, Integer matchingMode) {
-    	
-    	
-    	//TODO
-    	
-    	
+        String value = currentEntry.value;
+        
+        // Get the number of years
+        String[] elems = value.split(" ");
+        int number_years;
+        try {
+            number_years = Integer.valueOf(elems[1]);
+        } catch(NumberFormatException e) {
+            number_years = 0;
+        }
+
+        int year = 0;
+        boolean baseYearFlag = false;
+
+        // Verify the existence of the entry base_year
+        for(EntryMap.Entry baseYearEntry : sortedEntries) {
+            if(baseYearEntry.pattern.toLowerCase().trim() == "base_year"){
+                try {
+                    year = Integer.valueOf(baseYearEntry.value);
+                    baseYearFlag = true;
+                    break;
+                } catch(NumberFormatException e) {
+                    continue;
+                }
+            }
+        }
+
+        if(year <= 0) {
+            // Get the current year
+            year = Calendar.getInstance().get(Calendar.YEAR);
+        }
+        
+        // If the number of years is equal to the max value for
+        // integers, then the addition with the current year will
+        // give a negative number because that is how java handles
+        // this case.
+        if(number_years == Integer.MAX_VALUE || Integer.MAX_VALUE - number_years < year) {
+            if(!baseYearFlag) {
+                number_years = 0;
+            } else {
+                year = Calendar.getInstance().get(Calendar.YEAR);
+            }
+        }
+
+        // Final year as string
+        String syear = String.valueOf(year + number_years);
+
+        currentEntry.value = syear;
     }
     
     private Result instantiate(String instancedString, ArrayList<Template> sortedTemplates, ArrayList<EntryMap.Entry> sortedEntries, Integer matchingMode){
