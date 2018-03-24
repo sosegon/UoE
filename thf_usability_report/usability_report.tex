@@ -1,4 +1,4 @@
-\documentclass[11pt,]{article}
+\documentclass[12pt]{article}
 \usepackage{apacite}
 \usepackage[T1]{fontenc}
 \usepackage{amssymb,amsmath}
@@ -50,7 +50,7 @@
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \setcounter{secnumdepth}{1}
 
-\usepackage[a4paper,body={170mm,250mm},top=35mm,left=35mm, right=35mm]{geometry}
+\usepackage[a4paper,body={170mm,250mm},top=35mm,left=35mm, right=35mm, bottom=35mm]{geometry}
 \usepackage[sf,bf,small]{titlesec}
 \usepackage{fancyhdr}
 
@@ -75,39 +75,42 @@
 
 \begin{center}
 \textsf{\textbf{\Large The Human Factor: Usability Report}}
+\end{center}
 
-%\bigskip
-%\textbf{Release date: Monday 6th November 2017}
-%
-%\textbf{Due date: 16:00 Tuesday 28th November 2017}
+\begin{center}
+\textsf{\textbf{Transport for Edinburgh app}}
 \end{center}
 
 \section{Introduction}
 \label{sec:intro}
 \paragraph{}
-Edinburgh has a public transportation system that allows people to travel around the city. The company that provides the transportation services (Lothian buses) offers a mobile application. This application provides real-time information related to stops, routes, schedules and news. 
+The City of Edinburgh has a public transportation system that allows people to travel around the city. The company that provides the transportation services (Lothian buses) offers a mobile application. This application provides real-time information related to stops, routes, schedules, and news. 
 
-The users of the transportation system can use the application to plan a route from one point of the city to another. The mobile application offers several options to get information that allows to plan a trip. The option selected by a user might be based on her knowledge of the city and her expertise with the application.
+The users of the transportation system can use the application to plan a route from one point of the city to another. The mobile application offers several options to get information that allows planning a trip. The option selected by users might be based on their knowledge of the city and their expertise with the application.
 
-As mentioned, the way a user can get information from the application depends on her previous experience. Therefore, different types of users can perform different tasks in the application to get information to plan their trips using the public transportation system. The scope of this report is set based on three elements: type of user, scenario of usage, and task to perform. 
+The existence of various options to plan a trip is a symptom that the application has been developed to be used by distinct kinds of users. Thus, different types of users can perform different tasks in the application to get valuable information and plan their trips using the public transportation system. The usability of the application presented in this report is set based on three elements: the type of user, the scenario of usage, and the task to perform. 
 
-The type of user of the application is a novice one. It follows that this kind of user has not used the application before. However, it is assumed that the user has previous experience with mobile applications and understand the type of available interactions. Also, the user must have a reasonable knowledge of places to go within the city. The previous condition adjusts more to a resident rather than to a tourist.
+The type of user selected to analyse the application is a novice one. This kind of user has not had contact with the application before. However, it is assumed that the users have previous experience with mobile applications and understand the type of available interactions. Also, the users must have a reasonable knowledge of places to go within the city; this means that the user is more likely to be a resident than a tourist.
 
-The scenario of usage is defined by the activities of the user. In this case, a user wants to go from one point of the city to another using the fastest route of the public transportation system. To do so, the user needs to perform a task using the application. Such task is finding the fastest route from the origin to the destination. 
+According to the National Records of Scotland, the City of Edinburgh received 29439, 31436 and 32387 new residents in the periods 2013-2014, 2014-2015 and 2015-2016 respectively \citep{edinStats}. These numbers show an increasing and considerable number of new potential users of the public transportation system and its mobile application every year. These type of potential users fit the novice user profile, therefore, an application that facilitates the usage for first-time users is a must.
 
-The application offers two alternatives to accomplish the task. The first one allows the user to set the origin and destination along with other parameters like travel modes (bus or tram). The second option is focused only on the destination. Here, the assumption is that the origin is the current position of the user. The application sets the origin by using the GPS information of the device. This report focuses in the second alternative.
+The scenario of usage is defined by the activities of the user. In this case, a user wants to go from one point of the city to another using the fastest route of the public transportation system. To do so, the user needs to find the fastest route using the application. Thus, the task to be executed is finding the fastest route from the origin to the destination. 
+
+The application offers two alternatives to accomplish the task. The first one allows the user to set the origin and destination along with other parameters like travel modes (bus or tram). The second option is focused only on the destination. Here, the condition is that the origin is the current position of the user. The application sets the origin by using the GPS information of the device. This report focuses on the second alternative.
 
 
 \section{Method}
 \label{sec:method}
-Based on the scope definition, the objective is to analyse the learnability of the application for novice users. One of the method to perform this type of analysis is cognitive walkthrough \citep{helander2014handbook}. The first thing to do the analysis is to determine the steps to accomplish the given task. It is assumed that the user has already opened the application and has landed to the home screen. Based on that, the steps to accomplish the task are the following:
+Based on the scope definition, the objective of this report is to analyse the learnability of the application for novice users given that there exist a considerable number of new potential users. One of the methods to perform this type of analysis is the cognitive walkthrough \citep{helander2014handbook}. This method does not require the participation of users and it is focused on the first time of usage. As a drawback, the method does not provide information about the frequency of potential errors.
+
+The first thing to do the analysis using cognitive walkthrough is to determine the steps to accomplish the given task. It is assumed that the user has already opened the application and has landed on the home screen. Based on that, the steps to accomplish the task are the following:
 
 \begin{enumerate}
 	\item Select the search box.
  	\item Type the name of the destination.
   	\item Select the correct destination.
   	\item Select the route that takes less time to the destination.
-  	\item See the route in the map.
+  	\item See the route on the map.
 \end{enumerate}
 
 \begin{figure*}[!htb]
@@ -120,7 +123,9 @@ Based on the scope definition, the objective is to analyse the learnability of t
 	\vskip -5mm
 \end{figure*}
 
-The application screens associated with every step are displayed in Figure \ref{fig:fig1}. Using these steps, the following four questions have to answered for each one:
+The application screens associated with every step are displayed in Figure \ref{fig:fig1}. It is worth to notice the consistency in the visual style throughout all the steps. 
+
+Next, the following four questions have to be answered for each step:
 
 \begin{enumerate}
   \item [Q1.] Will users understand that the step is needed to reach the goal?
@@ -129,13 +134,11 @@ The application screens associated with every step are displayed in Figure \ref{
   \item [Q4.] Will users understand the feedback?
 \end{enumerate}
 
-Finally, the answers are used to provide suggestions and recommendations of the design, specially those where the answer is negative.
-
-Each of the screens corresponding to the steps to accomplish the task are displayed in the Figure \ref{fig:fig1}
+Finally, the answers are used to provide suggestions and recommendations to improve the design, especially in those steps where an answer is negative.
 
 \section{Results}
 \label{sec:results}
-Based on the results shown \ref{tab:tab1}, it is clearly evident that steps 1 and 5 can be easily performed by novice users. It is worth to highlight the use of labels and metaphors specially in the home screen. This not only allows the user to perform the first step of the task, but it also allows to easily identify other sections of the application. 
+Based on the results shown in Table \ref{tab:tab1}, it is clearly evident that steps 1 and 5 can be performed by novice users with ease. It is worth to highlight the use of labels and metaphors principally on the home screen. This not only allows the user to perform the first step of the task, but it also permits to identify other sections of the application easily.
  
 \begin{table}[h!]
 	\begin{center}
@@ -157,7 +160,7 @@ Based on the results shown \ref{tab:tab1}, it is clearly evident that steps 1 an
 	\end{center}
 \end{table}
 
-The feedback in the second step is not clear enough. Based on the previous step, at this point the user is expecting to see a list of places related to the input text. However, the first results the application displays are bus routes with the name of the destination place. This can confuse the user, specially because the application has another section for bus routes as seen in Figure \ref{fig:fig2}
+The feedback in the second step is not clear enough. Based on the previous step, at this point, the user is expecting to see a list of places related to the input text. However, the first results the application displays are bus routes that have the destination place in their names. This can confuse the user, mainly because the application has another section for bus routes as seen in Figure \ref{fig:fig2}
 
 \begin{figure*}[!htb]
 	\vskip 5mm
@@ -169,20 +172,49 @@ The feedback in the second step is not clear enough. Based on the previous step,
 	\vskip -5mm
 \end{figure*}
 
-In the third step, the user could not clearly recognize which is the right option to choose. This situation is related to the feedback from the second step. The results for places are not corrected labelled. Since the results for routes are clearly labelled as "Routes", a user would expect the label "Places" for those results. However, those results are labelled as "Search results", which is a consistency issue.
+In the third step, the user could not clearly recognize which is the right option to choose. This situation is related to the feedback from the second step. The results for places are not corrected labeled, whereas the results for routes are clearly labeled as "Routes". A user would expect the label "Places" for the results of locations, however, they are labeled as "Search results", which is an issue related to consistency.
 
 Finally, even though a user can easily recognize the travel times (colored in dark red) in the list and select the fastest route, the additional time information (colored in light gray) might cause confusion. The additional time information indicates the walking time, but it's not clear if that time is part of the total trip or extra time.
 
 \section{Discussion}
 \label{sec:discussion}
 
-Based on the results, some parts of the design of the application can be improved to perform the task. First, the feedback in the second step can be enhanced in two ways. The first option is to remove routes results. In the other option, routes results can still be displayed, but after the places results, which are the main interest of the user.
+The results and their analysis show that some parts of the design in the application can be improved to facilitate the execution of the task for novice users. First, the feedback in the second step can be enhanced in two ways. The first option is to remove routes results as seen in Figure \ref{fig:fig3}. Since the user is interested in locations, the other option requires the routes results to be displayed after the places results as seen in Figure \ref{fig:fig4}.
 
-The recognition of the action to execute in the third step can be improved based on the previous decision. If the routes results are not displayed, then nothing else is need since it would be clear that the presented results correspond to places. However, if the routes are still displayed, then a proper label for places results is needed.
+\begin{figure*}[!htb]
+	\vskip 5mm
+		\begin{center}
+		\includegraphics[width=3cm]{step2_1}
+		\caption{First proposed design to avoid confusion when searching for places.}
+		\label{fig:fig3}
+		\end{center}
+	\vskip -5mm
+\end{figure*}
 
-Finally, for the fourth step there are two options to avoid confusions related to the total time of a trip and the walking time. The first one is to hide that information, that information will still be available in the following screen. However, some user might want to see that information right away to make a proper decision. The second option is to display the time on bus information along with the total and walking time. In this case, the position of that extra information needs to be carefully decided to avoid problems in the current layout.
+\begin{figure*}[!htb]
+	\vskip 5mm
+		\begin{center}
+		\includegraphics[width=3cm]{step2_2}
+		\caption{Second proposed design to avoid confusion when searching for places.}
+		\label{fig:fig4}
+		\end{center}
+	\vskip -5mm
+\end{figure*}
 
+The recognition of the action to execute in the third step can be improved based on the previous decision. If the results for routes are not displayed, then nothing else is needed since it would be clear that the presented results correspond to places as seen in Figure \ref{fig:fig3}. However, if the routes are still displayed, then a proper label for places results is needed as seen in Figure \ref{fig:fig4}.
 
-\bibliographystyle{apacite}
+Finally, in the fourth step, there are two options to avoid confusions related to the total time of a trip and the walking time. The first one is to hide the walking time, that information will still be available on the following screen as seen in the fifth screenshot in Figure \ref{fig:fig1}. However, some users might want to see that information right away to make a proper decision and avoid the last step. The second option requires to display the time on bus along with the total and walking time. In this case, the position of that extra information needs to be carefully decided to avoid problems in the layout. One possible option is presented in Figure \ref{fig:fig5}.
+
+\begin{figure*}[!htb]
+	\vskip 5mm
+		\begin{center}
+		\includegraphics[width=3cm]{step4}
+		\caption{Proposed design to avoid confusion in travel times.}
+		\label{fig:fig5}
+		\end{center}
+	\vskip -5mm
+\end{figure*}
+
+\bibliographystyle{plainnat}
 \bibliography{usability_report_references}
 \end{document}
