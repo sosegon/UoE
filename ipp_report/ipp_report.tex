@@ -86,13 +86,42 @@ Before the raise of technological techniques aimed to leverage the benefits of g
 
 One of the foundations of spaced repetition is the acquisition of new content by recurrent revisions in a series of short learning sessions scattered over fixed or variable intervals of time. These conditions increase the capacity of retention compared to the acquirement of knowledge in a single massive learning session. Thus, the difficulty of remembering new facts, concepts or definitions is diminished and mental process like recognition and recall are boosted.
 
-Spaced repetition has also taken advantage of new technologies. Thus, software products like Anki implements this technique to make it more accessible to a wider audience by providing web, desktop and mobile interfaces. 
+Originally, spaced repetition is implemented with flashcards. Each one of them contains one or multiple related concepts. The flashcards are grouped based on how well the leaner remembers the content within them. Then, the group of flashcards with more challenging content is presented to the learner more frequently. Flashcards move from one group to another as the learner keeps progressing in each session.
+
+Spaced repetition has also taken advantage of new technologies. Thus, open source software products like Anki implements a digital version of this technique. Anki makes spaced repetition more accessible to a wider audience by providing web, desktop and mobile interfaces. Anki provides a group of characteristics of spaced repetition ***, it also gives different fields of study and it is customisable.
+
+The current document presents a proposal to gamify the Anki version for Android devices:  AnkiDroid. The ultimate objective is to make AnkiDroid more appealing for learners to increase user engagement and improve its effectiveness. The following sections describe the design of the solution, risk management strategy, methodology for evaluation, and the execution plan.
+
+\section{Design}
+
+\subsection{AnkiDroid}
+
+\subsection{The game}
+
+AnkiDroid provides an interface that follows the best practices for mobile development. However, the lack of motivational elements might make it boring for some users. As mentioned, gamification is meant to increase the user engagement for a product. Such characteristic along with its ability to be integrated into existing solutions, makes it a good fit to be integrated into AnkiDroid.
+
+The usual way to implement gamification into existing applications is to append game principles and elements throughout the use of the application. An example of this approach is the addition of a leaderboard of the users based on points earned while using the application. This is a motivation to use the application in order the reach the top of the classification. Overall, this way of implementing gamification means that the entire user experience can be converted into a game context. 
+
+For the current proposal, the way to implement gamification is slightly different to the traditional one. Rather than appending game elements into AnkiDroid, the project aims to integrate an entire existing game and AnkiDroid as a single application. This condition poses a complexity in setting the balance of the main activity of final solution. 
+There are two options based on the main context of the final application. 
+
+The first option requires AnkiDroid to be the main activity of the final application. This means that using AnkiAndroid and playing the game would occur in interleaved stages as seen in Figure 1. One potential problem for this alternative is the lack of interconnection between the game and AnkiDroid. Thus, each component could be interpreted as an interruption of the other. 
+
+In the second option, the game takes the main role. Evidently, a similar situation of interruptions could occur. However, that potential issue is diminished by truly connecting both components. Inspired by the scheme proposed in \citep{johnson2012leveraging}, the flow of the final application is split into two phases: points earning and game playing.
+
+In the first phase, the user earns points by utilising the AnkiDroid features.
+
+
+The points obtained in the first phase are then used during the game. The main objective of the points is to use them as means to advance in the game
+
+The users would be motivated to use the features of AnkiDroid to 
+
 
 \bibliography{ipp_report_references}
 
 \end{document} 
 
-
+ 
 % This document was modified from the file originally made available by
 % Pat Langley and Andrea Danyluk for ICML-2K. This version was
 % created by Lise Getoor and Tobias Scheffer, it was slightly modified  
