@@ -212,19 +212,48 @@ The analysis of the collected information will be aimed to confirm or deny the h
 The execution of the project is defined in a series of tasks with specific goals. Each task has a number of resources, a duration, and outputs that might be required in a following stage. Potential risks are also identified and classified. The next subsections describe the details of each task.
 
 \subsection{Design of the final application}
-An overview of the general aspects of the design has been described previously (\ref{sec:design}). However, specific details about use case, features, user interface components, and user interactions are still required. The objective of such specifications is to clearly establish the shape of the final application. The output of this stage will be a specifications document describing the aforementioned details.
+An overview of the general aspects of the design has been described previously (\ref{sec:design}). However, specific details about use case, application features, user interface components, and user interactions are still required. The objective of such details is to clearly establish the scope and context of the final application. Those details will be described in a specifications document.
+
+Based on the specifications document, a first prototype of the user interface will be created on paper. Then, the prototype will be evaluated using a cognitive walkthrough approach \citep{helander2014handbook} to detect potential flaws in the design for first time users. All of the participants in the testing stage will be considered first time users since the application will be new. The result of this analysis will be used to improve the design of the user interface.
+
+The execution of this task is critical since its results will be the foundations for the implementation and analysis stages. The specifications document will contain not only the details of the application from the perspective of the user, but it will also contain the type of information to be collected to perform the analysis. The outcome of this stage will be a specifications document containing details about the features of the application along with sketches of the user interface. The duration of this task will be one week.
 
 \subsection{Implementation of the design}
-This stage corresponds to implementing the application based on the output from the previous stage. This phase is divide into iterative phases. The end of each phase will deliver an updated version of the application. Each new version will contain additional features and will fix bugs from the previous ones.
+This stage corresponds to implementing the application based on the output from the previous stage. This stage is divide into iterative phases. At the end of each phase, an updated version of the application will be released. Each new version will contain additional features and will fix bugs from the previous ones.
+
+Each one of the iterative phases is expected to last one week. The total number of phases will be five. An additional iteration lasting one week will be needed to perform beta tests. The implementation stage will end once the beta tests have been executed, and the final version of the application has been released.
+
+\subsection{Ethics approval for research}
+Since testing the application will require the participation of humans, it will be necessary to obtain the corresponding approval from The School of Informatics. The objective of this stage is to make sure that the activities during the testing stage will follow the guidelines from the School Ethics Code and ethics regulations at the College and University, therefore, no harm will be caused to the participants.
+
+This stage will require to fill and submit a Level 1 Ethics Procedure form along with the details of the project, and the consent form to be signed by the participants to make sure they understand the implications of the study. This will need to be done early during the development of the project; ideally, after the design of the application is done.
+
+\subsection{Recruitment of participants}
+Once the final version of the application has been released, it will have to be tested by the participants in the control and experimental groups. At this point the participants will have been recruited already. Moreover, they will have to be aware of the objective of the testing stage and their role. Such scenario poses a contact with potential participant as early as possible.
+
+Ideally, potential participants will be contacted during the first steps of the implementation stage when a basic functional version of the application is already released. The objective is to be able to provide screen-shots of the interface of the application. Thus, the potential candidates will have a rough idea of the look and feeling of the application. The expectation is that this strategy will help potential candidates to make a positive decision.
+
+Finally, the actual participants will have to be recruited before the release of the final version of the application. It follows that the participants will be fully aware of their role, the objective of the testing, the duration of the testing period, and the information that will be collected. To do so, they will have to sign the consent form previously approved by The School of Informatics.
 
 \subsection{Testing of the final application}
+The participants will test the final version of the application. As mentioned, there will be two groups: control and experimental. The users will not be informed to which group they belong to. The objective is to avoid potential biases due to the users knowing what the expected outcomes from one group or another are. After signing the consent form, they will be given the resources to install the application.
 
-\subsection{Analysis of results}
+The testing stage will last between two and three weeks. During this time, the participants are expected to use the application in a daily basis. Daily notifications will be sent remembering to use the application. The data from the application will be collected remotely as long as the participants are connected to a free wifi service to avoid extra charges in their mobile service.
+
+The testing stage will require the participants to take a final quiz. Such quiz will be taken within the application. The participants will be notified remotely about the final quiz. After completing that quiz, the participants will be informed that testing period has ended and they will be free to uninstall the application. After ending the testing period, the participants will receive a monetary compensation.
+
+\subsection{Analysis of data}
+The data collected during the testing stage will be used to perform analysis related to the user engagement and spaced repetition effectiveness. Since, the data will be gathered remotely, it will be possible to start the analysis before the end of the testing stage. The expectation is that in the middle of the testing stage there will be enough data that can be used to find trends in the usage of the application.
+
+The analysis process can be speed up by performing automated routines to clean and pre-process the data in a daily basis. Then, once all the data have been collected, a simple processing will be required. The outcome of this stage will be a series of statistical parameters that characterize the usage of the application in the control and experimental group. This information will be used to confirm or deny the hypotheses. 
 
 \subsection{User engagement and spaced repetition effectiveness report}
+The outcome from the analysis of data will be the foundations to draw conclusions about the effects of gamifying a spaced repetition software. The report will be aimed to interpret the results from the analysis data and identify possible causes for such results. Moreover, information about the limitations of the project will be provided as well. Either the hypotheses have been confirmed or denied, the report will provide the guidelines for further work in the same field or related ones.
 
 \section{Risk Management}
-Throughout the development and evaluation processes, there might a series of potential risks that can delay or compromise the flow of the project. To diminish the impact of such potential risks it is necessary to identify and categorize them. Moreover, an strategy to cope with them is needed.
+Throughout the process, there might be a series of potential risks that can delay or compromise the flow of the project. In every stage 
+
+To diminish the impact of such potential risks it is necessary to identify and categorize them. Moreover, an strategy to cope with them is needed.
 
 
 \bibliography{ipp_report_references}
