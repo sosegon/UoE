@@ -97,6 +97,7 @@ Spaced repetition has also taken advantage of new technologies. Thus, different 
 The current document presents a proposal to gamify an existing mobile software implementation of spaced repetition. The ultimate objective is to create a more appealing version to increase the user engagement aimed to improve its effectiveness. The following sections describe the design of the solution, methodology for evaluation, risk management strategy, and execution plan.
 
 \section{Design}
+\label{sec:design}
 
 The usual way to implement gamification into existing solutions is to append game principles and elements throughout the use of the application. An example of this approach is the addition of a leaderboard of the users based on points earned while using the application. Such leaderboard adds another motivation to use the application in order the reach the top of the classification. Overall, this way of implementing gamification means that the entire user experience can be converted into a game context.
 
@@ -175,25 +176,56 @@ Even though the minimum constraints in the selection of participants, it is impo
 
 Finally, the participants will use the final application at any time during their daily activities. This means the application will be used in an uncontrolled environment. There are several potential issues for such condition. However, the most relevant one is that the user might forget to use the application, therefore not enough data will be generated. To diminish such situation, the application will sent daily notifications to remember to use it. Evidently, the frequency of such notifications has to be moderated to avoid the users perceive them as intrusive.
 
-\subsection{Qualitative data}
+\subsection{Quantitative data}
+The approach to measure the effects of gamification applied to a spaced repetition software will be done through quantitative data. There are two parameters to measure. The first one is the user engagement, which can be measured by collecting and analysing different types of data from the application including time of use, frequency of use, and commonly used features. The second parameter is the effectiveness of spaced repetition when it is implemented with gamification. This parameter require to test how much knowledge has been retained by the participants after using the application.
 
+\subsubsection{User engagement}
+There are three types of data to be collected from the usage of the application:
+\begin{enumerate}
+	\item \textbf{Time in session (TIS):}  It is the time the users spend every occasion they use the application. It is measured in minutes per session.
+	\item \textbf{Frequency of sessions (FOS):} It is the time between sessions. It is measured in hours between two consecutive sessions.
+	\item \textbf{Frequency of spaced repetition features (FOSR):} It is the number of times spaced repetition features are used in every session. It is measured in number of times per session.
+\end{enumerate}
+
+\subsubsection{Spaced repetition effectiveness}
+The data to measure the spaced repetition effectiveness will be collected during the usage of the application and in a final test to be taken by the participants. Such information will take the form of following scores:
+\begin{enumerate}
+	\item \textbf{Score in session (SIS):} The score obtained in the quiz taken during a session of usage. It is measured as the number of correctly answered question divided by the total number of questions.
+	\item \textbf{Final score (FS):} The score obtained in the final test. It is measured as the number of correctly answered question divided by the total number of questions.
+\end{enumerate}
 
 \subsection{Hypotheses}
-The main objective of the project is to increase the user engagement of AnkiDroid which will be reflected in an increase of its effectiveness. Thus, the following hypotheses need to be confirmed or denied:
+The main objectives of the project are to increase the user engagement of AnkiDroid, and measure the effectiveness of spaced repetition when implemented with gamification. Thus, the following hypotheses need to be confirmed or denied:
 
 \begin{displayquote}
 \textbf{H1: } The participants in the experimental group will spend more time using the application than the participants in the control group.
 \end{displayquote}
 
 \begin{displayquote}
-\textbf{H2: } The participants in the experimental group will obtain higher scores than the participants in the control group in the final test.
+\textbf{H2: } The participants in the experimental group will obtain higher scores than the participants in the control group.
 \end{displayquote}
 
 \subsection{Analysis}
+The analysis of the collected information will be aimed to confirm or deny the hypotheses to some level of confidence. 
+
+\section{Tasks and Schedule}
+The execution of the project is defined in a series of tasks with specific goals. Each task has a number of resources, a duration, and outputs that might be required in a following stage. Potential risks are also identified and classified. The next subsections describe the details of each task.
+
+\subsection{Design of the final application}
+An overview of the general aspects of the design has been described previously (\ref{sec:design}). However, specific details about use case, features, user interface components, and user interactions are still required. The objective of such specifications is to clearly establish the shape of the final application. The output of this stage will be a specifications document describing the aforementioned details.
+
+\subsection{Implementation of the design}
+This stage corresponds to implementing the application based on the output from the previous stage. This phase is divide into iterative phases. The end of each phase will deliver an updated version of the application. Each new version will contain additional features and will fix bugs from the previous ones.
+
+\subsection{Testing of the final application}
+
+\subsection{Analysis of results}
+
+\subsection{User engagement and spaced repetition effectiveness report}
 
 \section{Risk Management}
+Throughout the development and evaluation processes, there might a series of potential risks that can delay or compromise the flow of the project. To diminish the impact of such potential risks it is necessary to identify and categorize them. Moreover, an strategy to cope with them is needed.
 
-\section{Schedule}
 
 \bibliography{ipp_report_references}
 
