@@ -21,6 +21,9 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 
+% For quotes
+\usepackage{csquotes}
+
 % the hyperref package is used to produce hyperlinks in the
 % resulting PDF.  If this breaks your system, please commend out the
 % following usepackage line and replace \usepackage{mlp2017} with
@@ -153,15 +156,39 @@ The first state implies that the user has won. Nonetheless, the user can continu
 \section{Evaluation}
 The evaluation process requires to measure the variation of user engagement in the gamified version of the spaced repetition software. At first user engagement can be seen as a subjective concept, thus difficult to measure. One first approach would be to perform a qualitative analysis of the application. To do so, the type of required information would be related to the perception of the user about the application. Such information would have the form of opinions, comments, and suggestions from the users.
 
-Collecting qualitative data can be difficult since it might require to interview the participants after using the application. Alternatively, surveys or questionnaires could be utilised to collect that type information. However, the biggest problem is that this kind of information is difficult to analyse. Moreover, the information could be biased by the mood of the participants when collecting it. Finally, under such conditions, it would be highly difficult to replicate the evaluation.
+Collecting qualitative data can be expensive since it might require to interview the participants after using the application. Alternatively, surveys or questionnaires could be utilised to collect that type information. However, the biggest problem is that this kind of information is difficult to analyse. Moreover, the information could be biased by the mood of the participants and other uncontrolled factors when collecting it. Under such conditions, it would be highly difficult to replicate the evaluation.
 
-Due to the difficulty of measuring user engagement, there have been some efforts to cope with that. One of them is the development of a framework to measure user engagement \citep{o2010development} by assessing parameters like perceived usability, aesthetics and felt involvement. Such assessment is performed through a series of surveys. Even though this option tries to minimize the problems related to collecting and analysing qualitative data, its main problem is that it is a general purpose framework for a considerable. Thus, it is difficult to adapt it when the number of participants is small.
+Some methods have been developed to cope with the difficulty of measuring user engagement. One of them is the development of a framework to measure user engagement \citep{o2010development} by assessing parameters like perceived usability, aesthetics and felt involvement. Such assessment is performed through a series of surveys. Even though this option tries to minimize the problems related to collecting and analysing qualitative data, its main problem is that it is a general purpose framework that needs for a considerable amount of information. Thus, it can be difficult to adapt it when the number of participants is small.
 
-Due to the difficulty pertaining to gathering and analysing qualitative data, the evaluation for the current project will be done in terms of quantitative data. This will ease the collection of data and its analysis. Moreover, it will permit to replicate the evaluation or perform a new one with modified conditions in order to make comparisons. The details of the evaluation method will be described in the following subsection.
+Due to the difficulty pertaining to gathering and analysing qualitative data, the evaluation for the current project will be done in terms of quantitative data. This will ease the collection of data and its analysis. Moreover, it will permit to replicate the evaluation or perform a new one with modified conditions in order to make comparisons. The details of the evaluation method will be described in the following subsections.
 
 \subsection{Participants}
-\subsection{Hypothesis}
+There will be two groups of participants. The first one will be the control group. The participants in this group will use a version of AnkiDroid with no gamification characteristics. The data obtained from this group will be used as a benchmark to measure the variation in user engagement. The second group will be the experimental group. The participants in this group will use the gamified version of AnkiDroid.
+
+The results obtained from the experimental group will be compared against the benchmark from the control group. The expectation is that there will be differences between both results. The analysis of those differences will allow to draw conclusions about the effectiveness of gamification for spaced repetition software.
+
+The number of total participants will depend on the availability of subjects to participate in the evaluation of the final application. The expectation is to have between seven and ten people in every group. In any case, the number of members in both groups will be the same so the amount of collected data will be comparable. 
+
+AnkiDroid is a general purpose implementation of spaced repetition. Thus, it can be used for any person that have access to an Android device. In fact, the published application in Google Play falls in the content rating \textit{Everyone}, so there is no restriction in the age of its users. Such situation means that the constraints in the selection of the participants are minimum.
+
+Even though the minimum constraints in the selection of participants, it is important to maintain a level of homogeneity among them. Thus, the complexity in the analysis of the results from the control and experimental will be further reduced. A potential issue with this condition is the level of generalizability of the results. It will be difficult to extrapolate the results to other groups of the general population.
+
+Finally, the participants will use the final application at any time during their daily activities. This means the application will be used in an uncontrolled environment. There are several potential issues for such condition. However, the most relevant one is that the user might forget to use the application, therefore not enough data will be generated. To diminish such situation, the application will sent daily notifications to remember to use it. Evidently, the frequency of such notifications has to be moderated to avoid the users perceive them as intrusive.
+
 \subsection{Qualitative data}
+
+
+\subsection{Hypotheses}
+The main objective of the project is to increase the user engagement of AnkiDroid which will be reflected in an increase of its effectiveness. Thus, the following hypotheses need to be confirmed or denied:
+
+\begin{displayquote}
+\textbf{H1: } The participants in the experimental group will spend more time using the application than the participants in the control group.
+\end{displayquote}
+
+\begin{displayquote}
+\textbf{H2: } The participants in the experimental group will obtain higher scores than the participants in the control group in the final test.
+\end{displayquote}
+
 \subsection{Analysis}
 
 \section{Risk Management}
