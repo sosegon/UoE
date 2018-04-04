@@ -22,6 +22,9 @@
 \newcolumntype{S}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{R}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
+% For multiple rows
+\usepackage{multirow}
+
 % For grant graphics
 \usepackage{pgfgantt}
 
@@ -373,14 +376,34 @@ This task runs through the entire period of the project. It starts along with th
 	Report & 1 & Report\\ \hline
 	Documentation & 12 & Project documentation\\ \hline
 	\end{tabular}
-	\caption{Stages of the project, duration, and outcomes}
+	\caption{Duration and outcomes of every stage of the project.}
 	\label{tab:stages}
 \end{table*}
 
 \section{Risk Management}
 As seen in Table \ref{tab:stages}, each stage has a defined duration and outcomes. Some stages depend on the completion of previous ones as seen in Figure \ref{fig:gantt_full}. It follows that a delay or a problem in one stage could potentially affect the execution of the following ones, hence, the flow of the entire project. 
 
-To diminish the affectation of the project due to issues in every stage, it is important to identify and classify potential risks. Moreover, an strategy to cope with the effects of such risks is needed. The following subsections provide details about potentials risks in every stage and how to minimize their influence in the flow of the project.
+To diminish the affectation of the project due to issues in every stage, it is important to identify and classify potential risks. Moreover, an strategy to mitigate the effects of such risks is needed. Table \ref{tab:risks} provides a summary of the potential risks and mitigation strategies. The following subsections provide more details about risks in every stage and how to minimize their influence in the flow of the project.
+	
+\begin{table*}[!htb]
+	\centering
+	\begin{tabular}{| l | l | l | l |}
+	\hline
+	\textbf{Stage} & \textbf{Risks} & \textbf{Severity} & \textbf{Mitigation}\\ \hline
+	Design & Miss important aspects & High & Double evaluation of prototype\\ \hline
+	\multirow{ 2}{*}{Implementation} & Too many features & Medium & Categorization and prioritization\\ 
+	& Bugs & Medium & Test cases \& TDD\\ \hline
+	Ethics approval & Not approval & Low & Guidelines \& feedback\\ \hline
+	Participants recruitment & Few participants & High & Early contact\\ \hline
+	\multirow{ 2}{*}{Testing} & Low usage & High & Notifications\\ 
+	& Abandonments & Medium & Extra participants\\ \hline
+	Analysis & Incorrect analysis & Low & Advice from experts\\ \hline
+	Report & Unproper conclusions & Low & Advice from experts\\ \hline
+	Documentation & Delay in other stages & Low & Daily updates \& weekly revision\\ \hline
+	\end{tabular}
+	\caption{Summary of potential risks in the project.}
+	\label{tab:risks}
+\end{table*}
 
 \subsection{Design of the final application}
 The potential risk in this stage is that the design misses some important aspects that will affect the interaction of the users with the application. The severity of this risk is high since it would affect all subsequent stages (implementation, testing, analysis and report.) As previously described, the alternative to identify flaws and improve the design is to perform an evaluation of a first prototype.
@@ -390,7 +413,7 @@ A single evaluation of the first prototype of the application can miss some impo
 \subsection{Implementation of the design}
 The iterative phases of this stage are meant to implement new features and fix bugs. Therefore, there are two types of potential risks. The first one is that a high number of features could delay each iteration. The severity of this risk is medium since some features can be avoided. Ideally, the features will be categorized by their importance and relevance to the application. Then, the most important ones will have to be implemented during the first iterations. If at the end of the fifth iteration some secondary features are not implemented yet, they will have to be discarded. 
 
-The second potential risk is the creation of new bugs when fixing previous ones or implementing new features. Similarly, the severity of this risks is medium since features causing bugs can be discarded as long as their relevance is small. The effects of this risk can be minimized by the creation of test cases that will have to be ran when a new feature is added or a previous bug is fixed. Alternatively, a test driven development strategy can be adopted. It is important to note, that the creation of test cases can be time consuming, therefore, it is necessary to keep a balance between them and the overall implementation process.
+The second potential risk is the creation of new bugs when fixing previous ones or implementing new features. Similarly, the severity of this risks is medium since features causing bugs can be discarded as long as their relevance is small. The effects of this risk can be minimized by the creation of test cases that will have to be ran when a new feature is added or a previous bug is fixed. Alternatively, a test driven development (TDD) strategy can be adopted. It is important to note, that the creation of test cases can be time consuming, therefore, it is necessary to keep a balance between them and the overall implementation process.
 
 \subsection{Ethics approval for research}
 The major potential risk in this stage is that the study has not been approved in the first submission. The severity of this risk is low since the tasks is executed along with the implementation stage and its duration is small. This risks is minimized by following the guidelines provided by the School Ethics Code and ethics regulations at the College and University. If the study is not approved in the first submission, it is expected that feedback and recommendations will be provided to improve the next submission.
@@ -411,23 +434,6 @@ This is the last stage of the project. At this point everything else have been a
 
 \subsection{Documentation}
 Documenting the stages poses a risk to the flow of the whole project. Writing the documentation could be time consuming, therefore, it would affect the execution of the tasks. The strategy to minimize those affectations is to update the documentation on a daily basis when possible. At the end of every week a revision will be done. If is not possible to add all the details related to the activities done during the week, then the task will be skipped until the next week. During the testing stage most of the activities will be related to the participants which will provide some spare time to update the documentation and fill any gap from the previous weeks.
-	
-\begin{table*}[!htb]
-	\centering
-	\begin{tabular}{| S{2.5cm} | R{2cm} | R{1.5cm} | R{1.7cm} | R{2cm} | R{1.5cm} | R{1.5cm} | R{1.5cm} |}
-	\hline
-	\textbf{Stage} & \textbf{Risks} & \textbf{Severity} & \textbf{Likelihood} & \textbf{Consequences} & \textbf{Control} & \textbf{Mitigation} & \textbf{Remarks}\\ \hline
-	Design & & & & & & & \\ \hline
-	Implementation & & & & & & & \\ \hline
-	Ethics approval & & & & & & & \\ \hline
-	Participants recruitment & & & & & & & \\ \hline
-	Testing & & & & & & & \\ \hline
-	Analysis & & & & & & & \\ \hline
-	Report & & & & & & & \\ \hline
-	\end{tabular}
-	\caption{Summary of potential risks in the project}
-	\label{tab:risks}
-\end{table*}
 
 \bibliography{ipp_report_references}
 
