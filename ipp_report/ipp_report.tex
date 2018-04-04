@@ -17,6 +17,11 @@
 % For citations
 \usepackage{natbib}
 
+% For size of cells in tables
+\usepackage{array}
+\newcolumntype{S}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
 % For algorithms
 \usepackage{algorithm}
 \usepackage{algorithmic}
@@ -251,10 +256,55 @@ The analysis process can be speed up by performing automated routines to clean a
 The outcome from the analysis of data will be the foundations to draw conclusions about the effects of gamifying a spaced repetition software. The report will be aimed to interpret the results from the analysis data and identify possible causes for such results. Moreover, information about the limitations of the project will be provided as well. Either the hypotheses have been confirmed or denied, the report will provide the guidelines for further work in the same field or related ones.
 
 \section{Risk Management}
-Throughout the process, there might be a series of potential risks that can delay or compromise the flow of the project. In every stage 
+Throughout every stage of the process, there might be a series of potential risks that can delay or compromise the flow of the project. To diminish the impact of such potential risks it is necessary to identify and categorize them. Moreover, an strategy to cope with them is required. The information in Table \ref{tab:risks} describes the potential risks in every stage and how to manage them.
 
-To diminish the impact of such potential risks it is necessary to identify and categorize them. Moreover, an strategy to cope with them is needed.
 
+\begin{enumerate}
+	\item \textbf{Design}
+		\begin{itemize}
+			\item{Risk}
+		\end{itemize}
+	\item \textbf{Implementation}
+		\begin{itemize}
+			\item{Risk}
+		\end{itemize}
+	\item \textbf{Ethics approval}
+		\begin{itemize}
+			\item{Approval not given}
+		\end{itemize}
+	\item \textbf{Participants recruitment}
+		\begin{itemize}
+			\item{Number of participants smaller than required}
+		\end{itemize}
+	\item \textbf{Testing}
+		\begin{itemize}			
+			\item{Participants abandon study}
+		\end{itemize}
+	\item \textbf{Analysis}
+	\item \textbf{Report}
+	
+\begin{table*}[!htb]
+	\centering
+	\begin{tabular}{| S{2.5cm} | R{2cm} | R{1.5cm} | R{1.7cm} | R{2cm} | R{1.5cm} | R{1.5cm} | R{1.5cm} |}
+	\hline
+	\textbf{Stage} & \textbf{Risks} & \textbf{Severity} & \textbf{Likelihood} & \textbf{Consequences} & \textbf{Control} & \textbf{Mitigation} & \textbf{Remarks}\\ \hline
+	Design & ddddddddddddd & & & & & & \\ \hline
+	Implementation & & & & & & & \\ \hline
+	Ethics approval & & & & & & & \\ \hline
+	Participants recruitment & & & & & & & \\ \hline
+	Testing & & & & & & & \\ \hline
+	Analysis & & & & & & & \\ \hline
+	Report & & & & & & & \\ \hline
+	\end{tabular}
+	\caption{Summary of potential risks in the project}
+	\label{tab:risks}
+\end{table*}
+
+
+
+\end{enumerate}
+
+\section{Conclusions}
 
 \bibliography{ipp_report_references}
 
