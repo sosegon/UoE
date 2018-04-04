@@ -218,28 +218,34 @@ The main objectives of the project are to increase the user engagement of AnkiDr
 The analysis of the collected information will be aimed to confirm or deny the hypotheses to some level of confidence. 
 
 \section{Tasks and Schedule}
-The execution of the project is defined in a series of tasks with specific goals. Each task has a number of resources, a duration, and outcomes that might be required in a following stage as seen in Figure \ref{fig:gantt_full}. The next subsections describe the details of each task.
+The execution of the project is defined in a series of tasks or stages with specific goals. Each task has a number of resources, a duration, and outcomes that might be required in a following stage as seen in Figure \ref{fig:gantt_full}. The next subsections describe the details of each task.
 
 \begin{figure}
 	\begin{center}
-		\begin{ganttchart}[hgrid, vgrid, x unit=4.5mm]{1}{12}
+		\begin{ganttchart}[hgrid, vgrid, x unit=4.5mm, y unit chart=8mm]{1}{12}
 			\gantttitlelist{1,...,12}{1} \\
-			\ganttbar{Design}{1}{1} \\
-			\ganttlinkedbar[name=I]{Implementation}{2}{7} \\
-			\ganttbar{Ethics approval}{2}{3} \\
-			\ganttbar{Recruitment}{3}{6} \\
-			\ganttbar[name=T]{Testing}{8}{10} \\
-			\ganttlinkedbar{Analysis}{11}{11} \\
-			\ganttlinkedbar{Report}{12}{12} \\			
+			\ganttbar[name=Des]{Design}{1}{1} \\
+			\ganttmilestone[name=Spe]{Specifications}{1} \\
+			\ganttlinkedbar[name=Imp]{Implementation}{2}{7} \\
+			\ganttmilestone[name=App]{Application}{7} \\
+			\ganttbar[name=Eth]{Ethics approval}{2}{3} \\
+			\ganttbar[name=Rec]{Recruitment}{3}{6} \\
+			\ganttbar[name=Tes]{Testing}{8}{10} \\
+			\ganttmilestone[name=Dat]{Data}{8} \\
+			\ganttlinkedbar[name=Ana]{Analysis}{11}{11} \\
+			\ganttmilestone[name=Sta]{Statistics}{11} \\
+			\ganttlinkedbar[name=Rep]{Report}{12}{12} \\			
 			\ganttbar{Documentation}{1}{12}
-			\ganttlink[link mid=.4]{I}{T}
+			\ganttlink[link mid=.4]{Des}{Spe}
+			\ganttlink[link mid=.4]{Imp}{App}
+			\ganttlink[link mid=.4]{App}{Tes}			
+			\ganttlink[link mid=.4]{Tes}{Dat}
+			\ganttlink[link mid=.4]{Ana}{Sta}
 		\end{ganttchart}
 	\end{center}
-	\caption{Gantt chart of execution of project tasks over a period of 12 weeks.}
+	\caption{Gantt chart of execution of project tasks over a period of 12 weeks. Some tasks deliver milestones needed to start the following task.}
 	\label{fig:gantt_full}
 \end{figure}
-
-%% 
 
 \subsection{Design of the final application}
 An overview of the general aspects of the design has been described previously (\ref{sec:design}). However, specific details about use case, application features, user interface components, and user interactions are still required. The objective of such details is to clearly establish the scope and context of the final application. Those details will be described in a specifications document.
@@ -249,50 +255,110 @@ Based on the specifications document, a first prototype of the user interface wi
 The execution of this task is critical since its results will be the foundations for the implementation and analysis stages. The specifications document will contain not only the details of the application from the perspective of the user, but it will also contain the type of information to be collected to perform the analysis. The outcome of this stage will be a specifications document containing details about the features of the application along with sketches of the user interface. The duration of this task will be one week.
 
 \subsection{Implementation of the design}
-This stage corresponds to implementing the application based on the output from the previous stage. This stage is divide into iterative phases. At the end of each phase, an updated version of the application will be released. Each new version will contain additional features and will fix bugs from the previous ones.
+This stage corresponds to implementing the application based on the output from the previous stage. This stage is divided into iterative phases as seen in Figure \ref{fig:gantt_impl}. At the end of each phase, an updated version of the application will be released. Each new version will contain additional features and will fix bugs from the previous ones.
 
 Each one of the iterative phases is expected to last one week. The total number of phases will be five. An additional iteration lasting one week will be needed to perform beta tests. The implementation stage will end once the beta tests have been executed, and the final version of the application has been released.
 
-\subsection{Ethics approval for research}
-Since testing the application will require the participation of humans, it will be necessary to obtain the corresponding approval from The School of Informatics. The objective of this stage is to make sure that the activities during the testing stage will follow the guidelines from the School Ethics Code and ethics regulations at the College and University, therefore, no harm will be caused to the participants.
+\begin{figure}
+	\begin{center}
+		\begin{ganttchart}[hgrid, vgrid, x unit=7mm, y unit chart=8mm]{1}{8}
+			\gantttitlelist{1,...,8}{1} \\
+			\ganttbar{Version 1}{2}{2} \\
+			\ganttlinkedbar{Version 2}{3}{3} \\
+			\ganttlinkedbar{Version 3}{4}{4} \\
+			\ganttlinkedbar{Version 4}{5}{5} \\
+			\ganttlinkedbar{Version 5}{6}{6} \\
+			\ganttlinkedbar[name=5]{Beta testing}{7}{7}\\
+			\ganttmilestone[name=f]{Final version}{7}
+			\ganttlink[link mid=.4]{5}{f}
+		\end{ganttchart}
+	\end{center}
+	\caption{Gantt chart of implementation stage. An iterative process where each phase adds new features and fixes bugs from previous versions.}
+	\label{fig:gantt_impl}
+\end{figure}
 
-This stage will require to fill and submit a Level 1 Ethics Procedure form along with the details of the project, and the consent form to be signed by the participants to make sure they understand the implications of the study. This will need to be done early during the development of the project; ideally, after the design of the application is done.
+\subsection{Ethics approval for research}
+Since testing the application will require the participation of humans, it will be necessary to obtain the corresponding approval from The School of Informatics. The objective of this stage is to make sure that the activities during the testing stage will follow the guidelines from the School Ethics Code and ethics regulations at the College and University, therefore, no harm will be caused to the participants. This stage will require to fill and submit a Level 1 Ethics Procedure form.
+
+Additionally, the details of the project, and the consent form to be signed by the participants will be provided. Both elements will be created out of the specifications document from the design stage. The purpose of the consent form is to make sure the participants understand the implications of the study. This task will need to be done early during the development of the project, ideally, after the specifications document is ready. The expectation is that the study will be approved within two weeks.
 
 \subsection{Recruitment of participants}
-Once the final version of the application has been released, it will have to be tested by the participants in the control and experimental groups. At this point the participants will have been recruited already. Moreover, they will have to be aware of the objective of the testing stage and their role. Such scenario poses a contact with potential participant as early as possible.
+Once the final version of the application has been released, it will have to be tested by the participants in the control and experimental groups. At this point the participants will have been recruited already. Moreover, they will have to be aware about the purpose of the testing stage and their role. Such scenario poses a contact with potential participants as early as possible.
 
-Ideally, potential participants will be contacted during the first steps of the implementation stage when a basic functional version of the application is already released. The objective is to be able to provide screen-shots of the interface of the application. Thus, the potential candidates will have a rough idea of the look and feeling of the application. The expectation is that this strategy will help potential candidates to make a positive decision.
+Ideally, potential participants will be contacted during the first steps of the implementation stage when a basic functional version of the application is already released. The purpose is to be able to provide screen-shots of the interface of the application. Thus, the potential candidates will have a rough idea of the look and feeling of the application. The expectation is that this strategy will encourage potential candidates to participate in the study.
 
-Finally, the actual participants will have to be recruited before the release of the final version of the application. It follows that the participants will be fully aware of their role, the objective of the testing, the duration of the testing period, and the information that will be collected. To do so, they will have to sign the consent form previously approved by The School of Informatics.
+Finally, the actual participants will have to be contacted before the release of the final version of the application. It follows that the participants will be fully aware of their role, the objective of the testing, the duration of the testing period, and the information that will be collected. To do so, they will have to sign the consent form previously approved by The School of Informatics. This process is expected to last four weeks. The outcome will be the consent forms signed by the participants.
 
 \subsection{Testing of the final application}
-The participants will test the final version of the application. As mentioned, there will be two groups: control and experimental. The users will not be informed to which group they belong to. The objective is to avoid potential biases due to the users knowing what the expected outcomes from one group or another are. After signing the consent form, they will be given the resources to install the application.
+The participants will test the final version of the application. As mentioned, there will be two groups: control and experimental. This stage will be conducted as a blinded experiment, thus, the participants will not be informed to which group they belong to. The purpose is to avoid potential biases due to the users knowing what the expected outcomes are. After signing the consent form, they will be given the resources to install the application.
 
-The testing stage will last between two and three weeks. During this time, the participants are expected to use the application in a daily basis. Daily notifications will be sent remembering to use the application. The data from the application will be collected remotely as long as the participants are connected to a free wifi service to avoid extra charges in their mobile service.
+The testing stage will last between two and three weeks. The actual duration will depend on the amount of data collected after the second week of study. During this time, the participants are expected to use the application in a daily basis. Daily notifications will be sent remembering to use the application. The data from the application will be collected remotely as long as the participants are connected to a free wifi service to avoid charges in their mobile service due to the use of the application.
 
-The testing stage will require the participants to take a final quiz. Such quiz will be taken within the application. The participants will be notified remotely about the final quiz. After completing that quiz, the participants will be informed that testing period has ended and they will be free to uninstall the application. After ending the testing period, the participants will receive a monetary compensation.
+The testing stage will require the participants to take a final quiz. Such quiz will be taken within the application. The participants will be notified remotely about the final quiz. After completing that quiz, the participants will be informed that testing period has ended and they will be free to uninstall the application. Once the testing period has ended, the participants will receive a monetary compensation. The outcome of this stage is a set of data collected while the participants used the application.
 
 \subsection{Analysis of data}
-The data collected during the testing stage will be used to perform analysis related to the user engagement and spaced repetition effectiveness. Since, the data will be gathered remotely, it will be possible to start the analysis before the end of the testing stage. The expectation is that in the middle of the testing stage there will be enough data that can be used to find trends in the usage of the application.
+The data collected during the testing stage will be used to perform analysis related to the user engagement and spaced repetition effectiveness. Since, the data will be gathered remotely, it will be possible to start the analysis before the end of the testing stage. The expectation is that in the middle of the testing stage there will be enough data that can be used to find trends or other characterizations in the usage of the application.
 
-The analysis process can be speed up by performing automated routines to clean and pre-process the data in a daily basis. Then, once all the data have been collected, a simple processing will be required. The outcome of this stage will be a series of statistical parameters that characterize the usage of the application in the control and experimental group. This information will be used to confirm or deny the hypotheses. 
+The analysis process can be speed up by performing automated routines to clean and pre-process the data in a daily basis. Once all the data have been collected, a simple processing will be required. The outcome of this stage will be a series of statistical parameters that characterize the usage of the application in the control and experimental group. This information will be used to confirm or deny the hypotheses. This stage is expected to last one week.
 
 \subsection{User engagement and spaced repetition effectiveness report}
-The outcome from the analysis of data will be the foundations to draw conclusions about the effects of gamifying a spaced repetition software. The report will be aimed to interpret the results from the analysis data and identify possible causes for such results. Moreover, information about the limitations of the project will be provided as well. Either the hypotheses have been confirmed or denied, the report will provide the guidelines for further work in the same field or related ones.
+The outcome from the analysis of data will be the foundations to draw conclusions about the effects of gamifying a spaced repetition software. The report will be aimed to interpret the results from the analysis data and identify possible causes for such results. Moreover, information about the limitations of the project will be provided as well. Either the hypotheses have been confirmed or denied, the report will provide the guidelines for further work in the same field or related ones. This stage is expected to last one week.
 
 \subsection{Documentation}
 This task runs through the entire period of the project. It starts along with the implementation stage, and it lasts until the end of the project. The objective is to describe the details of the execution of each task. It will provide a clear way to understand how the project was developed including changes, problems, and solutions that might have found throughout the process.
+	
+\begin{table*}[!htb]
+	\centering
+	\begin{tabular}{| l | >{\centering}p{3.5cm} | l | R{1.7cm} | R{2cm} | R{1.5cm} | R{1.5cm} | R{1.5cm} |}
+	\hline
+	\textbf{Stage} & \textbf{Duration (weeks)} & \textbf{Outcomes}\\ \hline
+	Design & 1 & Specifications document\\ \hline
+	Implementation & 6 & Final version of the application\\ \hline
+	Ethics approval & 2 & Approval from The School of Informatics\\ \hline
+	Participants recruitment & 4 & Signed consents\\ \hline
+	Testing & 2-3 & Data\\ \hline
+	Analysis & 1 & Statistics\\ \hline
+	Report & 1 & Report\\ \hline
+	Documentation & 12 & Project documentation\\ \hline
+	\end{tabular}
+	\caption{Stages of the project, duration, and outcomes}
+	\label{tab:stages}
+\end{table*}
 
 \section{Risk Management}
-Throughout every stage of the process, there might be a series of potential risks that can delay or compromise the flow of the project. To diminish the impact of such potential risks it is necessary to identify and categorize them. Moreover, an strategy to cope with them is required. The information in Table \ref{tab:risks} describes the potential risks in every stage and how to manage them.
+As seen in Table \ref{tab:stages}, each stage has a defined duration and outcomes. Some stages depend on the completion of previous ones as seen in Figure \ref{fig:gantt_full}. It follows that a delay or a problem in one stage could potentially affect the execution of the following ones, hence, the flow of the entire project. 
+
+To diminish the affectation of the project due to issues in every stage, it is important to identify and classify potential risks. Moreover, an strategy to cope with the effects of such risks is needed. The following subsections provide details about potentials risks in every stage and how to minimize their influence in the flow of the project.
 
 \subsection{Design of the final application}
+The potential risk in this stage is that the design misses some important aspects that will affect the interaction of the users with the application. The severity of this risk is high since it would affect all subsequent stages (implementation, testing, analysis and report.) As previously described, the alternative to identify flaws and improve the design is to perform an evaluation of a first prototype.
+
+A single evaluation of the first prototype of the application can miss some important aspects as well. Minimizing the effects of such situation  will require the application to be evaluated by at least two human computer interaction experts. The recommendations from those experts will then be utilised to create the final design of the interface.
+
 \subsection{Implementation of the design}
+The iterative phases of this stage are meant to implement new features and fix bugs. Therefore, there are two types of potential risks. The first one is that a high number of features could delay each iteration. The severity of this risk is medium since some features can be avoided. Ideally, the features will be categorized by their importance and relevance to the application. Then, the most important ones will have to be implemented during the first iterations. If at the end of the fifth iteration some secondary features are not implemented yet, they will have to be discarded. 
+
+The second potential risk is the creation of new bugs when fixing previous ones or implementing new features. Similarly, the severity of this risks is medium since features causing bugs can be discarded as long as their relevance is small. The effects of this risk can be minimized by the creation of test cases that will have to be ran when a new feature is added or a previous bug is fixed. Alternatively, a test driven development strategy can be adopted. It is important to note, that the creation of test cases can be time consuming, therefore, it is necessary to keep a balance between them and the overall implementation process.
+
 \subsection{Ethics approval for research}
+The major potential risk in this stage is that the study has not been approved in the first submission. The severity of this risk is low since the tasks is executed along with the implementation stage and its duration is small. This risks is minimized by following the guidelines provided by the School Ethics Code and ethics regulations at the College and University. If the study is not approved in the first submission, it is expected that feedback and recommendations will be provided to improve the next submission.
+
 \subsection{Recruitment of participants}
+Participants are the most important component of the testing stage. No participants mean that the testing stage is not possible to execute. The potential risk in this stage is that the number of participants is not enough to collected sufficient data for the analysis stage. The severity of this risk is high since not enough data will affect the confirmation or denial of the hypotheses. The effects of this risk are minimized by contacting the potential participants early in the development of the project.
+
 \subsection{Testing of the final application}
+Once the testing stage has started, the usage of the application will depend on the participants only since they will use it at some points during their daily routines. The main risk is that they will forget about the application, therefore, not data will be collected. The severity of this risk is high since the lack of enough data will affect the posterior analysis. The first strategy to cope with this risk is the implementation of daily notifications to remember the participants to use the application.
+
+The second risk is that the participants abandon the study. Evidently, participants will not be forced to continue in the study. To reduce the affectation of this risks, an extra number of participants will be needed, as long as the budget allows it. Moreover, the monetary compensation will be given at the end of the study. Finally, the consent form must establish that abandoning the study will mean no monetary compensation will be granted.
+
 \subsection{Analysis of data}
+This stage the data will require to make a statistical analysis. The risk here is that the proposed analysis might not provide the results to confirm or deny the hypotheses. The severity of this risk is low since at this point there will be more alternatives to analyse the data. One of those alternatives will be to look for advice from experienced people in the field. Moreover, the vast amount of resources for data analysis will help to have a better understanding of the collected information.
+
 \subsection{User engagement and spaced repetition effectiveness report}
+This is the last stage of the project. At this point everything else have been already done. This means that the effects of the risks at this stage will be low. One risk would be the drawing of not proper conclusions. This effect can be minimized by getting advice from experts in the fields related to the project.
+
+\subsection{Documentation}
+Documenting the stages poses a risk to the flow of the whole project. Writing the documentation could be time consuming, therefore, it would affect the execution of the tasks. The strategy to minimize those affectations is to update the documentation on a daily basis when possible. At the end of every week a revision will be done. If is not possible to add all the details related to the activities done during the week, then the task will be skipped until the next week. During the testing stage most of the activities will be related to the participants which will provide some spare time to update the documentation and fill any gap from the previous weeks.
 	
 \begin{table*}[!htb]
 	\centering
@@ -310,9 +376,6 @@ Throughout every stage of the process, there might be a series of potential risk
 	\caption{Summary of potential risks in the project}
 	\label{tab:risks}
 \end{table*}
-
-
-\section{Conclusions}
 
 \bibliography{ipp_report_references}
 
