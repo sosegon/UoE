@@ -48,7 +48,7 @@
 
 % Set up MLP coursework style (based on ICML style)
 \usepackage{mlp2017}
-\mlptitlerunning{MLP Coursework 2 (\studentNumber)}
+\mlptitlerunning{IPP report (\studentNumber)}
 \bibliographystyle{icml2017}
 
 
@@ -60,6 +60,7 @@
 \DeclareMathOperator{\elu}{elu}
 \DeclareMathOperator{\selu}{selu}
 \DeclareMathOperator{\maxout}{maxout}
+\DeclareMathOperator{\nextdate}{Next\ date}
 
 %% You probably do not need to change anything above this comment
 
@@ -69,7 +70,7 @@
 \begin{document} 
 
 \twocolumn[
-\mlptitle{IRR report\\ 
+\mlptitle{IPP report\\ 
 Gamifying Spaced Repetition Software}
 
 
@@ -154,11 +155,9 @@ In the original scheme, the flow of the stages was fixed and the participants we
 
 Among all the available spaced repetition software only few of them are open source. The most relevant option is Anki \citep{anki} which is distributed under the GNU Affero General Public License (AGPLv3) for most of its platform versions except iOS. Therefore, it is possible to modify the existing source code and adapt it as convenience. 
 
-Anki makes spaced repetition more accessible to a wider audience by providing web, desktop and mobile interfaces. Anki provides a group of characteristics of spaced repetition [MENTION FEATURES], it also gives different fields of study and it is customisable. 
+Anki makes spaced repetition more accessible to a wider audience by providing web, desktop and mobile interfaces. Anki provides a group of characteristics of spaced repetition including different types of content in the flashcards(text, images, sounds), a multitude of decks compiled for several languages and various topics, and statistics of usage. It also provides features to customize the topics to learn.
 
 The Anki version for Android devices is known as AnkiDroid. It provides an intuitive user interface that follows the best practices for mobile development. However, the lack of elements that motivate its usage might make it boring for some users which makes it a good fit for the current project.
-
-%% Add content about the features of AnkiDroid
 
 \begin{figure}[htb]
     \vskip 5mm
@@ -169,6 +168,19 @@ The Anki version for Android devices is known as AnkiDroid. It provides an intui
         \end{center}
     \vskip -5mm
 \end{figure}
+
+The spaced repetition in Anki is implemented using the SuperMemo 2 (SM-2) algorithm \citep{wozniak1990optimization}. The algorithm defines the next date to review an item depending on the current answer as seen in expression \ref{eq:sm2} where \textit{y} is the easiness, and \textit{x} is the consecutive correct answers for that item. Easiness is a number greater than or equal to 1.3 which represents how easy to learn is an item, being 1.3 the most difficult.
+
+\begin{equation}
+	\nextdate\ =
+  		\begin{cases}
+  			now + 6y^{x - 1}\ days & \text{if correct}\\
+  			now + 1\ day& \text{if incorrect}  				
+  		\end{cases}
+  	\label{eq:sm2}
+\end{equation}
+
+
 
 \subsection{The game: 2048}
 
