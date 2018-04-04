@@ -112,15 +112,25 @@ The usual way to implement gamification into existing solutions is to append gam
 
 For the current proposal, the way to implement gamification is different to the traditional one. Rather than appending game elements into the spaced repetition software, the project aims to fuse it with an existing game. Thus, two software components will be integrated as a single application. This condition poses a complexity in setting the balance of the main context for the final solution. Based on this, there are two alternatives to implement the application. 
 
-The first option requires the spaced repetition component to be the main activity of the final application. Such requirement means that using spaced repetition and playing the game would occur in interleaved stages as seen in Figure 1. The implementation of this option would be straightforward, however, a potential problem would be the lack of interconnection between the game and spaced repetition. Thus, each component could be interpreted as an interruption of the other. 
+The first option requires the spaced repetition component to be the main activity of the final application. Such requirement means that using spaced repetition and playing the game would occur in interleaved stages as seen in Figure \ref{fig:flow1}. The implementation of this option would be straightforward, however, a potential problem would be the lack of interconnection between the game and spaced repetition. Thus, each component could be interpreted as an interruption of the other. 
 
 For the second alternative, the game would take the main role. Evidently, a similar situation of interruptions could occur. However, that potential issue would be avoided by creating a true connection between the game and spaced repetition. The level of complexity of the implementation would be higher compared to the first option, but the potential benefits would be higher as well. The details of this approach along with the descriptions of the spaced repetition software and the game are described in the following subsections.
+
+\begin{figure}[htb]
+    \vskip 5mm
+        \begin{center}
+            \includegraphics[scale=0.45]{flow1.png}
+            \caption{Flow of spaced repetition and game components with no real connection between them.}
+            \label{fig:flow1}
+        \end{center}
+    \vskip -5mm
+\end{figure}
 
 \subsection{Integration of spaced repetition into an existing game}
 
 As described in the introduction section (\ref{sec:intro}), when the source of knowledge is perceived in a positive way, the learning process requires less mental effort and it is more pleasant. Based on this idea, it is safe to assume that playing a game is perceived more positively than executing spaced repetition. For this reason, the main context of the final application will be the game component, and the spaced repetition component will complement it. 
 
-The final application will integrate the spaced repetition and game components as a single piece of software. Thus, it is necessary to implement a connection between both component. As mentioned previously, one of the objectives of such connection is to avoid the user interpreting the components as interruptions of each other. However, the main goal is to establish a relationship such the output of using one component can be seen as a valuable resource to be used in the other component as seen in Figure 2.
+The final application will integrate the spaced repetition and game components as a single piece of software. Thus, it is necessary to implement a connection between both component. As mentioned previously, one of the objectives of such connection is to avoid the user interpreting the components as interruptions of each other. However, the main goal is to establish a relationship such the output of using one component can be seen as a valuable resource to be used in the other component as seen in Figure \ref{fig:flow2}.
 
 Since the main context of the final application will be the game, the spaced repetition component needs to be connected in a way such the users find worth using that component. One alternative is to reward the users when using the spaced repetition component. Then the reward can be using during the game. Such rewards can be implemented as points to reach higher positions in a leaderboard, or as resources that can be used to ease the game.
 
@@ -129,6 +139,16 @@ A similar scheme was proposed in previous work \citep{johnson2012leveraging}. Th
 There are other mechanisms that can be used to reward users and motivate them to use the spaced repetition software. However, for simplicity and ease of implementation, only the scheme of points earning will be taken into consideration. Therefore, the usage of the application will be split into two stages: points earning and game playing. The main difference with the scheme in \citep{johnson2012leveraging} is the flexibility of executing the points earning stage. 
 
 In the original scheme, the flow of the stages was fixed and the participants were able to earn points only at the beginning of each game session. For the current design, that flow is still valid and the points earning stage will be mandatory. However, the participants will also have a single extra opportunity to earn points. They will be able to execute the spaced repetition component at any time while playing the game. The application will suggest that option to the participants especially during challenging levels.
+
+\begin{figure}[htb]
+    \vskip 5mm
+        \begin{center}
+            \includegraphics[scale=0.45]{flow2.png}
+            \caption{Flow of spaced repetition and game components with connection via resources provided from one component to the other.}
+            \label{fig:flow2}
+        \end{center}
+    \vskip -5mm
+\end{figure}
 
 \subsection{The spaced repetition component: AnkiDroid}
 
@@ -140,11 +160,21 @@ The Anki version for Android devices is known as AnkiDroid. It provides an intui
 
 %% Add content about the features of AnkiDroid
 
+\begin{figure}[htb]
+    \vskip 5mm
+        \begin{center}
+            \includegraphics[scale=0.25]{anki.png}
+            \caption{Example of AnkiDroid user interface. Image taken from the Google Play page of the application.}
+            \label{fig:anki}
+        \end{center}
+    \vskip -5mm
+\end{figure}
+
 \subsection{The game: 2048}
 
 Since the selected spaced repetition component is implemented for Android devices, it is necessary to choose a game for the same platform. Among the huge number of games available in Android, just a few of them are open source. The selected game for the current project is the popular 2048. It is distributed under the MIT License, which is compatible with other licenses including AGPLv3. This way it is possible to modify the code as convenience as well.
 
-2048 was first developed for web environments, but ever since it has been ported to many other platforms. It is an sliding puzzle which ultimate objective is to merge numbered blocks until create a tile with the number 2048. Blocks are distributed over a grid of cells of variable size, but the default number of cells is 4x4. At the start of the game, two randomly positioned tiles holding the number 2 are displayed in the grid as seen in Figure 1.
+2048 was first developed for web environments, but ever since it has been ported to many other platforms. It is an sliding puzzle which ultimate objective is to merge numbered blocks until create a tile with the number 2048. Blocks are distributed over a grid of cells of variable size, but the default number of cells is 4x4. At the start of the game, two randomly positioned tiles holding the number 2 are displayed in the grid as seen in Figure \ref{fig:2048}.
 
 A player has to  slide the blocks horizontally or vertically. The cells are moved in the chosen direction and they are stopped by the edges or when colliding when other cells. If two cells holding the same numbers collide, then they are merged into a single cell holding the sum of the values of the previous cells. In every turn a new cell holding a power of two number is randomly positioned in the grid, being the power an integer between 1 and 10 as seen in expression (\ref{eq:eq1});
 
@@ -162,6 +192,16 @@ The game ends if one of the following states is reached:
 \end{enumerate}
 
 The first state implies that the user has won. Nonetheless, the user can continue playing to create tiles with numbers higher than 2048. The second states indicates that the user has lost. Therefore, a new session has to be initiated to play again.
+
+\begin{figure}[htb]
+    \vskip 5mm
+        \begin{center}
+            \includegraphics[scale=0.35]{2048.png}
+            \caption{Example of the game 2048 user interface. Image taken from the Google Play page of the application.}
+            \label{fig:2048}
+        \end{center}
+    \vskip -5mm
+\end{figure}
 
 \section{Evaluation}
 The evaluation process requires to measure the variation of user engagement in the gamified version of the spaced repetition software. At first user engagement can be seen as a subjective concept, thus difficult to measure. One first approach would be to perform a qualitative analysis of the application. To do so, the type of required information would be related to the perception of the user about the application. Such information would have the form of opinions, comments, and suggestions from the users.
