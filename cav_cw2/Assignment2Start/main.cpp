@@ -12,7 +12,7 @@
 #include "vec.h"
 #include "vol.h"
 
-#define WIDTH 128                                           
+#define WIDTH 128
 #define HEIGHT 256
 
 static cVolumeData* volumeData = NULL;
@@ -35,13 +35,15 @@ void Draw(void) {
 
   for (int z = 0; z < volumeData->GetDepth(); z++) {
     for (int y = 0; y < volumeData->GetHeight(); y++) {
+      int ray_acc = 0;
+      int max_val = 0;
       for (int x = 0; x < volumeData->GetWidth(); x++) {
-        vec3 color = vec3(0,1,0);
+        // vec3 color = vec3(0,1,0);
         unsigned char val = volumeData->Get(x, y, z);
 
         // z, y, x are height, width and depth
-        
-        /* TODO:
+
+        /* TODO:z
         **
         **  Here is where you should calculate the color of
         **  the pixel via some more sophisticated method.
@@ -54,17 +56,22 @@ void Draw(void) {
         //   glVertex3f(y, z, 0);
         //   break;
         // }
-
-        if (val > threshold) {
-          vec3 red = vec3(1,0,0);
-          vec3 blue = vec3(0,0,1);
-          vec3 color = quadraticTF(red, blue, val/255.0);
-          //vec3 color = vec3(val, val, val) / 255.0;
-          glColor3f(color.r(), color.g(), color.b());
-          glVertex3f(y, z, 0);
-          break;
+        ray_acc += val;
+        // if(ray_acc > threshold) {
+        //   break;
+        // }
+        if(val > max_val) {
+          max_val = val;
         }
+        // if (ray_acc > threshold) {
+        // }
       }
+      // vec3 red = vec3(1,0,0);
+      // vec3 blue = vec3(0,0,1);
+      // vec3 color = linearTF(red, blue, ray_acc/255.0);
+      vec3 color = vec3(max_val, max_val, max_val) / 255.0;
+      glColor3f(color.r(), color.g(), color.b());
+      glVertex3f(y, z, 0);
     }
   }
 
