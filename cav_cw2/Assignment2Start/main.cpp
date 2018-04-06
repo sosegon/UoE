@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector>
 
 #include <GL/glut.h>
 #define GLUT_KEY_ESCAPE 27
@@ -11,12 +12,77 @@
 #include "mat.h"
 #include "vec.h"
 #include "vol.h"
+#include "trf.h"
 
 #define WIDTH 128
 #define HEIGHT 256
 
 static cVolumeData* volumeData = NULL;
 static unsigned char threshold = 75;
+static std::vector<vec4> transferFunction(256);
+
+void ComputeTransferFunction() {
+  std::vector<cp> colorKnots = {
+    cp(.91f, .7f, .61f, 0),
+    cp(.91f, .7f, .61f, 80),
+    cp(1.0f, 1.0f, .85f, 82),
+    cp(1.0f, 1.0f, .85f, 256)
+  };
+
+  std::vector<cp> alphaKnots = {
+    cp(0.0f, 0),
+    cp(0.0f, 40),
+    cp(0.2f, 60),
+    cp(0.05f, 63),
+    cp(0.0f, 80),
+    cp(0.9f, 82),
+    cp(1.0f, 256)
+  };
+
+  std::vector<cp> tempColorKnots = {
+    cp(.91f, .7f, .61f, 0),
+    cp(.91f, .7f, .61f, 80),
+    cp(1.0f, 1.0f, .85f, 82),
+    cp(1.0f, 1.0f, .85f, 256)
+  };
+
+  std::vector<cp> tempAlphaKnots = {
+    cp(0.0f, 0),
+    cp(0.0f, 40),
+    cp(0.2f, 60),
+    cp(0.05f, 63),
+    cp(0.0f, 80),
+    cp(0.9f, 82),
+    cp(1.0f, 256)
+  };
+
+  std::vector<cubic> colorCubic = cubic::CalculateCubicSpline(
+    colorKnots.size() - 1, tempColorKnots);
+  std::vector<cubic> alphaCubic = cubic::CalculateCubicSpline(
+    alphaKnots.size() - 1, tempAlphaKnots);
+
+  int numTF = 0;
+  for(std::size_t i = 0, max = colorKnots.size() - 1; i != max; ++i) {
+    int steps = colorKnots.at(i + 1).isoValue - colorKnots.at(i).isoValue;
+    for(int j = 0; j < steps; j++) {
+      float k = (float)j / (float)(steps - 1);
+      transferFunction.at(numTF++) = colorCubic.at(i).GetPointOnSpline(k);
+    }
+  }
+
+  numTF = 0;
+  for(std::size_t i = 0, max = alphaKnots.size() - 1; i != max; ++i) {
+    int steps = alphaKnots.at(i + 1).isoValue - alphaKnots.at(i).isoValue;
+    for(int j = 0; j < steps; j++) {
+      float k = (float)j / (float)(steps - 1);
+      transferFunction.at(numTF++).w = alphaCubic.at(i).GetPointOnSpline(k).w;
+    }
+  }
+
+  for(int i = 0; i < 256; i++){
+    transferFunction.at(i) = transferFunction.at(i) * 255.0f;
+  }
+}
 
 vec3 linearTF(vec3 a, vec3 b, float t) {
   return a * (1-t) + b * t;
@@ -26,6 +92,35 @@ vec3 quadraticTF(vec3 a, vec3 b, float t) {
   return a * (1-t*t) + b * t*t;
 }
 
+vec4 CleanColor(vec4 color) {
+  float x = color.r();
+  float y = color.g();
+  float z = color.b();
+  float w = color.a();
+
+  if(x > 1.0f)
+    x = 1.0f;
+  if(x < 0.0f)
+    x = 0.0f;
+
+  if(y > 1.0f)
+    y = 1.0f;
+  if(y < 0.0f)
+    y = 0.0f;
+
+  if(z > 1.0f)
+    z = 1.0f;
+  if(z < 0.0f)
+    z = 0.0f;
+
+  if(w > 1.0f)
+    w = 1.0f;
+  if(w < 0.0f)
+    w = 0.0f;
+
+  return vec4(x, y, z, w);
+}
+
 void Update(void) { glutPostRedisplay(); }
 
 void Draw(void) {
@@ -33,44 +128,30 @@ void Draw(void) {
   glPointSize(2.0);
   glBegin(GL_POINTS);
 
-  for (int z = 0; z < volumeData->GetDepth(); z++) {
-    for (int y = 0; y < volumeData->GetHeight(); y++) {
-      int ray_acc = 0;
-      int max_val = 0;
-      for (int x = 0; x < volumeData->GetWidth(); x++) {
+  int depth = volumeData->GetDepth();
+  int height = volumeData->GetHeight();
+  int width = volumeData->GetWidth();
+  for (int z = 0; z < depth; z++) {
+    for (int y = 0; y < height; y++) {
+      float alpha_acc = 0.0f;
+      for (int x = 0; x < width; x++) {
         // vec3 color = vec3(0,1,0);
         unsigned char val = volumeData->Get(x, y, z);
 
-        // z, y, x are height, width and depth
-
-        /* TODO:z
-        **
-        **  Here is where you should calculate the color of
-        **  the pixel via some more sophisticated method.
-        */
-        // if(color.r() < threshold || color.g() < threshold || color.b() < threshold) {
-        //   vec3 red = vec3(1,0,0);
-        //   color = linearTF(red, color, val/255.0);
-        // } else {
-        //   glColor3f(color.r(), color.g(), color.b());
-        //   glVertex3f(y, z, 0);
-        //   break;
-        // }
-        ray_acc += val;
-        // if(ray_acc > threshold) {
-        //   break;
-        // }
-        if(val > max_val) {
-          max_val = val;
+        if(alpha_acc > float(threshold / 255.0f)) {
+          break;
         }
-        // if (ray_acc > threshold) {
-        // }
+        float alpha_cur = val / 255.0;
+        alpha_acc = alpha_cur + (1 - alpha_cur) * alpha_acc;
       }
       // vec3 red = vec3(1,0,0);
       // vec3 blue = vec3(0,0,1);
-      // vec3 color = linearTF(red, blue, ray_acc/255.0);
-      vec3 color = vec3(max_val, max_val, max_val) / 255.0;
-      glColor3f(color.r(), color.g(), color.b());
+      // vec3 color = linearTF(red, blue, alpha_acc);
+      int index = (int)(alpha_acc * 255.0f);
+      vec4 color = transferFunction.at(index) / 255.0f;
+      color = CleanColor(color);
+      // vec4 color = vec4(alpha_acc, alpha_acc, alpha_acc, alpha_acc);
+      glColor4f(color.r(), color.g(), color.b(), color.a());
       glVertex3f(y, z, 0);
     }
   }
@@ -98,6 +179,7 @@ void KeyEvent(unsigned char key, int x, int y) {
 void KeyEventSpecial(int key, int x, int y) { KeyEvent(key, x, y); }
 
 int main(int argc, char** argv) {
+  ComputeTransferFunction();
   volumeData = new cVolumeData("volumeData");
 
   glutInit(&argc, argv);

@@ -3,7 +3,7 @@ CC=g++
 INCS= -I ./include
 LIBS= -L ./lib -L ./ 
 
-CFLAGS= $(INCS) -std=c++98 -Wall -Werror -g#-O3
+CFLAGS= $(INCS) -std=c++11 -Wall -Werror -g#-O3
 
 CPP_FILES= $(wildcard src/*.cpp)
 OBJ_FILES= $(addprefix obj/,$(notdir $(CPP_FILES:.cpp=.o)))
