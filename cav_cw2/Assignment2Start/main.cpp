@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <vector>
+#include <cmath>
 
 #include <GL/glut.h>
 #define GLUT_KEY_ESCAPE 27
@@ -19,6 +20,9 @@
 
 static cVolumeData* volumeData = NULL;
 static unsigned char threshold = 75;
+static float t1 = 7.f;
+static float t2 = 14.f;
+static float t3 = 0.f;
 static std::vector<vec4> transferFunction(256);
 
 void ComputeTransferFunction() {
@@ -92,6 +96,36 @@ vec3 quadraticTF(vec3 a, vec3 b, float t) {
   return a * (1-t*t) + b * t*t;
 }
 
+vec3 skullTF1(vec3 skin, vec3 bone, float t){
+  float a = .35f;
+  float b = .60f;
+  float c = .80f;
+
+  if(t<a){
+    return vec3::Zero();
+  } else if(t>=a && t<b){
+    return skin;
+  } else if(t>=b && t<c){
+    return skin * (-t) + bone * (t);
+  } else{
+    return bone;
+  }  
+}
+
+vec3 skullTF(vec3 skin, vec3 bone, float t){
+  float a = .35f;
+  float b = .60f;
+  float e = std::exp(-t);
+
+  if(t<a){
+    return vec3::Zero();
+  } else if(t>=a && t<b){
+    return skin * (1/(1+e));
+  } else{
+    return bone;
+  }  
+}
+
 vec4 CleanColor(vec4 color) {
   float x = color.r();
   float y = color.g();
@@ -131,27 +165,43 @@ void Draw(void) {
   int depth = volumeData->GetDepth();
   int height = volumeData->GetHeight();
   int width = volumeData->GetWidth();
+  
   for (int z = 0; z < depth; z++) {
     for (int y = 0; y < height; y++) {
       float alpha_acc = 0.0f;
+      vec3 skin = vec3(255, 255, 0) / 128.0f;
+      vec3 bone = vec3(0, 0, 255) / 128.0f;
+      vec3 color = vec3::Zero();
       for (int x = 0; x < width; x++) {
-        // vec3 color = vec3(0,1,0);
         unsigned char val = volumeData->Get(x, y, z);
 
-        if(alpha_acc > float(threshold / 255.0f)) {
-          break;
-        }
         float alpha_cur = val / 255.0;
         alpha_acc = alpha_cur + (1 - alpha_cur) * alpha_acc;
+
+        float intensity = .0f;
+        if (x > 0) {
+          unsigned char prev_val = volumeData->Get(x - 1, y, z);
+          intensity = ((1 - alpha_acc) * prev_val);
+        }
+
+        float intensityf = intensity / 255.0f;
+        if (intensity < t1){
+          continue;
+        } else if (intensity >= t1 && intensity < t2) {
+          color = color + (skin * intensityf);
+        } else {
+          color = color + (bone * intensityf);
+        }
+        
+        // original
+        // if(val > threshold) {
+        //   vec3 color = vec3(val, val, val) / 255.0f;
+        //   glColor3f(color.r(), color.g(), color.b());
+        //   glVertex3f(y, z, 0);
+        //   break;
+        // }
       }
-      // vec3 red = vec3(1,0,0);
-      // vec3 blue = vec3(0,0,1);
-      // vec3 color = linearTF(red, blue, alpha_acc);
-      int index = (int)(alpha_acc * 255.0f);
-      vec4 color = transferFunction.at(index) / 255.0f;
-      color = CleanColor(color);
-      // vec4 color = vec4(alpha_acc, alpha_acc, alpha_acc, alpha_acc);
-      glColor4f(color.r(), color.g(), color.b(), color.a());
+      glColor3f(color.r(), color.g(), color.b());
       glVertex3f(y, z, 0);
     }
   }
@@ -168,10 +218,34 @@ void KeyEvent(unsigned char key, int x, int y) {
       exit(EXIT_SUCCESS);
       break;
     case GLUT_KEY_UP:
-      threshold = (threshold == 255) ? 255 : threshold + 1;
+      threshold = (threshold == 255) ? 255 : threshold + 10;
       break;
     case GLUT_KEY_DOWN:
-      threshold = (threshold == 0) ? 0 : threshold - 1;
+      threshold = (threshold == 0) ? 0 : threshold - 10;
+      break;
+    case GLUT_KEY_F1:
+      t1 = (t1 == 255) ? 255 : t1 + 1;
+      printf("t1: %.2f, t2: %.2f, t3: %.2f\n", t1, t2, t3);
+      break;
+    case GLUT_KEY_F2:
+      t1 = (t1 == 0.0) ? 0.0 : t1 - 1;
+      printf("t1: %.2f, t2: %.2f, t3: %.2f\n", t1, t2, t3);
+      break;
+    case GLUT_KEY_F3:
+      t2 = (t2 == 255) ? 255 : t2 + 1;
+      printf("t1: %.2f, t2: %.2f, t3: %.2f\n", t1, t2, t3);
+      break;
+    case GLUT_KEY_F4:
+      t2 = (t2 == 0.0) ? 0.0 : t2 - 1;
+      printf("t1: %.2f, t2: %.2f, t3: %.2f\n", t1, t2, t3);
+      break;
+    case GLUT_KEY_F5:
+      t3 = (t3 == 255) ? 255 : t3 + 1;
+      printf("t1: %.2f, t2: %.2f, t3: %.2f\n", t1, t2, t3);
+      break;
+    case GLUT_KEY_F6:
+      printf("t1: %.2f, t2: %.2f, t3: %.2f\n", t1, t2, t3);
+      t3 = (t3 == 0.0) ? 0.0 : t3 - 1;
       break;
   }
 }
