@@ -255,17 +255,19 @@ void KeyEventSpecial(int key, int x, int y) { KeyEvent(key, x, y); }
 int main(int argc, char** argv) {
   ComputeTransferFunction();
   volumeData = new cVolumeData("volumeData");
+  int height = volumeData->GetHeight();
+  int width = volumeData->GetWidth();
 
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
-  glutInitWindowSize(WIDTH, HEIGHT);
+  glutInitWindowSize(width, height);
   glutCreateWindow("CAV Assignment 2 [BUILD: " __DATE__ "]");
 
   glClearColor(0.5, 0.5, 0.5, 1.0);
 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  glOrtho(0, WIDTH, HEIGHT, 0, -512, 512);
+  glOrtho(0, width, height, 0, -512, 512);
 
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
