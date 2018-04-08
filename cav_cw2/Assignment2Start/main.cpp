@@ -180,7 +180,7 @@ void Draw(void) {
 
         float intensity = .0f;
         if (x > 0) {
-          unsigned char prev_val = volumeData->Get(x, y-1, z);
+          unsigned char prev_val = volumeData->Get(x-1, y, z);
           intensity = ((1 - alpha_acc) * prev_val);
         }
 
