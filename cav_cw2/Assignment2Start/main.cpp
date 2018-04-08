@@ -254,7 +254,7 @@ void KeyEventSpecial(int key, int x, int y) { KeyEvent(key, x, y); }
 
 int main(int argc, char** argv) {
   ComputeTransferFunction();
-  volumeData = new cVolumeData("volumeData");
+  volumeData = new cVolumeData("volumeData", 2);
   int height = volumeData->GetHeight();
   int width = volumeData->GetWidth();
 
