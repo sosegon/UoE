@@ -4,7 +4,7 @@
 
 #include "vol.h"
 
-cVolumeData::cVolumeData(const std::string& filename, int resolution) {
+cVolumeData::cVolumeData(const std::string& filename, const int resolution) {
 
   std::ifstream f(filename.c_str());
     if (f == NULL) {

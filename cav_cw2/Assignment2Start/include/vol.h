@@ -4,7 +4,7 @@
 
 class cVolumeData {
 public:
-  cVolumeData(const std::string& filename, int resolution);
+  cVolumeData(const std::string& filename, const int resolution);
   ~cVolumeData(void);
 
   int GetWidth(void) const;
