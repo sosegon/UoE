@@ -19,8 +19,8 @@ cVolumeData::cVolumeData(const std::string& filename, int resolution) {
     int val = 0;
     
     for(int z = 0; z < m_prev_depth; z++)
-    for(int x = 0; x < m_prev_width; x++)
-    for(int y = 0; y < m_prev_height; y++) {
+    for(int y = 0; y < m_prev_height; y++) 
+    for(int x = 0; x < m_prev_width; x++) {
       f >> val;
       SetPrev(x, y, z, val);
     }
@@ -60,7 +60,6 @@ cVolumeData::cVolumeData(const std::string& filename, int resolution) {
         }
       }
     }
-
     for (int z = 0; z < m_prev_depth; z++) {
       for (int y = 0; y < m_prev_height; y++) {
         for (int x = 0; x < m_prev_width; x++) {
@@ -80,7 +79,6 @@ cVolumeData::cVolumeData(const std::string& filename, int resolution) {
         }
       }
     }
-
     for (int z = 0; z < m_prev_depth; z++) {
       for (int y = 0; y < m_prev_height; y++) {
         for (int x = 0; x < m_prev_width; x++) {
@@ -100,7 +98,6 @@ cVolumeData::cVolumeData(const std::string& filename, int resolution) {
         }
       }
     }
-
 
     printf("Volume Width: %i Height: %i Depth: %i\n", m_width, m_height, m_depth);
 }
