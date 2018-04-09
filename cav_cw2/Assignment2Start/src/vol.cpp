@@ -41,6 +41,7 @@ cVolumeData::cVolumeData(const std::string& filename, const int resolution) {
       return;
     }
 
+    // This is the interpolation process
     for (int z = 0; z < m_prev_depth; z++) {
       for (int y = 0; y < m_prev_height; y++) {
         for (int x = 0; x < m_prev_width; x++) {

@@ -44,17 +44,23 @@ void Draw(void) {
       for (int x = 0; x < width; x++) {
         unsigned char val = volumeData->Get(x, y, z);
 
-        float alpha_cur = val / 255.0;
+        float factor = 3.0f; // corrective factor to allow reaching information from the bones
+        float alpha_cur = val / 255.0 / factor;
         alpha_acc = alpha_cur + (1 - alpha_cur) * alpha_acc;
 
-        float intensity = .0f;
-        if (x > 0) {
-          unsigned char prev_val = volumeData->Get(x-1, y, z);
-          intensity = ((1 - alpha_acc) * prev_val);
+        // Limit to skip accumulating since everything else will
+        // not be visible
+        if(alpha_acc > 0.9) {
+          break;
         }
 
+        float intensity = .0f;
+        intensity = ((1 - alpha_acc) * val);
+
+        // This is the transfer function based on thresholds
         float intensityf = intensity / 255.0f;
         if (intensity < t1){
+          //alpha_acc = prev_alpha_acc;
           continue;
         } else if (intensity >= t1 && intensity < t2) {
           color = color + (skin * intensityf);
@@ -87,10 +93,10 @@ void KeyEvent(unsigned char key, int x, int y) {
       exit(EXIT_SUCCESS);
       break;
     case GLUT_KEY_UP:
-      threshold = (threshold == 255) ? 255 : threshold + 10;
+      threshold = (threshold == 255) ? 255 : threshold + 1;
       break;
     case GLUT_KEY_DOWN:
-      threshold = (threshold == 0) ? 0 : threshold - 10;
+      threshold = (threshold == 0) ? 0 : threshold - 1;
       break;
     case GLUT_KEY_F1:
       t1 = (t1 == 255) ? 255 : t1 + 1;
