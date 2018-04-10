@@ -5,7 +5,7 @@
 - Grammar.
 - Redaction.
 - ~~Algorithm explanation and formula for spaced repetition in AnkiDroid~~.
-- More details about the integrations.
+- ~~More details about the integrations~~.
 - Information about the stats for SRS and the game.
 - The control group should use the application with no integration.
 - Ways to recruit people.

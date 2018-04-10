@@ -118,45 +118,7 @@ The current document presents a proposal to gamify an existing mobile applicatio
 
 The usual way to implement gamification into existing solutions is to append game principles and elements throughout the application. An example of this approach is the addition of a leaderboard of the users based on points earned while using the application. Such leaderboard adds another motivation to use the application in order to reach the top of the classification. Overall, this way of implementing gamification means that the entire user experience can be converted into a game context.
 
-For the current proposal, the way to implement gamification is different to the traditional one. Rather than appending game elements into the spaced repetition software, the project aims to fuse it with an existing game. Thus, two software components will be integrated as a single application. This condition poses a complexity in setting the balance of the main context for the final solution. Based on this, there are two alternatives to implement the application. 
-
-The first option requires the spaced repetition component to be the main activity of the final application. Such requirement means that using spaced repetition and playing the game would occur in interleaved stages as seen in Figure \ref{fig:flow1}. The implementation of this option would be straightforward, however, a potential problem would be the lack of interconnection between the game and the spaced repetition component. Thus, each component might be interpreted as an interruption of the other. 
-
-For the second alternative, the game would play the main role. Evidently, a similar situation of interruptions might occur. However, that potential issue would be avoided by creating a true connection between the game and the spaced repetition component. The level of complexity of the implementation would be higher compared to the first option, but the potential benefits would be higher as well. The details of this approach along with the descriptions of the spaced repetition software and the game are described in the following subsections.
-
-\begin{figure}[htb]
-    \vskip 5mm
-        \begin{center}
-            \includegraphics[scale=0.45]{flow1.png}
-            \caption{Flow of spaced repetition and game components with no real connection between them.}
-            \label{fig:flow1}
-        \end{center}
-    \vskip -5mm
-\end{figure}
-
-\subsection{Integration of spaced repetition and an existing game}
-
-As described in the introduction section (\ref{sec:intro}), when the source of knowledge is perceived in a positive way, the learning process requires less mental effort and it is more pleasant. Based on this idea, it is safe to assume that playing a game is perceived more positively than executing spaced repetition. For this reason, the main context of the final application will be the game component, and the spaced repetition component will complement it. 
-
-The final application will integrate the spaced repetition and game components as a single piece of software. Therefore, it is necessary to implement a connection between both components. As mentioned previously, one of the objectives of such connection is to avoid that the user interprets the components as interruptions of each other. However, the main goal is to establish a relationship such the output of using one component can be seen as a valuable resource to be used in the other component as seen in Figure \ref{fig:flow2}.
-
-Since the main context of the final application will be the game, the spaced repetition component needs to be connected in a way such the users find worth using that component. One alternative is to reward the users when using the spaced repetition component. Then the reward can be used during the game. Such rewards can be implemented as points to reach higher positions in a leaderboard, or as resources that can be used to ease the game.
-
-A similar scheme was proposed in previous work \citep{johnson2012leveraging}. There, the flow of the final application was split into two phases: points earning and game playing. During the first phase, the participants obtained points in two stages. In the first stage, the participants reviewed content using spaced repetition. The second stage consisted of a quiz where points were granted based on the number of correct answers. Then, those points could be used during the game.
-
-There are other mechanisms that can be used to reward users and motivate them to use the spaced repetition component. However, for simplicity and ease of implementation, only the scheme of points earning will be taken into consideration. Therefore, the usage of the application will be split into two stages: points earning and game playing. The main difference with the scheme in \citep{johnson2012leveraging} is the flexibility of executing the points earning stage. 
-
-In the original scheme, the flow of the stages was fixed and the participants were able to earn points only at the beginning of each game session. For the current design, that flow is still valid and the points earning stage will be mandatory. However, the participants will also have a single extra opportunity to earn points. They will be able to execute the spaced repetition component at any time while playing the game. The application might suggest that option to the participants, especially during challenging levels.
-
-\begin{figure}[htb]
-    \vskip 5mm
-        \begin{center}
-            \includegraphics[scale=0.45]{flow2.png}
-            \caption{Flow of spaced repetition and game components with connection via resources provided from one component to the other.}
-            \label{fig:flow2}
-        \end{center}
-    \vskip -5mm
-\end{figure}
+For the current proposal, the way to implement gamification is different to the traditional one. Rather than appending game elements into the spaced repetition software, the project aims to fuse it with an existing game. Thus, two software components will be integrated as a single application. A brief description of those components and the details of the strategy to integrate them are given in the following subsections:
 
 \subsection{The spaced repetition component: AnkiDroid}
 
@@ -202,6 +164,8 @@ The quality of the response is an integer value between 5 and 0. This parameter 
 
 The main difference in the SM-2 algorithm version implemented by Anki is the flexibility of the initial learning interval. As seen in expression (\ref{eq:sm2}), a new item can be displayed every day until the learner eventually remembers it. Anki understands that new items have to be displayed a number of times before the learner is able to remember it, but it does not punishes him by showing failed items several times over a short period of days due to initial failures. Moreover, the learner can set the base number of days for correctly answered items; it does not have to be 6 for every learner.
 
+In every learning session, Anki presentes a set of cards to the user. Each card has two elements the front and the back, both of them contain related information. For instance, cards used to learn a new language can have the words in the native language of the learner in the front, and the translations to the new language in the back. For every card, the application presents the front, the user analyses its content, and then the back is shown; then the following card is displayed. The session ends when no more cards are left.
+
 \subsection{The game: 2048}
 
 Since the selected spaced repetition component is implemented for Android devices, it is necessary to choose a game for the same platform. Among the huge number of games available in Android, just a few of them are open source. The selected game for the current project is the popular 2048 \citep{2048}. It is distributed under the MIT License, which is compatible with other licenses including AGPLv3. Therefore, it is possible to modify the code as the convenience as well.
@@ -234,6 +198,63 @@ The first state implies that the user has won. Nonetheless, the user can continu
         \end{center}
     \vskip -5mm
 \end{figure}
+
+
+\subsection{Integration of spaced repetition and an existing game}
+Integrating two components into a single element poses a complexity in setting the balance between them. There are two strategies to cope with such situation. The first one simply fuses the game and Anki in independent contexts. The second alternative creates a connection to get a dependency between the components.
+
+\subsubsection{Integration in independent contexts}
+In this option, using the spaced repetition component and playing the game will occur in interleaved stages as seen in Figure \ref{fig:flow1}. The implementation of this option would be straightforward, however, the lack of a real connection between both components might be a potential problem. First, it would be difficult for the user understand which the main context of the application is. Moreover, switching between Anki and the game might be interpreted as an interruption of one over the other.
+
+
+\begin{figure}[htb]
+    \vskip 5mm
+        \begin{center}
+            \includegraphics[scale=0.45]{flow1.png}
+            \caption{Flow of spaced repetition and game components with no real connection between them.}
+            \label{fig:flow1}
+        \end{center}
+    \vskip -5mm
+\end{figure}
+
+
+The main design decision for this option is to define the moment to switch the components. From the game, that moment will be when it reaches one of the ending conditions. In the other hand switching from Anki will occur when the learning session ends. This flow is fixed and it might make feel the users forced to do one activity to continue to the other. Alternatively, the users will be able to switch between components at any moment they will. Moreover, the users will have the option to skip the switching and continue using the current component. 
+
+\subsubsection{Integration with connection}
+This alternative poses a clear definition of the main context of the application. In this case, one of the components will play the main role, and the other will be a complement. The integration will be done by creating a true connection between both components. The level of complexity of the implementation might be higher compared to the first option, but the potential benefits might be higher as well. 
+
+As described in the introduction section (\ref{sec:intro}), when the source of knowledge is perceived in a positive way, the learning process requires less mental effort and it is more pleasant. Based on this idea, it is safe to assume that playing a game is perceived more positively than executing spaced repetition. For this reason, the main context of the final application will be the game, and Anki will complement it. 
+
+It is necessary to implement a connection between both components. One of the objectives of such connection is to avoid the users interpreting the components as interruptions of each other. However, the main goal is to establish a relationship such the output of using one component can be seen as a valuable resource to be used in the other component as seen in Figure \ref{fig:flow2}.
+
+\begin{figure}[htb]
+    \vskip 5mm
+        \begin{center}
+            \includegraphics[scale=0.45]{flow2.png}
+            \caption{Flow of spaced repetition and game components with connection via resources provided from one component to the other.}
+            \label{fig:flow2}
+        \end{center}
+    \vskip -5mm
+\end{figure}
+
+Since the main context of the final application will be the game, Anki needs to be connected in a way such the users find worth using it. One alternative is to reward the users when using the spaced repetition component. Then, the reward can be used during the game. Such rewards can be implemented as points to reach higher positions in a leaderboard, or as resources that can be used to ease the game.
+
+A similar scheme was proposed in previous work \citep{johnson2012leveraging}. There, the flow of the final application was split into two phases: points earning and game playing. During the first phase, the participants obtained points in two stages. In the first stage, the participants reviewed content using spaced repetition. The second stage consisted of a quiz where points were granted based on the number of correct answers. Then, those points could be used during the game.
+
+There are other mechanisms that can be used to reward users and motivate them to use the spaced repetition component. However, for simplicity and ease of implementation, only the scheme of points earning will be taken into consideration. Therefore, the usage of the application will be split into two stages: points earning and game playing. The main difference with the scheme in \citep{johnson2012leveraging} is the flexibility of executing the points earning stage. 
+
+In the original scheme, the flow of the stages was fixed and the participants were able to earn points only at the beginning of each game session. For the current design, that flow is still valid and the points earning stage will be mandatory. However, the participants will also have a single extra opportunity to earn points. They will be able to execute the spaced repetition component at any time while playing the game. The application might suggest that option to the participants, especially during challenging levels.
+
+The number of points earned in the corresponding stage will be based on the easiness of each answered card; the more difficult the card, the higher the number of points. Then, while playing the game, its complexity can be reduced by exchanging the points with resources like the following:
+
+\begin{itemize}
+	\item Remove a number of random blocks
+	\item Avoid the addition of new blocks for a number of turns
+	\item Allow new blocks with higher values other than 2
+	\item Remove specific blocks
+\end{itemize}
+
+Each of the available resources will be acquired by a number of points, which will depend on how much they ease the game; the higher the benefit of the resource, the higher its cost. Additionally, due to the simplicity of the original game, new features will be added. Those features will be initially locked; then they will be available as the user progress in Anki.
 
 \section{Evaluation}
 The evaluation process requires to measure the variation of user engagement in the gamified version of the spaced repetition software. At first user engagement can be seen as a subjective concept, thus difficult to measure. One first approach might be to perform a qualitative analysis of the application. To do so, the type of required information would be related to the perception of the user about the application. Such information might have the form of opinions, comments, and suggestions.
