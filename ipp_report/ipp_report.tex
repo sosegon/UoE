@@ -203,7 +203,8 @@ The first state implies that the user has won. Nonetheless, the user can continu
 \subsection{Integration of spaced repetition and an existing game}
 Integrating two components into a single element poses a complexity in setting the balance between them. There are two strategies to cope with such situation. The first one simply fuses the game and Anki in independent contexts. The second alternative creates a connection to get a dependency between the components.
 
-\subsubsection{Integration in independent contexts}
+\subsubsection{Integration with independent contexts}
+\label{section:ind_contexts}
 In this option, using the spaced repetition component and playing the game will occur in interleaved stages as seen in Figure \ref{fig:flow1}. The implementation of this option would be straightforward, however, the lack of a real connection between both components might be a potential problem. First, it would be difficult for the user understand which the main context of the application is. Moreover, switching between Anki and the game might be interpreted as an interruption of one over the other.
 
 
@@ -221,6 +222,7 @@ In this option, using the spaced repetition component and playing the game will 
 The main design decision for this option is to define the moment to switch the components. From the game, that moment will be when it reaches one of the ending conditions. In the other hand switching from Anki will occur when the learning session ends. This flow is fixed and it might make feel the users forced to do one activity to continue to the other. Alternatively, the users will be able to switch between components at any moment they will. Moreover, the users will have the option to skip the switching and continue using the current component. 
 
 \subsubsection{Integration with connection}
+\label{section:connection}
 This alternative poses a clear definition of the main context of the application. In this case, one of the components will play the main role, and the other will be a complement. The integration will be done by creating a true connection between both components. The level of complexity of the implementation might be higher compared to the first option, but the potential benefits might be higher as well. 
 
 As described in the introduction section (\ref{sec:intro}), when the source of knowledge is perceived in a positive way, the learning process requires less mental effort and it is more pleasant. Based on this idea, it is safe to assume that playing a game is perceived more positively than executing spaced repetition. For this reason, the main context of the final application will be the game, and Anki will complement it. 
@@ -266,7 +268,7 @@ Some methods have been developed to cope with the difficulty of measuring user e
 Due to the difficulty pertaining to gathering and analysing qualitative data, the evaluation for the current project will be done in terms of quantitative data. This will ease the collection of data and their analysis. Moreover, it will permit to replicate the evaluation or perform a new one with modified conditions in order to make comparisons. The details of the evaluation method will be described in the following subsections.
 
 \subsection{Participants}
-There will be two groups of participants. The first one will be the control group. The participants in this group will use a version of AnkiDroid with no gamification characteristics. The data obtained from this group will be used as a benchmark to measure the variation in user engagement. The second group will be the experimental group. The participants in this group will use the gamified version of AnkiDroid.
+There will be two groups of participants. The first one will be the control group. The participants in this group will use the version of the application with independent contexts (\ref{section:ind_contexts}). The data obtained from this group will be used as a benchmark to measure the variation in user engagement. The second group will be the experimental group. The participants in this group will use the version of the application with connection between the game and Anki (\ref{section:connection}).
 
 The results obtained from the experimental group will be compared against the benchmark from the control group. The expectation is that there will be differences between both results. The analysis of those differences will allow to draw conclusions about the effectiveness of gamification for spaced repetition software.
 
@@ -276,7 +278,7 @@ AnkiDroid is a general purpose implementation of spaced repetition. Thus, it can
 
 Even though the minimum constraints in the selection of participants, it is important to maintain a level of homogeneity among them. Thus, the complexity in the analysis of the results from the control and experimental will be further reduced. A potential issue with this condition is the level of generalizability of the results. It might be difficult to extrapolate the results to other groups of the general population.
 
-Finally, the participants will use the final application at any time during their daily activities. It follows that the application will be used in an uncontrolled environment. There are several potential issues for such condition. However, the most relevant one is that the user might forget to use the application, therefore not enough data will be generated. To diminish such situation, the application will sent daily notifications to remember the users to use it. Evidently, the frequency of such notifications has to be moderated to avoid the users perceive them as intrusive.
+Finally, the participants will use the application at any time during their daily activities. It follows that the application will be used in an uncontrolled environment. There are several potential issues for such condition. However, the most relevant one is that the user might forget to use the application, therefore not enough data will be generated. To diminish such situation, the application will sent daily notifications to remember the users to use it. Evidently, the frequency of such notifications has to be moderated to avoid the users perceive them as intrusive.
 
 \subsection{Quantitative data}
 Quantitative data are easier to collect and analyse. Collecting them will be done remotely by implementing features in the application such it can deliver statistics about the its usage to a server. The type of data that will be gathered is wide and will come from both components. Examples of kinds of data include time using the game, time using Anki, number of correctly answer cards, number of earned points, and number of times the user skipped the switching. All this information can be analysed to find common characteristics of usage in every group of participants.
