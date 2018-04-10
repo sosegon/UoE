@@ -318,7 +318,7 @@ The main objectives of the project are to increase the user engagement of AnkiDr
 The analysis of the collected information will be aimed to confirm or deny the hypotheses to some level of confidence. It will require to make proper statistical analysis in the data from both groups. Initially, the analysis will be made using student's t-test and ANOVA, although other methods might be required.
 
 \section{Tasks and Schedule}
-The execution of the project is defined as a series of tasks or stages with specific goals. Each task has a number of resources, a duration, and outcomes that might be required in a following stage as seen in Figure \ref{fig:gantt_full}. The next subsections describe the details of each task.
+The execution of the project is defined as a series of tasks or stages with specific goals. Each task has a number of resources, a duration, and outcomes that might be required in a following stage as seen in Figure \ref{fig:gantt_full}. The next subsections describe the details of each task. Actual dates for the execution of each task can be found in Figure \ref{fig:plan} in the Appendix section.
 
 \begin{figure}
 	\begin{center}
@@ -334,13 +334,15 @@ The execution of the project is defined as a series of tasks or stages with spec
 			\ganttmilestone[name=Dat]{Data}{8} \\
 			\ganttlinkedbar[name=Ana]{Analysis}{11}{11} \\
 			\ganttmilestone[name=Sta]{Statistics}{11} \\
-			\ganttlinkedbar[name=Rep]{Report}{12}{12} \\			
-			\ganttbar{Documentation}{1}{12}
+			\ganttlinkedbar[name=Rep]{Report}{12}{12} \\
+			\ganttbar[name=Not]{Notes taking}{1}{7} \\
+			\ganttbar[name=The]{Thesis writing}{8}{12}
 			\ganttlink[link mid=.4]{Des}{Spe}
 			\ganttlink[link mid=.4]{Imp}{App}
 			\ganttlink[link mid=.4]{App}{Tes}			
 			\ganttlink[link mid=.4]{Tes}{Dat}
 			\ganttlink[link mid=.4]{Ana}{Sta}
+			\ganttlink[link mid=.4]{Not}{The}
 		\end{ganttchart}
 	\end{center}
 	\caption{Gantt chart of execution of project tasks over a period of 12 weeks. Some tasks deliver milestones needed to start the following task.}
@@ -402,8 +404,12 @@ The analysis process can be speed up by performing automated routines to clean a
 \subsection{User engagement and spaced repetition effectiveness report}
 The outcome from the analysis of data will be the foundations to draw conclusions about the effects of gamifying a spaced repetition software. The report will be aimed to interpret the results from the analysis data and identify possible causes for such results. Moreover, information about the limitations of the project will be provided. Either the hypotheses have been confirmed or denied, the report will provide the guidelines for further work in the same field or related ones. This stage is expected to last one week.
 
-\subsection{Documentation}
-This task will run through the entire period of the project. It starts along with the design stage, and it lasts until the end of the project. The objective is to describe the details of the execution of each task. It will provide a clear way to understand how the project was developed including changes, problems, and solutions that might have found throughout the process.
+\subsection{Notes taking}
+This task will run since the beginning of the project until the start of the testing stage. It will provide a reference for the Thesis writing stage. The objective is to take notes about the execution of every task to understand how the project was developed including changes, problems, and solutions that might have found.
+
+\subsection{Thesis writing}
+This task will provide a formal document with detailed information of the development of the project. Since the testing stage will depend mostly in the activities of the users, it poses a good opportunity to start the writing of the thesis. This task will run until the end of the twelfth week. Once, the document is ready, it will be sent for revision of the supervisors. The feedback will be used to enhance the document and present its final version.
+
 	
 \begin{table*}[!htb]
 	\centering
@@ -479,6 +485,23 @@ This is the last stage of the project. At this point everything else have been a
 Documenting the stages poses a risk to the flow of the whole project. Writing the documentation could be time consuming, therefore, it would affect the execution of the tasks. The strategy to minimize those affectations is to update the documentation on a daily basis when possible. At the end of every week a revision will be done. If is not possible to add all the details related to the activities done during the week, then the task will be skipped until the next week. During the testing stage most of the activities will be related to the participants which will provide some spare time to update the documentation and fill any gap from the previous weeks.
 
 \bibliography{ipp_report_references}
+
+\newpage
+
+\appendix
+
+\renewcommand\thefigure{\thesection.\arabic{figure}}    
+
+\section{Appendix}
+\begin{figure*}[htb]
+    \vskip 5mm
+        \begin{center}
+            \includegraphics[scale=0.45]{plan.png}
+            \caption{Project plan with specific dates. Every column along the 2018 row represents a week. The header for every column is the start date of the week}
+            \label{fig:plan}
+        \end{center}
+    \vskip -5mm
+\end{figure*}
 
 \end{document} 
 

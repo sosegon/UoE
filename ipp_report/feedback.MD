@@ -10,7 +10,7 @@
 - ~~The control group should use the application with no integration~~.
 - ~~Ways to recruit people~~.
 - Reference about the gathering of data.
-- Re-order the scheduled plan. 
+- ~~Re-order the scheduled plan~~. 
 - Clarify the documentation part.
 - Remove the paying to users thing.
 - Re-design the evaluation of the interface.
