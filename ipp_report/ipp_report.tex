@@ -279,22 +279,27 @@ Even though the minimum constraints in the selection of participants, it is impo
 Finally, the participants will use the final application at any time during their daily activities. It follows that the application will be used in an uncontrolled environment. There are several potential issues for such condition. However, the most relevant one is that the user might forget to use the application, therefore not enough data will be generated. To diminish such situation, the application will sent daily notifications to remember the users to use it. Evidently, the frequency of such notifications has to be moderated to avoid the users perceive them as intrusive.
 
 \subsection{Quantitative data}
-The approach to measure the effects of gamification applied to a spaced repetition software will be done through quantitative data. There are two parameters to measure. The first one is the user engagement, which can be measured by collecting and analysing different types of data from the application including time of use, frequency of use, and commonly used features. The second parameter is the effectiveness of spaced repetition when it is implemented with gamification. This parameter require to test how much knowledge has been retained by the participants after using the application.
+Quantitative data are easier to collect and analyse. Collecting them will be done remotely by implementing features in the application such it can deliver statistics about the its usage to a server. The type of data that will be gathered is wide and will come from both components. Examples of kinds of data include time using the game, time using Anki, number of correctly answer cards, number of earned points, and number of times the user skipped the switching. All this information can be analysed to find common characteristics of usage in every group of participants.
 
-\subsubsection{User engagement}
-There are three types of data to be collected from the usage of the application:
-\begin{enumerate}
-	\item \textbf{Time in session (TIS):}  It is the time the users spend every occasion they use the application. It is measured in minutes per session.
-	\item \textbf{Frequency of sessions (FOS):} It is the time between sessions. It is measured in hours between two consecutive sessions.
-	\item \textbf{Frequency of spaced repetition features (FOSR):} It is the number of times spaced repetition features are used in every session. It is measured in number of times per session.
-\end{enumerate}
+Eventually, there will be two parameters to study. The first one is \textit{user engagement}, which requires to collect and analyse usage data of the application. The second parameter is \textit{effectiveness of spaced repetition} when applied with gamification; this parameter requires to measure how much knowledge has been retained by the participants after using the application. The following definitions serve as a reference for the type of data that will be collected to measure both parameters.
 
-\subsubsection{Spaced repetition effectiveness}
-The data to measure the spaced repetition effectiveness will be collected during the usage of the application and in a final test to be taken by the participants. Such information will take the form of following scores:
-\begin{enumerate}
-	\item \textbf{Score in session (SIS):} The score obtained in the quiz taken during a session of usage. It is measured as the number of correctly answered questions divided by the total number of questions.
-	\item \textbf{Final score (FS):} The score obtained in the final test. It is measured as the number of correctly answered questions divided by the total number of questions.
-\end{enumerate}
+\begin{itemize}
+	\item \textit{User engagement}
+	\begin{enumerate}
+		\item \textbf{Time in session (TIS):}  It is the time the users spend every occasion they use the application. It is measured in minutes per session.
+		\item \textbf{Frequency of sessions (FOS):} It is the time between sessions. It is measured in hours between two consecutive sessions.
+		\item \textbf{Frequency of spaced repetition features (FOSR):} It is the number of times spaced repetition features are used in every session. It is measured in number of times per session.
+	\end{enumerate}
+\end{itemize}
+
+\begin{itemize}
+	\item \textit{Spaced repetition effectiveness}
+	\begin{enumerate}
+		\item \textbf{Initial score (IS):} The score obtained in the initial test. It is measured as the number of correctly answered questions divided by the total number of questions.
+		\item \textbf{Score in session (SIS):} The score obtained in the quiz taken during a session of usage. It is measured as the number of correctly answered questions divided by the total number of questions.
+		\item \textbf{Final score (FS):} The score obtained in the final test. It is measured as the number of correctly answered questions divided by the total number of questions.
+	\end{enumerate}
+\end{itemize}
 
 \subsection{Hypotheses}
 The main objectives of the project are to increase the user engagement of AnkiDroid, and measure the effectiveness of spaced repetition when implemented with gamification. Thus, the following hypotheses need to be confirmed or denied:
