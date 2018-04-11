@@ -14,3 +14,4 @@
 - ~~Clarify the documentation part~~.
 - ~~Remove the paying to users thing~~.
 - ~~Re-design the evaluation of the interface~~.
+- ~~Merge risk management with tasks and schedule~~.
