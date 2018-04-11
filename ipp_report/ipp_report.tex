@@ -460,7 +460,8 @@ This task will provide a formal document with detailed information of the develo
 \renewcommand\thefigure{\thesection.\arabic{figure}}    
 
 \section{Appendix}
-\begin{figure*}[htb]
+\setcounter{figure}{0} 
+\begin{figure}[H]
     \vskip 5mm
         \begin{center}
             \includegraphics[scale=0.45]{plan.png}
@@ -468,7 +469,7 @@ This task will provide a formal document with detailed information of the develo
             \label{fig:plan}
         \end{center}
     \vskip -5mm
-\end{figure*}
+\end{figure}
 
 \end{document} 
 
