@@ -1,7 +1,7 @@
 ## This is the list of things to do based on the feedback
 
-- Improve abstract.
-- Write more about background.
+- ~~Improve abstract~~.
+- ~~Write more about background~~.
 - Grammar.
 - Redaction.
 - ~~Algorithm explanation and formula for spaced repetition in AnkiDroid~~.
