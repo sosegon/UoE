@@ -18,23 +18,59 @@ public class Task2_Mutation {
         engine = new TemplateEngine();
         map = new EntryMap();
     }
+        
     /*
      * ****************************************************************
      * Mutation 02
      * ****************************************************************
      */
+	/*
+	 * An existing entry is deleted
+	 */
+	@Test
+	public void TestMutation02() {
+		map.store("key1", "value1");
+        map.store("key2", "value2");
+        map.store("key3", "value3");
+        
+		map.delete("key2");		
+		assertEquals(map.getEntries().size(), 2);
+		
+		map.store("key2", "nvalue2");
+		
+		Integer matchingMode = TemplateEngine.DEFAULT;
+		String result = engine.evaluate("Value is ${key2}", map, matchingMode);
+		assertEquals("Value is nvalue2", result);
+	}
     /*
      * ****************************************************************
      * Mutation 04
      * ****************************************************************
      */
+	/*
+	 * An entry map is found
+	 */
+	@Test
+	public void TestMutation04() {
+		map.store("AABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890", "1");
+		map.store("BABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890", "2");
+		map.store("CABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890", "3");
+		
+		String template = "Value is ${AABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890}";
+		Integer matchingMode = TemplateEngine.DEFAULT;
+		String result = engine.evaluate(template, map, matchingMode);
+		assertEquals("Value is 1", result);
+	}
     /*
      * ****************************************************************
      * Mutation 06
      * ****************************************************************
      */
+	/*
+	 * An empty template is deleted
+	 */
     @Test
-    public void TestEmptyTemplateBoundary_DeleteUnmatched() {
+    public void TestMutation06() {
         map.store("name", "Antonios");
         map.store("surname", "Valais");
         Integer matchingMode = TemplateEngine.DEFAULT | TemplateEngine.DELETE_UNMATCHED;
@@ -50,54 +86,13 @@ public class Task2_Mutation {
      * The pattern to replace is case sensitive
      */
     @Test
-    public void TestCase10() {
+    public void TestMutation08() {
     	String template = "ABC0abc0ABC0ABC";
     	String pattern = "abc";
     	String value = "XYZ";
     	int matchingMode = SimpleTemplateEngine.CASE_SENSITIVE;
     	String result = simpleEngine.evaluate(template, pattern, value, matchingMode);
     	String comparison = "ABC0XYZ0ABC0ABC";
-    	assertEquals(result, comparison);
-    }
-    /*
-     * The pattern to replace looks for whole words and is case sensitive for a single match
-     */
-    @Test
-    public void TestCase13() {
-    	String template = "ABC abc_ABC-ABC";
-    	String pattern = "ABC#2";
-    	String value = "XYZ";
-    	int matchingMode = SimpleTemplateEngine.WHOLE_WORLD_SEARCH | SimpleTemplateEngine.CASE_SENSITIVE;
-    	String result = simpleEngine.evaluate(template, pattern, value, matchingMode);
-    	String comparison = "ABC abc_XYZ-ABC";
-    	assertEquals(result, comparison);
-    }
-    /*
-     * The pattern to replace is case sensitive in a string with spaces
-     * Fails for Mutation 10 as well
-     */
-    @Test
-    public void TestCase15() {
-    	String template = "ABC abc_ABC-ABC";
-    	String pattern = "ABC";
-    	String value = "XYZ";
-    	int matchingMode = SimpleTemplateEngine.CASE_SENSITIVE;
-    	String result = simpleEngine.evaluate(template, pattern, value, matchingMode);
-    	String comparison = "XYZ abc_XYZ-XYZ";
-    	assertEquals(result, comparison);
-    }
-    /*
-     * The pattern to replace looks for whole words and is case sensitive for all matches
-     * Fails for Mutation 10 as well
-     */
-    @Test
-    public void TestCase17() {
-    	String template = "ABC abc_ABC-ABC";
-    	String pattern = "ABC";
-    	String value = "XYZ";
-    	int matchingMode = SimpleTemplateEngine.WHOLE_WORLD_SEARCH | SimpleTemplateEngine.CASE_SENSITIVE;
-    	String result = simpleEngine.evaluate(template, pattern, value, matchingMode);
-    	String comparison = "XYZ abc_XYZ-XYZ";
     	assertEquals(result, comparison);
     }
     /*
@@ -109,52 +104,13 @@ public class Task2_Mutation {
      * The pattern to replace is not case sensitive
      */
     @Test
-    public void TestCase11() {
+    public void TestMutation10() {
     	String template = "ABC0abc0ABC0ABC";
     	String pattern = "abc";
     	String value = "XYZ";
     	int matchingMode = SimpleTemplateEngine.DEFAULT_MATCH;
     	String result = simpleEngine.evaluate(template, pattern, value, matchingMode);
     	String comparison = "XYZ0XYZ0XYZ0XYZ";
-    	assertEquals(result, comparison);
-    }
-    /*
-     * The pattern to replace looks for whole words
-     */
-    @Test
-    public void TestCase12() {
-    	String template = "ABC abc_ABC-ABC";
-    	String pattern = "abc#4";
-    	String value = "XYZ";
-    	int matchingMode = SimpleTemplateEngine.WHOLE_WORLD_SEARCH;
-    	String result = simpleEngine.evaluate(template, pattern, value, matchingMode);
-    	String comparison = "ABC abc_ABC-XYZ";
-    	assertEquals(result, comparison);
-    }
-    /*
-     * The pattern to replace looks for whole words and is not case sensitive
-     */
-    @Test
-    public void TestCase14() {
-    	String template = "ABC abc_ABC-ABC";
-    	String pattern = "abc";
-    	String value = "XYZ";
-    	int matchingMode = SimpleTemplateEngine.WHOLE_WORLD_SEARCH;
-    	String result = simpleEngine.evaluate(template, pattern, value, matchingMode);
-    	String comparison = "XYZ XYZ_XYZ-XYZ";
-    	assertEquals(result, comparison);
-    }
-    /*
-     * The pattern to replace is not case sensitive in a string with spaces
-     */
-    @Test
-    public void TestCase16() {
-    	String template = "ABC abc_ABC-ABC";
-    	String pattern = "ABC";
-    	String value = "XYZ";
-    	int matchingMode = SimpleTemplateEngine.DEFAULT_MATCH;
-    	String result = simpleEngine.evaluate(template, pattern, value, matchingMode);
-    	String comparison = "XYZ XYZ_XYZ-XYZ";
     	assertEquals(result, comparison);
     }
 }
