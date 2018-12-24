@@ -2,7 +2,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.internal.runners.InitializationError;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -12,15 +11,166 @@ import st.EntryMap;
 import st.SimpleTemplateEngine;
 import st.TemplateEngine;
 
-@RunWith(Task1_Functional.class)
-@SuiteClasses({Task1_Functional.EntryMapStoreTest.class, Task1_Functional.EntryMapDeleteTest.class,
-	Task1_Functional.EntryMapUpdateTest.class, Task1_Functional.SimpleTemplateEngineTest.class,
-	Task1_Functional.TemplateEngineTest.class})
-public class Task1_Functional extends Suite{
+@RunWith(Task1_Coverage.class)
+@SuiteClasses({Task1_Coverage.EntryMapStoreTest.class, Task1_Coverage.EntryMapDeleteTest.class,
+	Task1_Coverage.EntryMapUpdateTest.class, Task1_Coverage.SimpleTemplateEngineTest.class,
+	Task1_Coverage.TemplateEngineTest.class,
+	Task1_Coverage.SimpleTemplateEngineCoverageTest.class})
+public class Task1_Coverage extends Suite{
 	
-	public Task1_Functional(Class<?> klass, RunnerBuilder builder) throws org.junit.runners.model.InitializationError {
+	public Task1_Coverage(Class<?> klass, RunnerBuilder builder) throws org.junit.runners.model.InitializationError {
 		super(klass, builder);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public static class SimpleTemplateEngineCoverageTest {
+		
+		private SimpleTemplateEngine simpleEngine;
+		
+		@Before
+	    public void setUp() throws Exception {
+			simpleEngine = new SimpleTemplateEngine();
+	    }
+
+		/*
+		 * Invalid matching mode -1
+		 */
+		@Test
+	    public void TestCase9_1() {
+	    	String template = "ABC0abc0ABC0ABC";
+	    	String pattern = "abc#2";
+	    	String value = "XYZ";
+	    	int matchingMode = -1;
+	    	String result = simpleEngine.evaluate(template, pattern, value, matchingMode);
+	    	String comparison = "ABC0XYZ0ABC0ABC";
+	    	assertEquals(result, comparison);
+	    }
+		
+		/*
+		 * Invalid matching mode null
+		 */
+		@Test
+	    public void TestCase9_2() {
+	    	String template = "ABC0abc0ABC0ABC";
+	    	String pattern = "abc#2";
+	    	String value = "XYZ";
+	    	String result = simpleEngine.evaluate(template, pattern, value, null);
+	    	String comparison = "ABC0XYZ0ABC0ABC";
+	    	assertEquals(result, comparison);
+	    }
+		
+		/*
+		 * Invalid matching mode >3
+		 */
+		@Test
+	    public void TestCase9_3() {
+	    	String template = "ABC0abc0ABC0ABC";
+	    	String pattern = "abc#2";
+	    	String value = "XYZ";
+	    	int matchingMode = 4;
+	    	String result = simpleEngine.evaluate(template, pattern, value, matchingMode);
+	    	String comparison = "ABC0XYZ0ABC0ABC";
+	    	assertEquals(result, comparison);
+	    }
+		/*
+		 * Does not increase coverage, it just test the invalid mode 3, which is not covered in the code.
+		 */
+		@Test
+	    public void TestCase9_4() {
+	    	String template = "ABC0abc0ABC0ABC";
+	    	String pattern = "abc";
+	    	String value = "XYZ";
+	    	int matchingMode = 3;
+	    	String result = simpleEngine.evaluate(template, pattern, value, matchingMode);
+	    	assertEquals(result, template);
+	    }
+		
+		/*
+		 * Invalid suffix letter
+		 */
+		@Test
+	    public void TestCase9_5() {
+	    	String template = "ABC0abc0ABC0ABC";
+	    	String pattern = "abc#a";
+	    	String value = "XYZ";
+	    	int matchingMode = 4;
+	    	String result = simpleEngine.evaluate(template, pattern, value, matchingMode);
+	    	assertEquals(result, template);
+	    }
+		
+		/*
+		 * Invalid suffix number and letter
+		 */
+		@Test
+	    public void TestCase9_6() {
+	    	String template = "ABC0abc0ABC0ABC";
+	    	String pattern = "abc#22a";
+	    	String value = "XYZ";
+	    	int matchingMode = 4;
+	    	String result = simpleEngine.evaluate(template, pattern, value, matchingMode);
+	    	assertEquals(result, template);
+	    }
+		
+		/*
+		 * Invalid suffix no number
+		 */
+		@Test
+	    public void TestCase9_7() {
+	    	String template = "ABC0abc0ABC0ABC";
+	    	String pattern = "abc#";
+	    	String value = "XYZ";
+	    	int matchingMode = 4;
+	    	String result = simpleEngine.evaluate(template, pattern, value, matchingMode);
+	    	assertEquals(result, template);
+	    }
+
+	    /*
+			Test cases of Antonios Valais
+		 */
+	    @Test
+		public void TestCase_Coverage_10() {
+			String originalText = "A"+Character.MIN_VALUE+"AA";
+			String expected = "ABC"+Character.MIN_VALUE+"AA";
+			String pattern = "A";
+			String result = simpleEngine.evaluate(originalText, pattern, "ABC", 2);
+			assertEquals(result, expected);
+		}
+	}
+
+	public static class TemplateEngineCoverageTest {
+		/*
+			Test cases of Antonios Valais
+		 */
+		private TemplateEngine engine;
+	    private EntryMap map;
+
+	    @Before
+	    public void setUp() throws Exception {
+	        engine = new TemplateEngine();
+	        map = new EntryMap();
+	    }
+
+	    @Test
+	    public void TestCase_Coverage_1()
+	    {
+	    	map.store("name", "Antonios");
+			
+			Integer integer = new Integer(2);
+			
+			for (Object entry : map.getEntries()) {
+				assertFalse(entry.equals(null));
+				assertTrue(entry.equals(entry));
+				assertFalse(entry.equals(integer));
+			}
+	    }
+
+		@Test
+	    public void TestTemplateStartsWithEntry() {
+	        map.store("name", "Antonios");
+	        Integer matchingMode = TemplateEngine.DEFAULT;
+	        String result = engine.evaluate("${name} is my name", map, matchingMode);
+	        assertEquals("Antonios is my name", result);
+	    }
 	}
 
 	public static class EntryMapStoreTest {

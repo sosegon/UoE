@@ -1,0 +1,28 @@
+
+Test Case 1  		<error>
+   Template_DATA_TYPE :  Null
+
+
+Test Case 2  		<error>
+   Template_CHARACTERS :  Empty
+
+
+Test Case 3  		<error>
+   Value_DATA_TYPE :  Null
+
+
+Test Case 4  		(Key = 1.2.1.1.0.)
+   Template_DATA_TYPE  :  String
+   Template_CHARACTERS :  Not empty
+   Value_DATA_TYPE     :  String
+   Map_CONTAINS_ENTRY  :  Yes
+   Map_KEEP_ORDER      :  <n/a>
+
+
+Test Case 5  		(Key = 1.2.1.2.1.)
+   Template_DATA_TYPE  :  String
+   Template_CHARACTERS :  Not empty
+   Value_DATA_TYPE     :  String
+   Map_CONTAINS_ENTRY  :  No
+   Map_KEEP_ORDER      :  Yes
+
