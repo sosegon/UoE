@@ -1,0 +1,159 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <vector>
+#include <cmath>
+
+#include <GL/glut.h>
+#define GLUT_KEY_ESCAPE 27
+#ifndef GLUT_WHEEL_UP
+#define GLUT_WHEEL_UP 3
+#define GLUT_WHEEL_DOWN 4
+#endif
+
+#include "mat.h"
+#include "vec.h"
+#include "vol.h"
+#include "trf.h"
+
+#define WIDTH 128
+#define HEIGHT 256
+
+static cVolumeData* volumeData = NULL;
+static unsigned char threshold = 75;
+static float t1 = 7.f;
+static float t2 = 14.f;
+static float t3 = 0.f;
+
+void Update(void) { glutPostRedisplay(); }
+
+void Draw(void) {
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  glPointSize(2.0);
+  glBegin(GL_POINTS);
+
+  int depth = volumeData->GetDepth();
+  int height = volumeData->GetHeight();
+  int width = volumeData->GetWidth();
+  
+  for (int z = 0; z < depth; z++) {
+    for (int y = 0; y < height; y++) {
+      float alpha_acc = 0.0f;
+      vec3 skin = vec3(255, 255, 0) / 128.0f;
+      vec3 bone = vec3(0, 0, 255) / 128.0f;
+      vec3 color = vec3::Zero();
+      for (int x = 0; x < width; x++) {
+        unsigned char val = volumeData->Get(x, y, z);
+
+        float factor = 3.0f; // corrective factor to allow reaching information from the bones
+        float alpha_cur = val / 255.0 / factor;
+        alpha_acc = alpha_cur + (1 - alpha_cur) * alpha_acc;
+
+        // Limit to skip accumulating since everything else will
+        // not be visible
+        if(alpha_acc > 0.9) {
+          break;
+        }
+
+        float intensity = .0f;
+        intensity = ((1 - alpha_acc) * val);
+
+        // This is the transfer function based on thresholds
+        float intensityf = intensity / 255.0f;
+        if (intensity < t1){
+          //alpha_acc = prev_alpha_acc;
+          continue;
+        } else if (intensity >= t1 && intensity < t2) {
+          color = color + (skin * intensityf);
+        } else {
+          color = color + (bone * intensityf);
+        }
+        
+        // original
+        // if(val > threshold) {
+        //   vec3 color = vec3(val, val, val) / 255.0f;
+        //   glColor3f(color.r(), color.g(), color.b());
+        //   glVertex3f(y, z, 0);
+        //   break;
+        // }
+      }
+      glColor3f(color.r(), color.g(), color.b());
+      glVertex3f(y, z, 0);
+    }
+  }
+
+  glEnd();
+
+  glFlush();
+  glutSwapBuffers();
+}
+
+void KeyEvent(unsigned char key, int x, int y) {
+  switch (key) {
+    case GLUT_KEY_ESCAPE:
+      exit(EXIT_SUCCESS);
+      break;
+    case GLUT_KEY_UP:
+      threshold = (threshold == 255) ? 255 : threshold + 1;
+      break;
+    case GLUT_KEY_DOWN:
+      threshold = (threshold == 0) ? 0 : threshold - 1;
+      break;
+    case GLUT_KEY_F1:
+      t1 = (t1 == 255) ? 255 : t1 + 1;
+      printf("t1: %.2f, t2: %.2f, t3: %.2f\n", t1, t2, t3);
+      break;
+    case GLUT_KEY_F2:
+      t1 = (t1 == 0.0) ? 0.0 : t1 - 1;
+      printf("t1: %.2f, t2: %.2f, t3: %.2f\n", t1, t2, t3);
+      break;
+    case GLUT_KEY_F3:
+      t2 = (t2 == 255) ? 255 : t2 + 1;
+      printf("t1: %.2f, t2: %.2f, t3: %.2f\n", t1, t2, t3);
+      break;
+    case GLUT_KEY_F4:
+      t2 = (t2 == 0.0) ? 0.0 : t2 - 1;
+      printf("t1: %.2f, t2: %.2f, t3: %.2f\n", t1, t2, t3);
+      break;
+    case GLUT_KEY_F5:
+      t3 = (t3 == 255) ? 255 : t3 + 1;
+      printf("t1: %.2f, t2: %.2f, t3: %.2f\n", t1, t2, t3);
+      break;
+    case GLUT_KEY_F6:
+      printf("t1: %.2f, t2: %.2f, t3: %.2f\n", t1, t2, t3);
+      t3 = (t3 == 0.0) ? 0.0 : t3 - 1;
+      break;
+  }
+}
+
+void KeyEventSpecial(int key, int x, int y) { KeyEvent(key, x, y); }
+
+int main(int argc, char** argv) {
+  volumeData = new cVolumeData("volumeData", 2);
+  int height = volumeData->GetHeight();
+  int width = volumeData->GetWidth();
+
+  glutInit(&argc, argv);
+  glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
+  glutInitWindowSize(width, height);
+  glutCreateWindow("CAV Assignment 2 [BUILD: " __DATE__ "]");
+
+  glClearColor(0.5, 0.5, 0.5, 1.0);
+
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  glOrtho(0, width, height, 0, -512, 512);
+
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+
+  glDisable(GL_DEPTH_TEST);
+
+  glutKeyboardFunc(KeyEvent);
+  glutSpecialFunc(KeyEventSpecial);
+  glutDisplayFunc(Draw);
+  glutIdleFunc(Update);
+
+  glutMainLoop();
+
+  delete volumeData;
+};

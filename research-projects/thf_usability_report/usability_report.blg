@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: usability_report.aux
+The style file: plainnat.bst
+Database file #1: usability_report_references.bib
+Warning--entry type for "edinStats" isn't style-file defined
+--line 9 of file usability_report_references.bib
+You've used 2 entries,
+            2773 wiz_defined-function locations,
+            605 strings with 5088 characters,
+and the built_in function-call counts, 808 in all, are:
+= -- 71
+> -- 20
+< -- 3
++ -- 8
+- -- 6
+* -- 44
+:= -- 120
+add.period$ -- 6
+call.type$ -- 2
+change.case$ -- 8
+chr.to.int$ -- 2
+cite$ -- 4
+duplicate$ -- 45
+empty$ -- 81
+format.name$ -- 8
+if$ -- 178
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 2
+newline$ -- 18
+num.names$ -- 8
+pop$ -- 26
+preamble$ -- 1
+purify$ -- 6
+quote$ -- 0
+skip$ -- 37
+stack$ -- 0
+substring$ -- 32
+swap$ -- 11
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 17
+warning$ -- 0
+while$ -- 8
+width$ -- 0
+write$ -- 33
+(There was 1 warning)

@@ -1,0 +1,10 @@
+/.metadata/
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+/*
+/*/
+!/ipp_report/
+!.gitignore

@@ -1,0 +1,167 @@
+This is TeX, Version 3.14159265 (TeX Live 2017/Debian) (preloaded format=tex 2018.3.13)  24 MAR 2018 21:27
+**apacite.ins
+(./apacite.ins (/usr/share/texlive/texmf-dist/tex/latex/base/docstrip.tex
+\blockLevel=\count26
+\emptyLines=\count27
+\processedLines=\count28
+\commentsRemoved=\count29
+\commentsPassed=\count30
+\codeLinesPassed=\count31
+\TotalprocessedLines=\count32
+\TotalcommentsRemoved=\count33
+\TotalcommentsPassed=\count34
+\TotalcodeLinesPassed=\count35
+\NumberOfFiles=\count36
+\inFile=\read0
+\inputcheck=\read1
+\@tempcnta=\count37
+\off@0=\count38
+\off@1=\count39
+\off@2=\count40
+\off@3=\count41
+\off@4=\count42
+\off@5=\count43
+\off@6=\count44
+\off@7=\count45
+\off@8=\count46
+\off@9=\count47
+\off@10=\count48
+\off@11=\count49
+\off@12=\count50
+\off@13=\count51
+\off@14=\count52
+\off@15=\count53
+\@temptokena=\toks12
+\@maxfiles=\count54
+\@maxoutfiles=\count55
+
+Utility: `docstrip' 2.5e <2014/09/29>
+English documentation    <2017/03/13>
+
+**********************************************************
+* This program converts documented macro-files into fast *
+* loadable files by stripping off (nearly) all comments! *
+**********************************************************
+
+********************************************************
+* No Configuration file found, using default settings. *
+********************************************************
+
+)
+
+Generating file(s) apacite.sty apacdoc.sty english.apc dutch.apc finnish.apc fr
+ench.apc german.apc ngerman.apc greek.apc norsk.apc spanish.apc swedish.apc apa
+cxmpl.tex apacite.drv apa5ex.bib apacite.bst apacitex.bst apacann.bst apacannx.
+bst 
+\openout0 = `apacite.sty'.
+
+\openout1 = `apacdoc.sty'.
+
+\openout2 = `english.apc'.
+
+\openout3 = `dutch.apc'.
+
+\openout4 = `finnish.apc'.
+
+\openout5 = `french.apc'.
+
+\openout6 = `german.apc'.
+
+\openout7 = `ngerman.apc'.
+
+\openout8 = `greek.apc'.
+
+\openout9 = `norsk.apc'.
+
+\openout10 = `spanish.apc'.
+
+\openout11 = `swedish.apc'.
+
+\openout12 = `apacxmpl.tex'.
+
+\openout13 = `apacite.drv'.
+
+\openout14 = `apa5ex.bib'.
+
+\openout15 = `apacite.bst'.
+
+
+Processing file apacite.dtx (package) -> apacite.sty
+                            (docpkg) -> apacdoc.sty
+                            (english) -> english.apc
+                            (dutch) -> dutch.apc
+                            (finnish) -> finnish.apc
+                            (french) -> french.apc
+                            (german) -> german.apc
+                            (ngerman) -> ngerman.apc
+                            (greek) -> greek.apc
+                            (norsk) -> norsk.apc
+                            (spanish) -> spanish.apc
+                            (swedish) -> swedish.apc
+                            (xmpl) -> apacxmpl.tex
+                            (driver) -> apacite.drv
+                            (bibdb) -> apa5ex.bib
+                            (bibstyle) -> apacite.bst
+File apacite.dtx ended by \endinput.
+Lines  processed: 23152
+Comments removed: 4911
+Comments  passed: 787
+Codelines passed: 17172
+
+\openout0 = `apacitex.bst'.
+
+\openout1 = `apacann.bst'.
+
+\openout2 = `apacannx.bst'.
+
+
+Processing file apacite.dtx (xbibstyle) -> apacitex.bst
+                            (bibstyle,annotated) -> apacann.bst
+                            (xbibstyle,annotated) -> apacannx.bst
+File apacite.dtx ended by \endinput.
+Lines  processed: 23152
+Comments removed: 4911
+Comments  passed: 787
+Codelines passed: 17172
+
+*****************************************************
+*                                                   *
+* To finish the installation you have to move the   *
+* following files into a directory searched by TeX: *
+*                                                   *
+*     All *.apc, *.sty                              *
+*                                                   *
+* and to move the following files into a directory  *
+* searched by BibTeX:                               *
+*                                                   *
+*     All *.bib, *.bst                              *
+*                                                   *
+* To produce the documentation, run the following   *
+* script (or something similar, depending on your   *
+* operating system):                                *
+*                                                   *
+*  pdflatex apacite.drv                             *
+*  bibtex   apacite                                 *
+*  pdflatex apacite.drv                             *
+*  pdflatex apacite.drv                             *
+*  pdflatex apacite.drv                             *
+*  makeindex -o apacite.and apacite.adx             *
+*  pdflatex apacite.drv                             *
+*  pdflatex apacite.drv                             *
+*                                                   *
+* See the README file for a brief explanation and   *
+* the file apacite.drv for how to customize the     *
+* manual (e.g., to include the documented source    *
+* code.                                             *
+*                                                   *
+* Happy TeXing!                                     *
+*                                                   *
+*****************************************************
+Overall statistics:
+Files  processed: 2
+Lines  processed: 46304
+Comments removed: 9822
+Comments  passed: 1574
+Codelines passed: 34344
+ )
+No pages of output.

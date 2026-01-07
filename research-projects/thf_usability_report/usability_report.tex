@@ -1,0 +1,222 @@
+\documentclass[12pt]{article}
+\usepackage{apacite}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb,amsmath}
+\usepackage{txfonts}
+\usepackage{microtype}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{subfigure} 
+\usepackage{natbib}
+\usepackage{paralist}
+\usepackage{hyperref}	
+\usepackage{url}
+\usepackage{textcomp}
+\urlstyle{same}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+\newcommand{\quotes}[1]{``#1''}
+
+\hypersetup{breaklinks=true,
+            pdfauthor={},
+            pdftitle={},
+            colorlinks=true,
+            citecolor=blue,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\setcounter{secnumdepth}{1}
+
+\usepackage[a4paper,body={170mm,250mm},top=35mm,left=35mm, right=35mm, bottom=35mm]{geometry}
+\usepackage[sf,bf,small]{titlesec}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\lhead{\sffamily Sebastian Velasquez}
+\rhead{\sffamily Exam No. B114657}
+\cfoot{\sffamily \thepage}
+
+\author{}
+\date{}
+
+\DeclareMathOperator{\softmax}{softmax}
+\DeclareMathOperator{\sigmoid}{sigmoid}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\relu}{relu}
+\DeclareMathOperator{\lrelu}{lrelu}
+\DeclareMathOperator{\elu}{elu}
+\DeclareMathOperator{\selu}{selu}
+\DeclareMathOperator{\maxout}{maxout}
+
+\begin{document}
+
+\begin{center}
+\textsf{\textbf{\Large The Human Factor: Usability Report}}
+\end{center}
+
+\begin{center}
+\textsf{\textbf{Transport for Edinburgh app}}
+\end{center}
+
+\section{Introduction}
+\label{sec:intro}
+\paragraph{}
+The City of Edinburgh has a public transportation system that allows people to travel around the city. The company that provides the transportation services (Lothian buses) offers a mobile application \citep{lothianapp} for Android and iOS devices. This application provides real-time information related to stops, routes, schedules, and news. 
+
+The users of the transportation system can use the application to plan a route from one point of the city to another. The mobile application offers several options to get information that allows planning a trip. The option selected by users might be based on their knowledge of the city and their expertise with the application.
+
+The existence of various options to plan a trip is a symptom that the application has been developed to be used by distinct kinds of users. Thus, different types of users can perform different tasks in the application to get valuable information and plan their trips using the public transportation system. The usability of the application presented in this report is set based on three elements: the type of user, the scenario of usage, and the task to perform. 
+
+The type of user selected to analyse the application is a novice one. This kind of user has not had contact with the application before. However, it is assumed that the a user has previous experience with mobile applications and understand the type of available interactions. Also, the users must have a reasonable knowledge of places to go within the city; this means that the user is more likely to be a resident than a tourist.
+
+According to the National Records of Scotland, the City of Edinburgh received 29439, 31436 and 32387 new residents in the periods 2013-2014, 2014-2015 and 2015-2016 respectively \citep{edinStats}. These numbers show an increasing and considerable number of new potential users of the public transportation system and its mobile application every year. These potential users fit the novice user profile, therefore, an application that facilitates the usage for first-time users is required.
+
+The scenario of usage is defined by the activities of the user. In this case, a user wants to go from one point of the city to another using the fastest route of the public transportation system. To do so, the user needs to find the fastest route using the application. Thus, the task to be executed is finding the fastest route from the origin to the destination. 
+
+The application offers two alternatives to accomplish the task. The first one allows the user to set the origin and destination along with other parameters like travel modes (bus or tram). The second option is focused only on the destination. Here, the condition is that the origin is the current position of the user. The application sets the origin by using the GPS information of the device. This report focuses on the second alternative.
+
+
+\section{Method}
+\label{sec:method}
+Based on the scope definition, the objective of this report is to analyse the learnability of the application for novice users given that there exist a considerable number of new potential users. One of the methods to perform this type of analysis is the cognitive walkthrough \citep{helander2014handbook}. This method does not require the participation of users and it is focused on the first time of usage. As a drawback, the method does not provide information about the frequency of potential errors.
+
+The first thing to do the analysis using cognitive walkthrough is to determine the steps to accomplish the given task. It is assumed that the user has already opened the application and has landed on the home screen. Based on that, the steps to accomplish the task are the following:
+
+\begin{enumerate}
+	\item Select the search box.
+ 	\item Type the name of the destination.
+  	\item Select the correct destination.
+  	\item Select the fastest route to the destination, that is the route that takes less time.
+  	\item See the route on the map.
+\end{enumerate}
+
+\begin{figure*}[!htb]
+	\vskip 5mm
+		\begin{center}
+		\includegraphics[width=14cm]{task_steps}
+		\caption{Application screens corresponding to the steps to perform the task.}
+		\label{fig:fig1}
+		\end{center}
+	\vskip -5mm
+\end{figure*}
+
+The application screens associated with every step are displayed in Figure \ref{fig:fig1}. It is worth to notice the consistency in the visual style in all the steps. 
+
+Next, the following four questions have to be answered for each step:
+
+\begin{enumerate}
+  \item [Q1.] Will users understand that the step is needed to reach the goal?
+  \item [Q2.] Will users see the control to perform the action?
+  \item [Q3.] Will users recognize the action as the correct one?
+  \item [Q4.] Will users understand the feedback?
+\end{enumerate}
+
+Finally, the answers are used to provide suggestions and recommendations to improve the design, especially in those steps where an answer is negative.
+
+\section{Results}
+\label{sec:results}
+Based on the results shown in Table \ref{tab:tab1}, it is clearly evident that steps 1 and 5 would be performed by novice users with ease. It is worth to highlight the use of labels and metaphors principally on the home screen. Such visual clues not only allow the user to perform the first step of the task easily, but they also permit to identify other sections of the application right away.
+ 
+\begin{table}[h!]
+	\begin{center}
+	\begin{tabular}{|p{1cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+		\hline
+		\multicolumn{5}{|c|}{Cognitive walkthrough} \\
+		\hline
+			Step & Q1 & Q2 & Q3 & Q4\\
+		\hline
+			1 & Yes & Yes & Yes & Yes\\
+			2 & Yes & Yes & Yes & No\\
+			3 & Yes & Yes & No & Yes\\
+			4 & Yes & Yes & Yes* & Yes\\
+			5 & Yes & Yes & Yes & Yes\\
+		\hline
+	\end{tabular}
+	\caption{Answers for cognitive walkthrough questions applied to the task steps.}
+	\label{tab:tab1}
+	\end{center}
+\end{table}
+
+The feedback in the second step is not clear enough. Based on the previous step, at this point, the user is expecting to see a list of places related to the input text. However, the first results the application displays are bus routes that have the destination place in their names. This situation might confuse the user, especially since the application has another section for bus routes as seen in Figure \ref{fig:fig2}
+
+\begin{figure*}[!htb]
+	\vskip 5mm
+		\begin{center}
+		\includegraphics[width=5cm]{routes}
+		\caption{Routes section of the application.}
+		\label{fig:fig2}
+		\end{center}
+	\vskip -5mm
+\end{figure*}
+
+In the third step, the user might not clearly recognize which is the right option to choose. Such situation is related to the feedback from the second step. The results for places are not corrected labeled, whereas the results for routes are clearly labeled as "Routes". A user might expect the label "Places" for the results of locations, however, they are labeled as "Search results", which is an issue related to consistency.
+
+Finally, even though a user would easily recognize the travel times (colored in dark red) in the list, and select the fastest route, the additional time information (colored in light gray) might cause confusion. The additional time information indicates the walking time, but it's not clear if that time is part of the total trip or extra time.
+
+\section{Discussion}
+\label{sec:discussion}
+
+The results and their analysis show that some parts of the design in the application can be improved to facilitate the execution of the task for novice users. First, the feedback in the second step can be enhanced in two ways. The first option consists of removing the results for routes as seen in Figure \ref{fig:fig3}. Since the user is interested in locations, the other option requires the routes results to be displayed after the results for places as seen in Figure \ref{fig:fig4}.
+
+\begin{figure*}[!htb]
+	\vskip 5mm
+		\begin{center}
+		\includegraphics[width=5cm]{step2_1}
+		\caption{First proposed design to avoid confusion when searching for places.}
+		\label{fig:fig3}
+		\end{center}
+	\vskip -5mm
+\end{figure*}
+
+\begin{figure*}[!htb]
+	\vskip 5mm
+		\begin{center}
+		\includegraphics[width=5cm]{step2_2}
+		\caption{Second proposed design to avoid confusion when searching for places.}
+		\label{fig:fig4}
+		\end{center}
+	\vskip -5mm
+\end{figure*}
+
+The recognition of the action to execute in the third step can be improved based on the previous decision to improve the feedback in step two. If the results for routes are not displayed, then nothing else is needed since it would be clear that the presented results correspond to places as seen in Figure \ref{fig:fig3}. However, if the routes are still displayed, then a proper label for places results is needed as seen in Figure \ref{fig:fig4}.
+
+Finally, in the fourth step, there are two options to avoid confusions related to the total time of a trip and the walking time. The first one is to hide the walking time, that information will still be available on the following screen as seen in the fifth screenshot in Figure \ref{fig:fig1}. However, some users might want to see that information right away to make a proper decision and avoid the last step. The second option requires to display the time on bus along with the total time and walking time. In this case, the position of that extra information needs to be carefully decided to avoid problems in the balance of the layout. One possible option is presented in Figure \ref{fig:fig5}.
+
+\begin{figure*}[!htb]
+	\vskip 5mm
+		\begin{center}
+		\includegraphics[width=5cm]{step4}
+		\caption{Proposed design to avoid confusion in travel times.}
+		\label{fig:fig5}
+		\end{center}
+	\vskip -5mm
+\end{figure*}
+
+Overall, the design of the application facilitates the task of finding the fastest route from the current position to a given the destination. The flow of steps is aimed to execute the task in a straightforward way. Nonetheless, some visual information might confuse first time users. Further analysis might be focused in the accessibility characteristics for the same or similar tasks and compare the findings with the results presented in this report.
+
+\bibliographystyle{plainnat}
+\bibliography{usability_report_references}
+\end{document}
