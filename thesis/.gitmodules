@@ -1,0 +1,6 @@
+[submodule "AnkiGame/app/src/main/assets/2048"]
+	path = AnkiGame/app/src/main/assets/2048
+	url = https://github.com/sosegon/2048
+[submodule "Anki-Android"]
+	path = Anki-Android
+	url = https://github.com/sosegon/AnkiGame

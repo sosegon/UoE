@@ -1,0 +1,73 @@
+Hola , espero que te esté yendo bien. Estoy desarrollando una aplicación móvil como parte de mi programa de estudios. La aplicación es de tipo educativa y tiene como objetivo mejorar el proceso de aprendizaje de nuevos conceptos. Voy a necesitar participantes para que prueben la aplicación por un período de dos a tres semanas. Esto será entre Mayo y Junio. Me gustaría que fueras parte de la evaluación. Avísame si te gustaría participar.
+
+Saludos
+
+Hi , I hope this message finds you well. I am developing a mobile application as part of my postgrad program. It is an educational app aimed to facilitate the learning process. I will need some participants to test the app for a period of 3-4 weeks. The participants are meant to use the app at any time during their daily activities. This evaluation will occur in June. I'd like you to be part of that process. Please, let me know if you are interested.
+
+BR,
+SV
+
+## For udacity students
+Hi , I graduated from the Android Developer Nanodegree a few months ago. Now, I am developing a mobile application as part of my postgrad program. It is an educational app aimed to facilitate the learning process. I will need some participants to test the app for a period of 3-4 weeks. The participants are meant to use the app at any time during their daily activities. This evaluation will start on June 18. I'd like you to be part of that process. Please, let me know if you are interested.
+
+BR,
+SV
+
+#Response
+Great. Thanks for your help ''. I will contact you in June when the app is ready. Progress of the dev can be seen under the HT #2048anki in Linkedin and Twitter
+
+
+########## Participation experimental group ##########
+
+Hi ,
+
+I hope you are doing well. Next week, I will release the application I asked you try. The study will formally start on 18th of June and will last for at least 3 weeks (up to 4). As I mentioned, you can use the app at any moment during your daily activities. The requirements of the device to install the app are the following:
+
+- OS: Android v22 (Lollipop). Lower versions are acceptable but the app may be unstable.
+
+You can see the characteristics of the app in this video https://www.youtube.com/watch?v=dxltNkxNO48
+
+Please, I need you to confirm you participation in the study. Let me know any question or comment.
+
+All the best.
+
+SV
+
+########## Participation control group ##########
+
+Hi ,
+
+I hope you are doing well. Next week, I will release the application I asked you try. The study will formally start on 18th of June and will last for at least 3 weeks (up to 4). As I mentioned, you can use the app at any moment during your daily activities. The requirements of the device to install the app are the following:
+
+- OS: Android v22 (Lollipop). Lower versions are acceptable but the app may be unstable.
+
+You can see the characteristics of the app in this video https://www.youtube.com/watch?v=IpAz0uSxf_g
+
+Please, I need you to confirm you participation in the study. Let me know any question or comment.
+
+All the best.
+
+SV
+
+Hola ,
+
+Espero que estés bien. La próxima semana, lanzaré la aplicación que te pedí que pruebes. El estudio comenzará formalmente el 18 de junio y tendrá una duración de al menos 3 semanas (hasta 4). Como mencioné, puedes usar la aplicación en cualquier momento durante tus actividades diarias. Los requisitos del dispositivo para instalar la aplicación son los siguientes:
+
+- Sistema operativo: Android v22 (Lollipop). Las versiones más bajas son aceptables, pero la aplicación puede ser inestable.
+
+Puede ver las características de la aplicación en este video https://www.youtube.com/watch?v=IpAz0uSxf_g
+
+Por favor, necesito que confirmes tu participación en el estudio. Déjame saber cualquier pregunta o comentario.
+
+Saludos,
+Sebastian
+
+
+########## Message ##########
+
+Hi , 
+
+I sent you an email about the app. It may have been reached your spam folder since I sent it from my university account. 
+
+BR, 
+SV

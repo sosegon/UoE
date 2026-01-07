@@ -1,0 +1,45 @@
+Number, Name, contact, group, where, contacted, confirmed, instructed, installed
+
+1, Anko Top, anko.top@reactivity.nl, experimental, linkedin, yes, yes, yes, yes
+2, Youssef Al Hariri, s1723488@sms.ed.ac.uk, experimental, uoe, yes, yes, yes, yes
+3, Devang Soni, soni_devang@ymail.com, experimental, linkedin, yes, yes, yes, yes
+4, Gabriela Atiencia, gabj18@hotmail.com, experimental, family, yes, yes, yes, yes
+5, Mengzhu Cai, s1734032@sms.ed.ac.uk, experimental, uoe, yes, yes, yes
+6, Katherine Atiencia, katheryn97atiencia@hotmail.com, experimental, family, yes, yes, yes, yes
+7, Thomas Chase, chasecorcoran@gmail.com, experimental, udacity, yes, yes, yes, yes
+
+8, Anshaj Khare, akhr2013@gmail.com, experimental, uoe, yes, yes, yes
+9, Diana Atiencia, carol_diana_9@hotmail.com, experimental, family, yes, yes, yes
+10 Nicolas Raoul, nicolas.raoul@gmail.com, experimental, ankiforums, yes, yes, yes
+11, Miriele Schumacker, mirieleschumacker@gmail.com, control, other, yes, yes, yes
+12, Juzer Shakir, juz.shakir5253@gmail.com, experimental, udacity, yes, yes, yes
+13, Carla García, carlagarciauk@gmail.com, experimental, welcoming, , yes, yes, yes
+
+
+0, Dionisis Karatzas, , experimental udacity-linkedin, yes, yes, no
+0, Gioconda, +584143616735, experimental, other
+0, Abdihakin Abdullahi, , experimental, udacity-linkedin, yes
+0, Rami Alzahrani, Ra-mi@hotmail.com, experimental, udacity-linkedin, yes
+0, Ramy Mohamed, , experimental, udacity-linkedin, yes
+0, Samantha Ch K, samanthak_3@hotmail.com, experimental, cec-epn, yes
+0, Shijie Yao, s1770642@sms.ed.ac.uk, experimental, uoe, yes, no
+
+1, Roberto, roanto2012@gmail.com, control, other, yes, yes, yes, yes
+2, Vitaliy Misurenki, vitaliy.misurenko@gmail.com, control, udacity-linkedin, yes, yes, yes, yes
+3, Tarek Bohdima, Tarek.buhdeima+test@gmail.com, control, udacity, yes, yes, yes, yes
+4, Patricia Velasquez, patitogatito91@hotmail.com, control, family, yes, yes, yes, yes
+5, Mike Hardy, mike@mikehardy.net, control, ankiforums, yes, yes, yes, yes
+6, Erika Atiencia, erika42228@hotmail.com, control, family, yes, yes, yes, yes
+7, Eslam Nagi, udacianDev@gmail.com, control, udacity-linkedin, yes, yes, yes, yes
+8, Claudia Iglesias, ciferreiracps1@gmail.com, control, livemocha, yes, yes, yes, yes
+
+9, Jie Zhang, zhangjie09@buaa.edu.cn, control, uoe, yes, yes, yes
+10, Arturo Polanco, apolanco3225@gmail.com, control, udacity, yes, yes, yes
+11, Pritam Hinger, hinger.pritam@gmail.com, control, udacity, yes, yes, yes
+12, Essam Mosbah, esammosbah1@gmail.com, control, udacity-linkedin, yes, yes, yes
+
+
+0, Olga, lizardo1880@gmail.com, control, welcoming, no, yes, yes, no
+0, Mahmoud A., , control, udacity MWS
+0, Kevin Curtis, , control, linkedin, yes
+0, Stathis Fotiadis, sfotiadis@gmail.com, control, uoe, yes, no
